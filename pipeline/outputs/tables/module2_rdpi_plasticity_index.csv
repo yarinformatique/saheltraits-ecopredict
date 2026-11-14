@@ -1,0 +1,49 @@
+"species","trait","RDPI_mean","RDPI_se","n_comparisons"
+"Balanites aegyptiaca (L.) Delile","SLA",0.0605,0.0024,300
+"Balanites aegyptiaca (L.) Delile","LDMC",0.031,0.0012,300
+"Balanites aegyptiaca (L.) Delile","Wood_density",0.0232,0.001,300
+"Balanites aegyptiaca (L.) Delile","Leaf_thickness",0.0104,4e-04,300
+"Adansonia digitata L.","SLA",0.047,0.0021,300
+"Adansonia digitata L.","LDMC",0.0297,0.0012,300
+"Adansonia digitata L.","Wood_density",0.016,7e-04,300
+"Adansonia digitata L.","Leaf_thickness",0.0069,3e-04,300
+"Faidherbia albida (Delile) A.Chev.","SLA",0.0475,0.0019,300
+"Faidherbia albida (Delile) A.Chev.","LDMC",0.0334,0.0014,300
+"Faidherbia albida (Delile) A.Chev.","Wood_density",0.0267,0.0012,300
+"Faidherbia albida (Delile) A.Chev.","Leaf_thickness",0.007,3e-04,300
+"Vachellia tortilis (Forssk.) Galasso & Banfi","SLA",0.073,0.003,300
+"Vachellia tortilis (Forssk.) Galasso & Banfi","LDMC",0.0382,0.0015,300
+"Vachellia tortilis (Forssk.) Galasso & Banfi","Wood_density",0.0227,0.001,300
+"Vachellia tortilis (Forssk.) Galasso & Banfi","Leaf_thickness",0.0138,5e-04,300
+"Combretum glutinosum Perr. ex DC.","SLA",0.0642,0.0027,300
+"Combretum glutinosum Perr. ex DC.","LDMC",0.0387,0.0015,300
+"Combretum glutinosum Perr. ex DC.","Wood_density",0.0198,9e-04,300
+"Combretum glutinosum Perr. ex DC.","Leaf_thickness",0.0099,4e-04,300
+"Ziziphus mauritiana Lam.","SLA",0.0577,0.0022,300
+"Ziziphus mauritiana Lam.","LDMC",0.039,0.0014,300
+"Ziziphus mauritiana Lam.","Wood_density",0.0198,9e-04,300
+"Ziziphus mauritiana Lam.","Leaf_thickness",0.0088,3e-04,300
+"Sclerocarya birrea (A.Rich.) Hochst.","SLA",0.0564,0.0022,300
+"Sclerocarya birrea (A.Rich.) Hochst.","LDMC",0.0318,0.0013,300
+"Sclerocarya birrea (A.Rich.) Hochst.","Wood_density",0.0194,8e-04,300
+"Sclerocarya birrea (A.Rich.) Hochst.","Leaf_thickness",0.0081,3e-04,300
+"Tamarindus indica L.","SLA",0.0511,0.0024,300
+"Tamarindus indica L.","LDMC",0.0257,0.0012,300
+"Tamarindus indica L.","Wood_density",0.0266,0.0011,300
+"Tamarindus indica L.","Leaf_thickness",0.0102,5e-04,300
+"Senegalia senegal (L.) Britton","SLA",0.0525,0.0022,300
+"Senegalia senegal (L.) Britton","LDMC",0.037,0.0017,300
+"Senegalia senegal (L.) Britton","Wood_density",0.0269,0.001,300
+"Senegalia senegal (L.) Britton","Leaf_thickness",0.009,4e-04,300
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","SLA",0.0587,0.0026,300
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","LDMC",0.0315,0.0013,300
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","Wood_density",0.0241,0.001,300
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","Leaf_thickness",0.0067,3e-04,300
+"Pterocarpus erinaceus Poir.","SLA",0.0627,0.0029,300
+"Pterocarpus erinaceus Poir.","LDMC",0.0271,0.0013,300
+"Pterocarpus erinaceus Poir.","Wood_density",0.0253,0.0011,300
+"Pterocarpus erinaceus Poir.","Leaf_thickness",0.0078,4e-04,300
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","SLA",0.057,0.0023,300
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","LDMC",0.0341,0.0015,300
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","Wood_density",0.025,0.001,300
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","Leaf_thickness",0.0083,3e-04,300

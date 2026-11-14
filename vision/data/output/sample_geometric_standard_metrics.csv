@@ -1,0 +1,4 @@
+qr_code_tag,leaf_id,area_cm2,perimeter_cm,length_cm,width_cm,circularity,aspect_ratio,herbivory_pct,consumed_area_cm2,intact_area_cm2,internal_hole_count,centroid_x,centroid_y,scale_pixels_per_cm,scale_method
+,1,15.998,15.97,5.62,3.99,0.788,1.41,3.21,0.5297687446136159,16.527614191324332,0,736.5,336.5,118.0,MARKER
+,2,12.503,14.6,4.01,3.99,0.737,1.0,15.95,2.3723211720769903,14.87551709278943,0,1299.9,336.8,118.0,MARKER
+,3,14.981,15.97,5.81,2.99,0.738,1.94,3.42,0.5297687446136159,15.510665038781958,0,795.5,927.5,118.0,MARKER

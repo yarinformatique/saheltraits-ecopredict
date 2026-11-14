@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 902.06 379.20000000000005" width="902.06" height="379.20000000000005" style="--bg:#FFFFFF;--fg:#1E293B;--line:#64748B;--muted:#475569;--surface:#F8FAFC;--border:#CBD5E1;background:var(--bg)">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+  text { font-family: 'Inter', system-ui, sans-serif; }
+  svg {
+    /* Derived from --bg and --fg (overridable via --line, --accent, etc.) */
+    --_text:          var(--fg);
+    --_text-sec:      var(--muted, color-mix(in srgb, var(--fg) 60%, var(--bg)));
+    --_text-muted:    var(--muted, color-mix(in srgb, var(--fg) 40%, var(--bg)));
+    --_text-faint:    color-mix(in srgb, var(--fg) 25%, var(--bg));
+    --_line:          var(--line, color-mix(in srgb, var(--fg) 50%, var(--bg)));
+    --_arrow:         var(--accent, color-mix(in srgb, var(--fg) 85%, var(--bg)));
+    --_node-fill:     var(--surface, color-mix(in srgb, var(--fg) 3%, var(--bg)));
+    --_node-stroke:   var(--border, color-mix(in srgb, var(--fg) 20%, var(--bg)));
+    --_group-fill:    var(--bg);
+    --_group-hdr:     color-mix(in srgb, var(--fg) 5%, var(--bg));
+    --_inner-stroke:  color-mix(in srgb, var(--fg) 12%, var(--bg));
+    --_key-badge:     color-mix(in srgb, var(--fg) 10%, var(--bg));
+  }
+</style>
+<defs>
+  <marker id="arrowhead" markerWidth="8" markerHeight="5" refX="7" refY="2.5" orient="auto">
+    <polygon points="0 0, 8 2.5, 0 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+  <marker id="arrowhead-start" markerWidth="8" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+    <polygon points="8 0, 0 2.5, 8 5" fill="var(--_arrow)" stroke="var(--_arrow)" stroke-width="0.75" stroke-linejoin="round" />
+  </marker>
+</defs>
+<polyline class="edge" data-from="A" data-to="B" data-style="solid" data-arrow-start="true" data-arrow-end="true" points="255.344,189.60000000000002 303.344,189.60000000000002" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-start)" />
+<polyline class="edge" data-from="B" data-to="C" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="545.364,189.60000000000002 563.364,189.60000000000002 563.364,66.9 581.364,66.9" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="B" data-to="D" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="545.364,189.60000000000002 563.364,189.60000000000002 563.364,148.70000000000002 581.364,148.70000000000002" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="B" data-to="E" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="545.364,189.60000000000002 563.364,189.60000000000002 563.364,230.50000000000003 581.364,230.50000000000003" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<polyline class="edge" data-from="B" data-to="F" data-style="solid" data-arrow-start="false" data-arrow-end="true" points="545.364,189.60000000000002 563.364,189.60000000000002 563.364,312.3 581.364,312.3" fill="none" stroke="var(--_line)" stroke-width="1" marker-end="url(#arrowhead)" />
+<g class="node" data-id="A" data-label="API REST FastAPI (Couche 3)
+Port 8000 : SQLite/PostGIS" data-shape="rectangle">
+  <rect x="40" y="162.70000000000002" width="215.344" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="147.672" y="189.60000000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="147.672" dy="-3.9000000000000012">API REST FastAPI (Couche 3)</tspan><tspan x="147.672" dy="16.900000000000002">Port 8000 : SQLite/PostGIS</tspan></text>
+</g>
+<g class="node" data-id="B" data-label="Next.js 14 / TypeScript (Couche 4b)
+Port 3000 : Leaflet + SVG Radars" data-shape="rectangle">
+  <rect x="303.344" y="162.70000000000002" width="242.01999999999998" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="424.354" y="189.60000000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="424.354" dy="-3.9000000000000012">Next.js 14 / TypeScript (Couche 4b)</tspan><tspan x="424.354" dy="16.900000000000002">Port 3000 : Leaflet + SVG Radars</tspan></text>
+</g>
+<g class="node" data-id="C" data-label="Module 1
+Explorateur Taxons &amp; Traits ETS v1.0" data-shape="rectangle">
+  <rect x="581.364" y="40" width="260.54499999999996" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="711.6365000000001" y="66.9" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="711.6365000000001" dy="-3.9000000000000012">Module 1</tspan><tspan x="711.6365000000001" dy="16.900000000000002">Explorateur Taxons &amp; Traits ETS v1.0</tspan></text>
+</g>
+<g class="node" data-id="D" data-label="Module 2
+Simulateur Cartographique EcoPredict" data-shape="rectangle">
+  <rect x="581.364" y="121.80000000000001" width="268.6959999999999" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="715.712" y="148.70000000000002" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="715.712" dy="-3.9000000000000012">Module 2</tspan><tspan x="715.712" dy="16.900000000000002">Simulateur Cartographique EcoPredict</tspan></text>
+</g>
+<g class="node" data-id="E" data-label="Module 3
+Dashboard 450 Enquêtes &amp; MODIS" data-shape="rectangle">
+  <rect x="581.364" y="203.60000000000002" width="244.24299999999997" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="703.4855" y="230.50000000000003" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="703.4855" dy="-3.9000000000000012">Module 3</tspan><tspan x="703.4855" dy="16.900000000000002">Dashboard 450 Enquêtes &amp; MODIS</tspan></text>
+</g>
+<g class="node" data-id="F" data-label="Module 4
+Manuel d'Utilisation Illustré (MEEA)" data-shape="rectangle">
+  <rect x="581.364" y="285.40000000000003" width="244.243" height="53.800000000000004" rx="0" ry="0" fill="var(--_node-fill)" stroke="var(--_node-stroke)" stroke-width="0.75" />
+  <text x="703.4855" y="312.3" text-anchor="middle" font-size="13" font-weight="500" fill="var(--_text)"><tspan x="703.4855" dy="-3.9000000000000012">Module 4</tspan><tspan x="703.4855" dy="16.900000000000002">Manuel d&#39;Utilisation Illustré (MEEA)</tspan></text>
+</g>
+</svg>

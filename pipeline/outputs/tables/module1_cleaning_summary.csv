@@ -1,0 +1,8 @@
+"Test","Count","Pct"
+"Total initial",3182,100
+"Coordonnées nulles (cc_zer)",24,0.75
+"Centroïdes capitales (cc_cap)",27,0.85
+"Hors zone terrestre/mer (cc_sea)",1,0.03
+"Doublons spatiaux (cc_dupl)",1094,34.38
+"Aberrations géographiques (cc_outl)",144,4.53
+"Occurrences validées conservées",1951,61.31

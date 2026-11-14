@@ -1,0 +1,53 @@
+name: SahelTraits-DB & EcoPredict Platform CI/CD
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache-dependency-path: |
+          web/package-lock.json
+          mobile/package-lock.json
+
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+
+    - name: Validate Backend API Requirements
+      run: |
+        cd backend
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        python -c "import fastapi, pydantic, sqlalchemy; print('FastAPI & dependencies OK')"
+
+    - name: Build Web Dashboard (Couche 4b)
+      run: |
+        cd web
+        npm ci || npm install
+        npm run build
+
+    - name: Build Mobile Field App (Couche 1)
+      run: |
+        cd mobile
+        npm ci || npm install
+        npm run build
+
+    - name: Validate Vision & Morphometrics (Couche 2)
+      run: |
+        cd vision
+        pip install -r requirements.txt
+        python -c "import cv2, numpy; print('OpenCV & Morpho-Vision OK')"

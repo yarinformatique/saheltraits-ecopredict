@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  pipeline_couche4a:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: saheltraits_analytics_pipeline
+    volumes:
+      - ../data:/workspace/pipeline/data
+      - ../outputs:/workspace/pipeline/outputs
+      - ../config:/workspace/pipeline/config
+    environment:
+      - N_CORES=4
+      - R_PARALLEL_STRATEGY=multicore
+    command: ["--all"]
+    restart: "no"

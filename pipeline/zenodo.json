@@ -1,0 +1,29 @@
+{
+  "title": "SahelTraits-DB & EcoPredict : Pipeline Bio-Statistique & Modélisation Conjointe JSDM/CMIP6 (Couche 4a)",
+  "description": "Pipeline analytique 100% reproductible sous Docker et Git pour l'écologie fonctionnelle, les traits adaptatifs et les projections spatiales d'habitats sous CMIP6 (horizons 2050 et 2080) au Sahel.",
+  "creators": [
+    {
+      "name": "YAGO, Abdoul Rachide",
+      "affiliation": "Université Joseph Ki-Zerbo (Ouagadougou, Burkina Faso) - École Doctorale Sciences et Technologies / ICC",
+      "orcid": "0009-0004-7128-3921"
+    }
+  ],
+  "keywords": [
+    "Écologie fonctionnelle",
+    "Sahel",
+    "Traits fonctionnels",
+    "IndVal",
+    "Plasticité phénotypique",
+    "RDPI",
+    "RLQ",
+    "Quatrième Coin",
+    "JSDM",
+    "Hmsc",
+    "biomod2",
+    "CMIP6",
+    "Burkina Faso"
+  ],
+  "license": "MIT",
+  "upload_type": "software",
+  "access_right": "open"
+}

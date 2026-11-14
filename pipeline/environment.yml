@@ -1,0 +1,34 @@
+name: saheltraits-pipeline-env
+channels:
+  - conda-forge
+  - r
+dependencies:
+  - python>=3.12
+  - r-base>=4.4.1
+  - numpy>=2.0.0
+  - pandas>=2.2.0
+  - scipy>=1.14.0
+  - tifffile
+  - pyyaml
+  - requests
+  - httpx
+  - xarray
+  - rasterio
+  - gdal
+  - geos
+  - proj
+  - pytest
+  - r-renv
+  - r-ade4
+  - r-ape
+  - r-lme4
+  - r-glmmtmb
+  - r-dharma
+  - r-factominer
+  - r-factoextra
+  - r-ggplot2
+  - r-dplyr
+  - r-tidyr
+  - r-terra
+  - r-sf
+  - r-future

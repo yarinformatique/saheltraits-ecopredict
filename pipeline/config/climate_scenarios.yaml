@@ -1,0 +1,45 @@
+# CMIP6 Scenarios Configuration for Sahel Climate Modeling
+scenarios:
+  ssp245:
+    name: "Shared Socioeconomic Pathway 2-4.5"
+    description: "Middle of the road scenario: moderate radiative forcing (+4.5 W/m2 by 2100)"
+    radiative_forcing_wm2: 4.5
+  ssp585:
+    name: "Shared Socioeconomic Pathway 5-8.5"
+    description: "Fossil-fueled development: high radiative forcing (+8.5 W/m2 by 2100)"
+    radiative_forcing_wm2: 8.5
+
+models:
+  IPSL-CM6A-LR:
+    institute: "Institut Pierre-Simon Laplace"
+    country: "France"
+    spatial_res: "100 km"
+    weight: 0.20
+  MPI-ESM1-2-HR:
+    institute: "Max Planck Institute for Meteorology"
+    country: "Germany"
+    spatial_res: "50 km"
+    weight: 0.20
+  MRI-ESM2-0:
+    institute: "Meteorological Research Institute"
+    country: "Japan"
+    spatial_res: "100 km"
+    weight: 0.20
+  UKESM1-0-LL:
+    institute: "Met Office Hadley Centre"
+    country: "UK"
+    spatial_res: "135 km"
+    weight: 0.20
+  GFDL-ESM4:
+    institute: "Geophysical Fluid Dynamics Laboratory (NOAA)"
+    country: "USA"
+    spatial_res: "100 km"
+    weight: 0.20
+
+horizons:
+  horizon_2050:
+    period: "2041-2060"
+    label: "2050"
+  horizon_2080:
+    period: "2071-2090"
+    label: "2080"

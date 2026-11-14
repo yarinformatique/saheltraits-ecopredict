@@ -1,0 +1,5 @@
+"Trait","Intercept_Soudanienne","Effect_Soudano_Sahelienne","Effect_Sahelienne","Var_Interspecific","Var_Intraspecific","Pct_Interspecific_Variance","Pct_Intraspecific_Variance","AIC","BIC"
+"SLA",11.417,-0.777,-1.208,3.9511,0.8094,83,17,1016.9,1036.3
+"LDMC",398.466,16.858,25.162,3263.6669,442.3435,88.06,11.94,3271.8,3291.2
+"Wood_density",0.659,0.004,0.013,0.0194,7e-04,96.29,3.71,-1458.8,-1439.4
+"Leaf_thickness",174.998,1.807,2.588,23.3328,6.5652,78.04,21.96,1760.7,1780.2

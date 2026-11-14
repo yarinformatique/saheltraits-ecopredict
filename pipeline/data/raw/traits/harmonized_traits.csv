@@ -1,0 +1,361 @@
+species,individual_id,plot_id,climatic_zone,SLA,LDMC,Wood_density,Seed_mass,Leaf_thickness,source
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-01,BF-DOR-01,Sahélienne,7.68,495.0,0.755,2815.7,184.8,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-02,BF-DOR-01,Sahélienne,8.8,510.2,0.743,2902.7,179.5,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-03,BF-DOR-01,Sahélienne,7.41,482.0,0.787,3608.7,185.0,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-04,BF-DOR-01,Sahélienne,8.34,497.6,0.751,2753.4,181.8,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-05,BF-DOR-01,Sahélienne,6.94,504.1,0.756,3704.7,188.2,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-06,BF-DOR-01,Sahélienne,8.06,506.5,0.772,3252.8,183.6,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-07,BF-DOR-01,Sahélienne,7.67,452.3,0.824,3031.7,186.6,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-08,BF-DOR-01,Sahélienne,8.26,470.7,0.797,3443.2,183.3,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-09,BF-DOR-01,Sahélienne,7.95,515.6,0.803,3283.5,183.0,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-DOR-01-10,BF-DOR-01,Sahélienne,8.63,494.4,0.716,2952.9,180.4,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,8.87,514.2,0.746,2512.2,179.3,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,7.15,481.0,0.751,2430.2,187.5,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,9.51,472.8,0.764,3590.8,178.1,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,9.6,441.8,0.723,3258.2,177.6,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,8.45,495.1,0.774,2885.8,183.3,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,7.58,463.6,0.732,3704.9,183.9,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,9.37,481.0,0.793,2828.9,179.1,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,8.8,452.0,0.757,3576.8,178.5,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,7.83,484.9,0.738,3648.3,181.8,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,7.68,463.9,0.732,3010.2,184.5,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-01,BF-PO-01,Soudanienne,7.54,432.4,0.769,3198.4,184.7,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-02,BF-PO-01,Soudanienne,9.93,442.7,0.787,3205.0,176.2,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-03,BF-PO-01,Soudanienne,8.86,512.2,0.671,3205.6,181.2,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-04,BF-PO-01,Soudanienne,9.28,469.0,0.761,3192.3,178.6,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-05,BF-PO-01,Soudanienne,8.73,467.9,0.764,3646.1,179.6,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-06,BF-PO-01,Soudanienne,8.92,479.3,0.729,3225.2,181.2,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-07,BF-PO-01,Soudanienne,9.48,476.4,0.759,2913.6,180.7,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-08,BF-PO-01,Soudanienne,9.41,458.3,0.782,3062.5,180.1,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-09,BF-PO-01,Soudanienne,8.39,448.0,0.716,2952.5,184.6,TRY_BIEN_SahelTraits_Ensemble
+Balanites aegyptiaca (L.) Delile,IND-BAL-BF-PO-01-10,BF-PO-01,Soudanienne,9.79,446.8,0.782,3302.6,177.0,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-01,BF-DOR-01,Sahélienne,11.98,344.5,0.323,496.1,174.4,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-02,BF-DOR-01,Sahélienne,12.78,325.9,0.323,411.1,171.7,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-03,BF-DOR-01,Sahélienne,11.87,340.9,0.332,467.3,173.3,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-04,BF-DOR-01,Sahélienne,12.7,345.0,0.353,392.7,171.7,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-05,BF-DOR-01,Sahélienne,12.76,324.1,0.331,415.6,173.9,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-06,BF-DOR-01,Sahélienne,10.61,352.6,0.343,428.3,176.1,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-07,BF-DOR-01,Sahélienne,11.69,339.3,0.341,395.6,174.5,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-08,BF-DOR-01,Sahélienne,12.24,343.4,0.343,383.9,171.7,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-09,BF-DOR-01,Sahélienne,11.74,336.9,0.339,435.8,171.0,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-DOR-01-10,BF-DOR-01,Sahélienne,12.43,341.9,0.328,500.1,171.8,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,13.36,305.1,0.334,480.4,169.8,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,12.14,344.4,0.329,407.1,173.8,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,12.38,355.1,0.34,509.4,176.1,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,11.67,314.6,0.314,482.2,174.6,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,13.33,328.5,0.334,461.0,171.7,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,10.51,310.2,0.324,485.2,176.7,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,14.72,340.5,0.319,458.8,167.5,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,12.24,332.8,0.321,552.4,172.9,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,11.02,325.5,0.323,475.3,174.6,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,12.31,342.9,0.336,445.3,171.6,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-01,BF-PO-01,Soudanienne,12.01,340.2,0.327,397.7,171.9,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-02,BF-PO-01,Soudanienne,12.42,304.7,0.331,466.0,172.7,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-03,BF-PO-01,Soudanienne,12.33,313.0,0.333,442.5,172.3,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-04,BF-PO-01,Soudanienne,13.21,301.1,0.347,449.7,170.4,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-05,BF-PO-01,Soudanienne,10.87,334.4,0.327,431.5,172.9,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-06,BF-PO-01,Soudanienne,12.8,316.7,0.337,432.9,170.5,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-07,BF-PO-01,Soudanienne,14.21,319.9,0.326,406.5,171.6,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-08,BF-PO-01,Soudanienne,13.51,295.8,0.344,457.1,171.0,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-09,BF-PO-01,Soudanienne,12.79,330.5,0.328,461.8,173.8,TRY_BIEN_SahelTraits_Ensemble
+Adansonia digitata L.,IND-ADA-BF-PO-01-10,BF-PO-01,Soudanienne,14.66,324.7,0.323,493.4,169.7,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-01,BF-DOR-01,Sahélienne,12.81,379.5,0.593,155.6,170.9,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-02,BF-DOR-01,Sahélienne,13.3,406.0,0.596,197.0,171.9,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-03,BF-DOR-01,Sahélienne,13.02,390.5,0.598,184.9,171.7,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-04,BF-DOR-01,Sahélienne,14.47,361.9,0.623,215.7,168.2,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-05,BF-DOR-01,Sahélienne,12.57,420.8,0.619,159.3,172.9,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-06,BF-DOR-01,Sahélienne,15.18,370.3,0.642,182.6,168.1,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-07,BF-DOR-01,Sahélienne,12.44,371.4,0.604,188.9,173.3,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-08,BF-DOR-01,Sahélienne,13.46,407.2,0.553,163.8,171.5,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-09,BF-DOR-01,Sahélienne,12.69,388.0,0.67,192.3,170.6,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-DOR-01-10,BF-DOR-01,Sahélienne,13.92,364.4,0.62,180.6,170.3,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,13.27,369.7,0.592,201.2,170.2,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,13.15,418.4,0.591,179.0,170.0,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,12.79,377.8,0.606,168.5,171.9,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,14.14,338.9,0.597,195.7,170.3,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,14.12,395.2,0.604,190.4,169.1,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,14.25,359.6,0.577,175.9,167.9,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,13.52,384.6,0.56,199.0,170.5,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,12.25,395.3,0.637,146.6,174.5,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,15.41,384.1,0.564,169.2,167.5,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,14.3,405.3,0.636,151.7,169.2,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-01,BF-PO-01,Soudanienne,12.99,343.5,0.584,192.4,172.5,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-02,BF-PO-01,Soudanienne,13.95,359.9,0.626,181.0,172.5,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-03,BF-PO-01,Soudanienne,16.45,385.8,0.624,162.3,167.0,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-04,BF-PO-01,Soudanienne,13.0,383.1,0.585,189.2,170.7,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-05,BF-PO-01,Soudanienne,14.94,401.9,0.602,184.5,167.5,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-06,BF-PO-01,Soudanienne,15.26,385.4,0.603,163.6,167.7,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-07,BF-PO-01,Soudanienne,14.8,336.2,0.62,175.4,168.0,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-08,BF-PO-01,Soudanienne,14.59,383.9,0.608,172.3,169.8,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-09,BF-PO-01,Soudanienne,15.71,352.7,0.539,157.4,167.1,TRY_BIEN_SahelTraits_Ensemble
+Faidherbia albida (Delile) A.Chev.,IND-FAI-BF-PO-01-10,BF-PO-01,Soudanienne,15.26,365.7,0.567,175.3,169.4,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-01,BF-DOR-01,Sahélienne,6.48,560.3,0.827,51.5,188.6,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-02,BF-DOR-01,Sahélienne,6.85,515.7,0.818,40.4,189.6,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-03,BF-DOR-01,Sahélienne,6.16,537.8,0.823,47.7,190.6,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-04,BF-DOR-01,Sahélienne,6.68,543.2,0.835,45.3,189.8,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-05,BF-DOR-01,Sahélienne,5.76,561.4,0.81,43.1,192.5,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-06,BF-DOR-01,Sahélienne,7.71,569.2,0.759,51.2,180.9,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-07,BF-DOR-01,Sahélienne,6.13,527.6,0.824,46.2,194.3,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-08,BF-DOR-01,Sahélienne,5.46,468.1,0.801,47.4,192.0,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-09,BF-DOR-01,Sahélienne,7.27,531.5,0.797,43.4,184.3,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-DOR-01-10,BF-DOR-01,Sahélienne,7.59,471.7,0.877,44.3,183.4,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,7.7,514.8,0.764,39.5,186.4,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,7.31,552.0,0.856,46.7,187.0,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,5.75,550.9,0.867,42.5,193.5,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,7.11,516.3,0.745,44.6,188.6,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,5.85,523.9,0.789,40.6,195.0,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,6.39,463.6,0.847,52.5,189.5,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,6.71,560.6,0.818,38.9,187.8,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,7.08,495.6,0.793,43.9,190.0,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,7.14,476.6,0.816,48.2,184.5,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,7.28,496.2,0.854,41.6,187.0,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-01,BF-PO-01,Soudanienne,7.29,481.8,0.783,44.8,184.4,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-02,BF-PO-01,Soudanienne,8.32,560.0,0.754,39.0,180.2,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-03,BF-PO-01,Soudanienne,8.03,482.6,0.803,37.0,181.0,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-04,BF-PO-01,Soudanienne,7.51,467.0,0.822,49.5,185.9,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-05,BF-PO-01,Soudanienne,6.56,497.3,0.779,44.4,192.3,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-06,BF-PO-01,Soudanienne,6.79,479.5,0.828,45.6,187.8,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-07,BF-PO-01,Soudanienne,8.01,500.8,0.814,50.0,183.3,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-08,BF-PO-01,Soudanienne,8.65,528.2,0.805,41.8,181.6,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-09,BF-PO-01,Soudanienne,7.24,510.0,0.831,46.0,185.7,TRY_BIEN_SahelTraits_Ensemble
+Vachellia tortilis (Forssk.) Galasso & Banfi,IND-VAC-BF-PO-01-10,BF-PO-01,Soudanienne,8.6,495.7,0.828,44.1,182.2,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-01,BF-DOR-01,Sahélienne,9.1,444.5,0.691,117.9,181.6,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-02,BF-DOR-01,Sahélienne,9.41,455.9,0.649,105.0,176.4,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-03,BF-DOR-01,Sahélienne,9.51,398.5,0.658,132.6,178.6,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-04,BF-DOR-01,Sahélienne,10.08,463.6,0.673,137.2,176.7,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-05,BF-DOR-01,Sahélienne,8.15,473.5,0.67,109.0,183.0,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-06,BF-DOR-01,Sahélienne,9.5,423.3,0.717,130.5,174.6,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-07,BF-DOR-01,Sahélienne,10.08,439.9,0.685,118.8,178.4,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-08,BF-DOR-01,Sahélienne,10.45,443.6,0.639,122.5,173.9,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-09,BF-DOR-01,Sahélienne,9.47,475.5,0.64,110.0,181.2,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-DOR-01-10,BF-DOR-01,Sahélienne,10.26,437.3,0.674,113.6,175.1,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,10.97,412.2,0.661,102.6,175.4,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,8.42,408.1,0.644,126.8,180.5,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,9.91,467.7,0.659,115.5,178.2,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,9.8,411.2,0.656,104.8,180.0,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,9.45,402.1,0.615,112.2,177.4,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,12.25,431.5,0.654,128.4,173.0,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,9.66,425.7,0.672,127.7,178.2,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,10.74,415.5,0.646,109.0,175.9,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,10.0,412.8,0.663,130.1,181.3,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,11.09,437.0,0.642,118.9,173.2,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-01,BF-PO-01,Soudanienne,9.91,380.7,0.706,123.3,177.7,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-02,BF-PO-01,Soudanienne,10.56,442.0,0.673,122.0,176.2,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-03,BF-PO-01,Soudanienne,11.46,369.6,0.622,134.3,172.4,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-04,BF-PO-01,Soudanienne,10.48,422.3,0.677,118.7,176.5,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-05,BF-PO-01,Soudanienne,10.51,396.9,0.65,98.5,175.6,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-06,BF-PO-01,Soudanienne,12.81,392.7,0.699,97.0,171.2,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-07,BF-PO-01,Soudanienne,11.99,399.1,0.652,117.6,173.0,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-08,BF-PO-01,Soudanienne,11.69,433.4,0.684,120.5,175.1,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-09,BF-PO-01,Soudanienne,12.24,423.5,0.657,97.4,174.8,TRY_BIEN_SahelTraits_Ensemble
+Combretum glutinosum Perr. ex DC.,IND-COM-BF-PO-01-10,BF-PO-01,Soudanienne,9.79,424.0,0.666,110.9,177.9,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-01,BF-DOR-01,Sahélienne,8.79,480.2,0.684,806.1,180.2,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-02,BF-DOR-01,Sahélienne,9.51,474.3,0.718,890.1,177.7,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-03,BF-DOR-01,Sahélienne,9.41,498.6,0.736,932.9,178.3,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-04,BF-DOR-01,Sahélienne,8.72,474.1,0.725,937.0,182.2,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-05,BF-DOR-01,Sahélienne,10.37,461.1,0.727,708.7,175.8,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-06,BF-DOR-01,Sahélienne,9.11,448.9,0.754,796.4,180.7,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-07,BF-DOR-01,Sahélienne,9.09,489.8,0.721,991.2,178.1,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-08,BF-DOR-01,Sahélienne,8.69,494.7,0.725,835.8,179.0,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-09,BF-DOR-01,Sahélienne,9.59,498.5,0.69,879.6,176.1,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-DOR-01-10,BF-DOR-01,Sahélienne,8.73,498.7,0.75,770.4,179.6,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,9.03,431.7,0.685,951.0,180.3,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,9.31,452.6,0.727,927.6,177.5,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,10.82,432.9,0.726,784.8,176.0,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,9.44,454.4,0.728,846.3,177.4,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,9.9,473.2,0.729,738.1,176.9,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,9.73,436.2,0.69,986.2,175.7,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,8.93,486.4,0.727,878.1,182.1,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,8.74,442.5,0.718,701.3,180.8,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,10.36,434.8,0.669,976.1,175.5,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,8.94,514.6,0.72,981.6,181.3,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-01,BF-PO-01,Soudanienne,10.52,440.5,0.7,794.1,174.7,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-02,BF-PO-01,Soudanienne,11.12,471.6,0.671,824.6,174.5,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-03,BF-PO-01,Soudanienne,10.33,441.7,0.735,968.1,175.2,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-04,BF-PO-01,Soudanienne,11.39,496.3,0.718,788.4,172.9,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-05,BF-PO-01,Soudanienne,10.99,433.5,0.718,844.5,176.2,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-06,BF-PO-01,Soudanienne,9.68,411.8,0.715,853.5,178.1,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-07,BF-PO-01,Soudanienne,11.7,425.8,0.739,804.9,173.8,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-08,BF-PO-01,Soudanienne,11.19,421.1,0.673,935.4,174.8,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-09,BF-PO-01,Soudanienne,10.12,460.1,0.655,794.7,177.0,TRY_BIEN_SahelTraits_Ensemble
+Ziziphus mauritiana Lam.,IND-ZIZ-BF-PO-01-10,BF-PO-01,Soudanienne,9.39,426.5,0.739,728.6,179.4,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-01,BF-DOR-01,Sahélienne,11.11,373.5,0.547,2477.4,174.9,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-02,BF-DOR-01,Sahélienne,12.98,377.7,0.553,2037.0,170.9,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-03,BF-DOR-01,Sahélienne,9.54,369.3,0.524,2418.9,178.5,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-04,BF-DOR-01,Sahélienne,10.45,391.9,0.552,2241.4,177.3,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-05,BF-DOR-01,Sahélienne,12.47,363.2,0.59,2545.8,172.2,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-06,BF-DOR-01,Sahélienne,10.52,399.1,0.559,2010.8,178.3,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-07,BF-DOR-01,Sahélienne,11.2,364.7,0.555,2619.0,176.8,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-08,BF-DOR-01,Sahélienne,10.27,361.4,0.527,2867.8,176.4,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-09,BF-DOR-01,Sahélienne,11.53,375.7,0.528,2067.2,174.3,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-DOR-01-10,BF-DOR-01,Sahélienne,11.27,353.5,0.561,2681.4,172.4,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,9.86,369.8,0.539,2017.5,178.7,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,11.02,408.2,0.542,2243.4,177.1,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,10.76,389.2,0.549,2603.2,175.5,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,11.63,378.6,0.522,2484.4,173.8,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,11.37,401.4,0.571,2375.7,175.3,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,12.82,365.8,0.553,2261.3,173.0,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,13.19,374.9,0.528,2144.3,172.2,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,11.48,414.4,0.572,2741.4,173.9,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,12.08,368.3,0.539,2092.3,171.4,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,10.69,377.3,0.556,2742.2,175.2,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-01,BF-PO-01,Soudanienne,10.18,373.0,0.549,2452.2,175.4,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-02,BF-PO-01,Soudanienne,13.11,368.3,0.531,2696.9,172.9,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-03,BF-PO-01,Soudanienne,12.08,347.6,0.565,2271.1,173.5,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-04,BF-PO-01,Soudanienne,11.97,349.8,0.537,2122.2,172.7,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-05,BF-PO-01,Soudanienne,12.99,347.4,0.567,2592.8,170.8,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-06,BF-PO-01,Soudanienne,12.15,384.8,0.529,2595.7,171.9,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-07,BF-PO-01,Soudanienne,13.43,363.1,0.59,2350.2,172.3,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-08,BF-PO-01,Soudanienne,12.99,351.6,0.587,2449.5,172.0,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-09,BF-PO-01,Soudanienne,12.41,343.1,0.549,2594.8,173.4,TRY_BIEN_SahelTraits_Ensemble
+Sclerocarya birrea (A.Rich.) Hochst.,IND-SCL-BF-PO-01-10,BF-PO-01,Soudanienne,11.63,332.9,0.554,2435.4,171.5,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-01,BF-DOR-01,Sahélienne,8.1,454.0,0.796,675.9,181.0,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-02,BF-DOR-01,Sahélienne,9.74,418.8,0.772,582.4,176.5,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-03,BF-DOR-01,Sahélienne,7.18,448.7,0.738,666.8,187.0,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-04,BF-DOR-01,Sahélienne,9.14,466.5,0.787,695.5,183.2,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-05,BF-DOR-01,Sahélienne,8.94,472.5,0.837,598.0,182.7,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-06,BF-DOR-01,Sahélienne,9.64,451.6,0.814,668.8,176.5,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-07,BF-DOR-01,Sahélienne,8.22,470.2,0.748,665.9,181.7,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-08,BF-DOR-01,Sahélienne,7.01,453.3,0.758,709.5,190.7,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-09,BF-DOR-01,Sahélienne,9.5,450.4,0.796,724.0,179.3,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-DOR-01-10,BF-DOR-01,Sahélienne,8.52,440.5,0.798,784.9,181.0,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,9.43,452.2,0.732,698.1,178.5,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,8.49,463.5,0.752,762.6,183.1,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,9.59,445.6,0.71,544.6,179.3,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,8.58,441.6,0.783,560.6,180.5,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,9.1,450.5,0.809,595.5,178.8,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,8.72,477.9,0.818,788.4,179.9,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,9.33,444.5,0.816,560.0,176.9,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,8.81,455.6,0.73,576.5,180.0,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,8.28,422.8,0.867,642.7,183.3,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,8.76,461.0,0.805,770.7,181.3,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-01,BF-PO-01,Soudanienne,8.93,456.5,0.787,538.1,180.7,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-02,BF-PO-01,Soudanienne,8.13,427.0,0.757,715.9,182.8,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-03,BF-PO-01,Soudanienne,8.7,428.8,0.776,590.5,179.2,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-04,BF-PO-01,Soudanienne,8.97,448.5,0.807,669.5,181.7,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-05,BF-PO-01,Soudanienne,10.72,439.9,0.85,589.6,174.8,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-06,BF-PO-01,Soudanienne,10.49,387.2,0.8,776.1,172.9,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-07,BF-PO-01,Soudanienne,9.57,433.4,0.771,531.1,178.3,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-08,BF-PO-01,Soudanienne,9.35,426.4,0.739,580.7,179.3,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-09,BF-PO-01,Soudanienne,8.76,432.8,0.786,663.6,179.9,TRY_BIEN_SahelTraits_Ensemble
+Tamarindus indica L.,IND-TAM-BF-PO-01-10,BF-PO-01,Soudanienne,9.66,416.9,0.766,622.0,179.7,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-01,BF-DOR-01,Sahélienne,9.22,413.0,0.749,86.7,182.4,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-02,BF-DOR-01,Sahélienne,8.97,434.2,0.781,94.2,178.8,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-03,BF-DOR-01,Sahélienne,10.87,454.2,0.738,89.0,174.9,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-04,BF-DOR-01,Sahélienne,9.02,439.7,0.741,90.1,177.2,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-05,BF-DOR-01,Sahélienne,10.37,423.7,0.776,99.4,176.3,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-06,BF-DOR-01,Sahélienne,9.9,488.3,0.8,81.2,178.6,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-07,BF-DOR-01,Sahélienne,10.39,459.4,0.687,92.1,175.7,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-08,BF-DOR-01,Sahélienne,10.83,461.0,0.771,95.0,173.4,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-09,BF-DOR-01,Sahélienne,9.21,444.5,0.787,80.2,180.7,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-DOR-01-10,BF-DOR-01,Sahélienne,9.94,485.6,0.74,102.2,178.5,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,10.0,447.3,0.766,87.5,176.8,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,8.94,416.0,0.676,88.5,184.3,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,9.73,432.0,0.758,84.7,179.3,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,10.07,436.9,0.759,74.2,177.1,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,11.77,422.2,0.74,80.0,172.2,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,9.4,490.3,0.689,82.4,179.3,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,10.14,461.9,0.734,71.2,178.2,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,10.91,447.2,0.793,85.2,173.5,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,11.22,432.8,0.741,87.7,176.0,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,10.67,466.8,0.705,86.4,175.2,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-01,BF-PO-01,Soudanienne,12.27,416.1,0.728,99.2,173.8,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-02,BF-PO-01,Soudanienne,11.59,402.3,0.707,67.9,172.6,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-03,BF-PO-01,Soudanienne,11.04,447.1,0.757,73.4,175.7,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-04,BF-PO-01,Soudanienne,12.11,387.6,0.715,74.2,173.9,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-05,BF-PO-01,Soudanienne,10.18,432.8,0.714,99.4,177.1,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-06,BF-PO-01,Soudanienne,10.64,439.3,0.719,97.4,178.6,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-07,BF-PO-01,Soudanienne,10.45,462.2,0.721,73.4,176.9,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-08,BF-PO-01,Soudanienne,10.27,418.6,0.688,82.3,178.5,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-09,BF-PO-01,Soudanienne,11.07,365.7,0.742,98.6,176.2,TRY_BIEN_SahelTraits_Ensemble
+Senegalia senegal (L.) Britton,IND-SEN-BF-PO-01-10,BF-PO-01,Soudanienne,10.96,465.1,0.729,80.4,173.4,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-01,BF-DOR-01,Sahélienne,10.34,334.4,0.484,261.7,176.6,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-02,BF-DOR-01,Sahélienne,11.42,359.3,0.525,262.7,172.5,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-03,BF-DOR-01,Sahélienne,12.26,301.8,0.525,279.6,171.3,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-04,BF-DOR-01,Sahélienne,12.46,365.0,0.546,289.7,171.6,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-05,BF-DOR-01,Sahélienne,12.79,336.9,0.546,272.4,173.1,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-06,BF-DOR-01,Sahélienne,12.85,343.3,0.516,238.9,170.9,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-07,BF-DOR-01,Sahélienne,10.62,353.3,0.55,272.9,177.5,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-08,BF-DOR-01,Sahélienne,11.54,380.6,0.549,268.2,173.5,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-09,BF-DOR-01,Sahélienne,12.55,343.0,0.536,299.8,171.7,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-DOR-01-10,BF-DOR-01,Sahélienne,11.45,351.5,0.573,254.4,174.0,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,12.66,364.6,0.515,271.8,173.1,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,13.14,368.5,0.534,293.3,170.3,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,12.71,333.9,0.499,240.9,171.1,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,16.0,324.7,0.567,279.2,169.5,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,14.29,327.9,0.549,280.4,170.3,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,14.19,329.9,0.518,274.9,170.0,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,11.76,350.0,0.536,279.1,173.7,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,13.37,328.4,0.576,247.6,170.7,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,13.12,375.7,0.538,267.5,173.0,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,13.0,358.0,0.534,260.9,171.7,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-01,BF-PO-01,Soudanienne,15.93,340.9,0.527,228.4,166.9,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-02,BF-PO-01,Soudanienne,13.0,354.6,0.55,260.1,170.3,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-03,BF-PO-01,Soudanienne,12.97,308.4,0.53,276.8,171.9,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-04,BF-PO-01,Soudanienne,12.15,348.0,0.511,269.5,172.3,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-05,BF-PO-01,Soudanienne,14.29,325.6,0.503,235.8,170.0,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-06,BF-PO-01,Soudanienne,13.15,328.9,0.531,280.6,171.6,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-07,BF-PO-01,Soudanienne,13.32,335.6,0.542,210.7,170.2,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-08,BF-PO-01,Soudanienne,11.58,330.2,0.511,224.1,171.9,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-09,BF-PO-01,Soudanienne,13.41,326.4,0.584,303.4,170.2,TRY_BIEN_SahelTraits_Ensemble
+Parkia biglobosa (Jacq.) R.Br. ex G.Don,IND-PAR-BF-PO-01-10,BF-PO-01,Soudanienne,13.7,335.0,0.554,292.7,171.3,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-01,BF-DOR-01,Sahélienne,12.35,357.1,0.719,163.1,172.3,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-02,BF-DOR-01,Sahélienne,10.42,366.2,0.708,130.2,177.6,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-03,BF-DOR-01,Sahélienne,11.85,370.2,0.726,142.8,173.6,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-04,BF-DOR-01,Sahélienne,9.32,366.9,0.734,140.0,179.6,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-05,BF-DOR-01,Sahélienne,12.13,386.5,0.658,154.5,171.1,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-06,BF-DOR-01,Sahélienne,12.05,370.5,0.746,144.3,173.3,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-07,BF-DOR-01,Sahélienne,12.39,405.6,0.718,130.5,172.8,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-08,BF-DOR-01,Sahélienne,12.5,388.0,0.711,134.8,174.6,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-09,BF-DOR-01,Sahélienne,10.89,353.4,0.637,135.8,174.2,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-DOR-01-10,BF-DOR-01,Sahélienne,12.54,362.0,0.746,168.8,172.8,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,10.15,359.5,0.725,166.7,175.5,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,12.42,395.7,0.708,149.9,171.1,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,12.24,356.4,0.714,134.3,172.6,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,12.59,362.7,0.733,171.2,172.2,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,11.9,370.6,0.681,139.7,173.7,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,12.29,358.1,0.677,165.5,173.3,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,11.12,355.8,0.735,148.0,175.7,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,12.24,370.8,0.702,137.2,172.3,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,12.47,360.0,0.694,158.6,172.8,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,9.93,374.1,0.733,127.7,176.6,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-01,BF-PO-01,Soudanienne,12.32,367.5,0.645,150.4,173.6,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-02,BF-PO-01,Soudanienne,14.1,351.8,0.685,133.7,170.5,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-03,BF-PO-01,Soudanienne,13.72,364.1,0.663,141.4,171.9,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-04,BF-PO-01,Soudanienne,13.02,321.6,0.709,128.8,172.8,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-05,BF-PO-01,Soudanienne,15.49,356.2,0.664,159.2,167.0,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-06,BF-PO-01,Soudanienne,14.03,352.1,0.686,174.1,169.2,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-07,BF-PO-01,Soudanienne,11.17,351.8,0.756,165.1,174.3,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-08,BF-PO-01,Soudanienne,13.13,336.6,0.714,161.1,171.4,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-09,BF-PO-01,Soudanienne,12.82,363.3,0.699,139.0,174.1,TRY_BIEN_SahelTraits_Ensemble
+Pterocarpus erinaceus Poir.,IND-PTE-BF-PO-01-10,BF-PO-01,Soudanienne,13.16,330.7,0.732,141.2,171.4,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-01,BF-DOR-01,Sahélienne,11.22,392.0,0.793,34.9,173.1,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-02,BF-DOR-01,Sahélienne,11.08,393.5,0.807,41.1,175.4,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-03,BF-DOR-01,Sahélienne,9.41,393.8,0.785,33.1,176.4,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-04,BF-DOR-01,Sahélienne,11.37,426.6,0.775,33.6,174.0,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-05,BF-DOR-01,Sahélienne,11.15,440.5,0.852,32.3,175.4,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-06,BF-DOR-01,Sahélienne,11.1,415.5,0.815,33.1,174.1,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-07,BF-DOR-01,Sahélienne,8.62,421.5,0.83,36.3,181.4,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-08,BF-DOR-01,Sahélienne,11.01,383.6,0.817,31.2,176.3,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-09,BF-DOR-01,Sahélienne,10.77,430.6,0.814,38.0,174.5,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-DOR-01-10,BF-DOR-01,Sahélienne,9.97,438.2,0.809,34.6,178.2,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-01,BF-KAY-01,Soudano-Sahélienne,9.71,391.8,0.77,35.4,178.6,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-02,BF-KAY-01,Soudano-Sahélienne,10.45,409.6,0.796,42.2,174.1,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-03,BF-KAY-01,Soudano-Sahélienne,12.73,447.2,0.781,32.4,173.2,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-04,BF-KAY-01,Soudano-Sahélienne,10.31,426.6,0.755,36.1,177.8,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-05,BF-KAY-01,Soudano-Sahélienne,9.82,394.6,0.828,34.9,177.1,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-06,BF-KAY-01,Soudano-Sahélienne,11.22,427.6,0.783,33.8,174.6,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-07,BF-KAY-01,Soudano-Sahélienne,11.38,392.7,0.815,39.4,172.4,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-08,BF-KAY-01,Soudano-Sahélienne,9.64,388.1,0.849,33.8,179.6,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-09,BF-KAY-01,Soudano-Sahélienne,9.71,389.3,0.802,34.3,177.2,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-KAY-01-10,BF-KAY-01,Soudano-Sahélienne,11.82,417.2,0.795,29.4,173.3,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-01,BF-PO-01,Soudanienne,12.29,417.6,0.754,38.3,172.1,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-02,BF-PO-01,Soudanienne,10.2,380.4,0.79,40.6,178.6,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-03,BF-PO-01,Soudanienne,12.02,351.0,0.744,35.0,172.0,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-04,BF-PO-01,Soudanienne,12.2,407.2,0.769,25.3,173.1,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-05,BF-PO-01,Soudanienne,12.66,359.1,0.725,39.3,172.9,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-06,BF-PO-01,Soudanienne,11.28,390.4,0.768,38.7,174.7,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-07,BF-PO-01,Soudanienne,10.29,399.9,0.765,36.7,176.6,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-08,BF-PO-01,Soudanienne,10.96,380.5,0.769,33.8,175.7,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-09,BF-PO-01,Soudanienne,11.31,390.0,0.789,28.2,173.2,TRY_BIEN_SahelTraits_Ensemble
+Anogeissus leiocarpa (DC.) Guill. & Perr.,IND-ANO-BF-PO-01-10,BF-PO-01,Soudanienne,12.56,386.6,0.74,41.1,171.4,TRY_BIEN_SahelTraits_Ensemble

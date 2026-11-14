@@ -1,0 +1,58 @@
+{
+  "type": "LEAF_SCAN",
+  "qr_code_tag": "BF-KDG-ACARAD-001",
+  "leaf_count": 3,
+  "total_leaf_area_cm2": 72.907,
+  "mean_leaf_area_cm2": 24.302,
+  "std_leaf_area_cm2": 8.004,
+  "mean_length_cm": 8.47,
+  "mean_width_cm": 3.6,
+  "mean_circularity": 0.544,
+  "mean_herbivory_pct": 22.85,
+  "is_compound": false,
+  "scale": {
+    "pixels_per_cm": 118.0,
+    "method": "MARKER"
+  },
+  "leaves": [
+    {
+      "leaf_id": 1,
+      "area_cm2": 25.363,
+      "perimeter_cm": 24.25,
+      "length_cm": 9.01,
+      "width_cm": 3.61,
+      "circularity": 0.542,
+      "aspect_ratio": 2.5,
+      "herbivory_pct": 20.84,
+      "consumed_area_cm2": 6.675545820166619,
+      "intact_area_cm2": 32.0385521401896,
+      "hole_count": 0
+    },
+    {
+      "leaf_id": 2,
+      "area_cm2": 33.532,
+      "perimeter_cm": 28.2,
+      "length_cm": 10.01,
+      "width_cm": 4.38,
+      "circularity": 0.53,
+      "aspect_ratio": 2.28,
+      "herbivory_pct": 24.97,
+      "consumed_area_cm2": 11.161411950588914,
+      "intact_area_cm2": 44.69380206837116,
+      "hole_count": 0
+    },
+    {
+      "leaf_id": 3,
+      "area_cm2": 14.012,
+      "perimeter_cm": 17.73,
+      "length_cm": 6.4,
+      "width_cm": 2.81,
+      "circularity": 0.56,
+      "aspect_ratio": 2.27,
+      "herbivory_pct": 22.73,
+      "consumed_area_cm2": 4.122220626256823,
+      "intact_area_cm2": 18.13460930767021,
+      "hole_count": 0
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+import { TaxonRef } from '@/types';
+
+export const SAHEL_TAXA: TaxonRef[] = [
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000001',
+    scientific_name: 'Balanites aegyptiaca (L.) Delile',
+    family: 'Zygophyllaceae',
+    genus: 'Balanites',
+    vernacular_moore: 'Kieglga',
+    vernacular_dioula: 'Ségéné',
+    vernacular_fulfulde: 'Murtooki',
+    functional_group: 'Épineux xérophyte persistant',
+    iucn_status: 'LC',
+    typical_sla_mean: 9.9,
+    typical_sla_sd: 0.6,
+    typical_wood_density_mean: 0.72,
+  },
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000002',
+    scientific_name: 'Adansonia digitata L.',
+    family: 'Malvaceae',
+    genus: 'Adansonia',
+    vernacular_moore: 'Toèga',
+    vernacular_dioula: 'Sira',
+    vernacular_fulfulde: 'Boki',
+    functional_group: 'Méga-arbre réserve hydrique',
+    iucn_status: 'LC',
+    typical_sla_mean: 14.5,
+    typical_sla_sd: 1.2,
+    typical_wood_density_mean: 0.28,
+  },
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000003',
+    scientific_name: 'Faidherbia albida (Delile) A.Chev.',
+    family: 'Fabaceae',
+    genus: 'Faidherbia',
+    vernacular_moore: 'Zaanga',
+    vernacular_dioula: 'Balanzan',
+    vernacular_fulfulde: 'Caski',
+    functional_group: 'Fixateur azote phénologie inversée',
+    iucn_status: 'LC',
+    typical_sla_mean: 16.2,
+    typical_sla_sd: 1.1,
+    typical_wood_density_mean: 0.58,
+  },
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000004',
+    scientific_name: 'Vachellia tortilis (Forssk.) Galasso & Banfi',
+    family: 'Fabaceae',
+    genus: 'Vachellia',
+    vernacular_moore: 'Gom-peelga',
+    vernacular_dioula: 'Danba',
+    vernacular_fulfulde: 'Cilluki',
+    functional_group: 'Épineux sahélien hyper-xérique',
+    iucn_status: 'LC',
+    typical_sla_mean: 8.8,
+    typical_sla_sd: 0.8,
+    typical_wood_density_mean: 0.78,
+  },
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000005',
+    scientific_name: 'Combretum glutinosum Perr. ex DC.',
+    family: 'Combretaceae',
+    genus: 'Combretum',
+    vernacular_moore: 'Rambolga',
+    vernacular_dioula: 'Doki',
+    vernacular_fulfulde: 'Dooki',
+    functional_group: 'Arbuste pyrophyle résilient',
+    iucn_status: 'LC',
+    typical_sla_mean: 12.1,
+    typical_sla_sd: 0.9,
+    typical_wood_density_mean: 0.69,
+  },
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000006',
+    scientific_name: 'Ziziphus mauritiana Lam.',
+    family: 'Rhamnaceae',
+    genus: 'Ziziphus',
+    vernacular_moore: 'Moug-noaga',
+    vernacular_dioula: 'Tomboron',
+    vernacular_fulfulde: 'Jaabi',
+    functional_group: 'Arbuste fruitier résistant',
+    iucn_status: 'LC',
+    typical_sla_mean: 11.4,
+    typical_sla_sd: 0.7,
+    typical_wood_density_mean: 0.65,
+  },
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000007',
+    scientific_name: 'Senegalia senegal (L.) Britton',
+    family: 'Fabaceae',
+    genus: 'Senegalia',
+    vernacular_moore: 'Gom-sablga',
+    vernacular_dioula: 'Danba-fiman',
+    vernacular_fulfulde: 'Pattuki',
+    functional_group: 'Arbre à gomme arabique xérique',
+    iucn_status: 'LC',
+    typical_sla_mean: 9.2,
+    typical_sla_sd: 0.7,
+    typical_wood_density_mean: 0.76,
+  },
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000008',
+    scientific_name: 'Sclerocarya birrea (A.Rich.) Hochst.',
+    family: 'Anacardiaceae',
+    genus: 'Sclerocarya',
+    vernacular_moore: 'Nobga',
+    vernacular_dioula: 'Nouna',
+    vernacular_fulfulde: 'Eeri',
+    functional_group: 'Arbre fruitier savanicole',
+    iucn_status: 'LC',
+    typical_sla_mean: 13.8,
+    typical_sla_sd: 1.0,
+    typical_wood_density_mean: 0.52,
+  },
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000009',
+    scientific_name: 'Tamarindus indica L.',
+    family: 'Fabaceae',
+    genus: 'Tamarindus',
+    vernacular_moore: 'Pusga',
+    vernacular_dioula: 'Tomi',
+    vernacular_fulfulde: 'Jaammi',
+    functional_group: 'Légumineuse fruitière sempervirente',
+    iucn_status: 'LC',
+    typical_sla_mean: 10.5,
+    typical_sla_sd: 0.8,
+    typical_wood_density_mean: 0.75,
+  },
+  {
+    taxon_id: 'b0000000-0000-0000-0000-000000000010',
+    scientific_name: 'Parkia biglobosa (Jacq.) R.Br. ex G.Don',
+    family: 'Fabaceae',
+    genus: 'Parkia',
+    vernacular_moore: 'Roanga',
+    vernacular_dioula: 'Néré',
+    vernacular_fulfulde: 'Narehi',
+    functional_group: 'Arbre de parc agroforestier (Néré)',
+    iucn_status: 'LC',
+    typical_sla_mean: 15.0,
+    typical_sla_sd: 1.1,
+    typical_wood_density_mean: 0.54,
+  },
+];
+
+export function findTaxonById(id: string): TaxonRef | undefined {
+  return SAHEL_TAXA.find((t) => t.taxon_id === id);
+}
+
+export function searchTaxa(query: string): TaxonRef[] {
+  if (!query) return SAHEL_TAXA;
+  const q = query.toLowerCase().trim();
+  return SAHEL_TAXA.filter(
+    (t) =>
+      t.scientific_name.toLowerCase().includes(q) ||
+      t.vernacular_moore.toLowerCase().includes(q) ||
+      t.vernacular_dioula.toLowerCase().includes(q) ||
+      t.vernacular_fulfulde.toLowerCase().includes(q) ||
+      t.family.toLowerCase().includes(q)
+  );
+}

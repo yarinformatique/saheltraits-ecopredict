@@ -1,0 +1,140 @@
+# ==============================================================================
+# SAHELTRAITS-DB & ECOPREDICT : CONFIGURATION GLOBALE DU PIPELINE (Couche 4a)
+# Thèse de Doctorat : Écologie Fonctionnelle & Bio-informatique (2026-2029)
+# Maître d'ouvrage : YAGO Abdoul Rachide (UJKZ - ICC)
+# ==============================================================================
+
+project:
+  name: "SahelTraits-DB & EcoPredict Bio-Statistical & JSDM Pipeline"
+  code: "Couche-4a"
+  version: "1.0.0"
+  author: "YAGO Abdoul Rachide"
+  email: "rachide.yago@ujkz.bf"
+  institution: "Université Joseph Ki-Zerbo (Ouagadougou, Burkina Faso)"
+  doctoral_school: "École Doctorale Sciences et Technologies - Informatique et Changement Climatique (ICC)"
+  start_year: 2026
+  completion_year: 2029
+
+study_domain:
+  region: "Sahel & Soudano-Sahélien (Afrique de l'Ouest)"
+  country: "Burkina Faso"
+  bbox:
+    xmin: -5.5
+    xmax: 2.5
+    ymin: 9.0
+    ymax: 15.5
+  crs: "EPSG:4326"
+  resolution_arcmin: 2.5
+  resolution_km: 4.5
+
+field_sites:
+  - plot_id: "BF-DOR-01"
+    name: "Dori - Mare de Yakouta"
+    zone: "Sahélienne"
+    lat: 14.0325
+    lon: -0.0925
+    elevation_m: 285.0
+    mean_annual_rainfall_mm: 420.0
+  - plot_id: "BF-KAY-01"
+    name: "Kaya - Forêt Classée de Dem"
+    zone: "Soudano-Sahélienne"
+    lat: 13.0825
+    lon: -1.1275
+    elevation_m: 312.0
+    mean_annual_rainfall_mm: 680.0
+  - plot_id: "BF-PO-01"
+    name: "Pô - Parc National Kaboré Tambi"
+    zone: "Soudanienne"
+    lat: 11.2425
+    lon: -1.1575
+    elevation_m: 290.0
+    mean_annual_rainfall_mm: 980.0
+
+climate_variables:
+  historical:
+    sources: ["WorldClim_v2.1", "CHIRPS", "ERA5_Land"]
+    bioclim:
+      - code: "bio1"
+        name: "Annual Mean Temperature"
+        unit: "°C"
+      - code: "bio4"
+        name: "Temperature Seasonality (std dev * 100)"
+        unit: "dimensionless"
+      - code: "bio12"
+        name: "Annual Precipitation"
+        unit: "mm"
+      - code: "bio15"
+        name: "Precipitation Seasonality (coeff variation)"
+        unit: "%"
+
+climate_scenarios_cmip6:
+  gcms:
+    - "IPSL-CM6A-LR"
+    - "MPI-ESM1-2-HR"
+    - "MRI-ESM2-0"
+    - "UKESM1-0-LL"
+    - "GFDL-ESM4"
+  ssps:
+    - "ssp245"
+    - "ssp585"
+  horizons:
+    - 2050
+    - 2080
+
+functional_traits:
+  foliar:
+    - code: "SLA"
+      name: "Specific Leaf Area"
+      unit: "mm2/mg"
+      protocol: "Cornelissen et al. (2003) - Leaf scanner 600dpi"
+    - code: "LDMC"
+      name: "Leaf Dry Matter Content"
+      unit: "mg/g"
+      protocol: "Hydrated fresh mass vs 72h 60C dry mass"
+    - code: "Leaf_thickness"
+      name: "Leaf Thickness"
+      unit: "um"
+  stem:
+    - code: "Wood_density"
+      name: "Stem Wood Density"
+      unit: "g/cm3"
+      protocol: "Archimedes water displacement"
+  regenerative:
+    - code: "Seed_mass"
+      name: "Single Seed Mass"
+      unit: "mg"
+    - code: "Germination_T50"
+      name: "Time to 50% germination"
+      unit: "days"
+
+statistical_parameters:
+  indval:
+    n_permutations: 9999
+    significance_threshold: 0.05
+  smith_saliency:
+    min_citations: 5
+  fourth_corner:
+    n_permutations: 49999
+    model: "Model_6"
+    p_adjust_method: "fdr"
+  hmsc_mcmc:
+    n_chains: 4
+    samples_per_chain: 2500
+    thinning: 10
+    transient: 1000
+    convergence:
+      max_psrf: 1.05
+      min_ess: 1000
+  biomod2_sdm:
+    algorithms: ["GLM", "GAM", "MAXNET", "RF", "GBM"]
+    cv_strategy: "spatial_block"
+    n_folds: 5
+    eval_thresholds:
+      min_auc: 0.85
+      min_tss: 0.70
+    ensemble_metric: "TSS_weighted_mean"
+
+hpc:
+  n_cores: 4
+  parallel_engine: "future"
+  seed: 20261114

@@ -1,0 +1,13 @@
+"scientific_name","indicative_zone","Specificity_A","Fidelity_B","IndVal_pct","p_value","is_significant","Smith_Saliency_Index"
+"Vachellia tortilis (Forssk.) Galasso & Banfi","Sahélienne",0.975,0.85,91.04,0.001,TRUE,0.668
+"Balanites aegyptiaca (L.) Delile","Sahélienne",0.978,0.825,89.84,0.001,TRUE,0.805
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","Soudanienne",0.981,0.775,87.22,0.001,TRUE,0.907
+"Pterocarpus erinaceus Poir.","Soudanienne",0.98,0.775,87.13,0.001,TRUE,0.844
+"Ziziphus mauritiana Lam.","Soudanienne",0.82,0.75,78.43,0.001,TRUE,0.481
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","Soudanienne",0.78,0.625,69.83,0.001,TRUE,0.86
+"Sclerocarya birrea (A.Rich.) Hochst.","Soudanienne",0.763,0.525,63.31,0.001,TRUE,0.446
+"Adansonia digitata L.","Soudanienne",0.75,0.525,62.75,0.002,TRUE,0.873
+"Tamarindus indica L.","Sahélienne",0.596,0.45,51.79,0.149,FALSE,0.447
+"Senegalia senegal (L.) Britton","Soudanienne",0.537,0.45,49.18,0.303,FALSE,0.79
+"Faidherbia albida (Delile) A.Chev.","Soudanienne",0.549,0.375,45.37,0.275,FALSE,0.945
+"Combretum glutinosum Perr. ex DC.","Soudanienne",0.58,0.275,39.94,0.276,FALSE,0.658

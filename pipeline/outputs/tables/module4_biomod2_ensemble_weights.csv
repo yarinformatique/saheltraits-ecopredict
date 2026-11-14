@@ -1,0 +1,60 @@
+"species","algorithm","Ensemble_Weight"
+"Adansonia digitata L.","GAM",0.7203
+"Adansonia digitata L.","GBM",0.7812
+"Adansonia digitata L.","GLM",0.709
+"Adansonia digitata L.","MAXNET",0.7626
+"Adansonia digitata L.","RF",0.7998
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GAM",0.7555
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GBM",0.7958
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GLM",0.732
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","MAXNET",0.7568
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","RF",0.7914
+"Balanites aegyptiaca (L.) Delile","GAM",0.7546
+"Balanites aegyptiaca (L.) Delile","GBM",0.7748
+"Balanites aegyptiaca (L.) Delile","MAXNET",0.763
+"Balanites aegyptiaca (L.) Delile","RF",0.799
+"Combretum glutinosum Perr. ex DC.","GAM",0.7495
+"Combretum glutinosum Perr. ex DC.","GBM",0.8048
+"Combretum glutinosum Perr. ex DC.","GLM",0.7325
+"Combretum glutinosum Perr. ex DC.","MAXNET",0.7872
+"Combretum glutinosum Perr. ex DC.","RF",0.78
+"Faidherbia albida (Delile) A.Chev.","GAM",0.751
+"Faidherbia albida (Delile) A.Chev.","GBM",0.777
+"Faidherbia albida (Delile) A.Chev.","GLM",0.7183
+"Faidherbia albida (Delile) A.Chev.","MAXNET",0.7228
+"Faidherbia albida (Delile) A.Chev.","RF",0.7712
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GAM",0.729
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GBM",0.7788
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GLM",0.7455
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","MAXNET",0.7764
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","RF",0.805
+"Pterocarpus erinaceus Poir.","GAM",0.7387
+"Pterocarpus erinaceus Poir.","GBM",0.7842
+"Pterocarpus erinaceus Poir.","GLM",0.74
+"Pterocarpus erinaceus Poir.","MAXNET",0.7512
+"Pterocarpus erinaceus Poir.","RF",0.7868
+"Sclerocarya birrea (A.Rich.) Hochst.","GAM",0.73
+"Sclerocarya birrea (A.Rich.) Hochst.","GBM",0.7942
+"Sclerocarya birrea (A.Rich.) Hochst.","GLM",0.727
+"Sclerocarya birrea (A.Rich.) Hochst.","MAXNET",0.784
+"Sclerocarya birrea (A.Rich.) Hochst.","RF",0.7824
+"Senegalia senegal (L.) Britton","GAM",0.725
+"Senegalia senegal (L.) Britton","GBM",0.785
+"Senegalia senegal (L.) Britton","GLM",0.736
+"Senegalia senegal (L.) Britton","MAXNET",0.7674
+"Senegalia senegal (L.) Britton","RF",0.8004
+"Tamarindus indica L.","GAM",0.7384
+"Tamarindus indica L.","GBM",0.7936
+"Tamarindus indica L.","GLM",0.7187
+"Tamarindus indica L.","MAXNET",0.7562
+"Tamarindus indica L.","RF",0.7988
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GAM",0.7425
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GBM",0.7742
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GLM",0.7285
+"Vachellia tortilis (Forssk.) Galasso & Banfi","MAXNET",0.7536
+"Vachellia tortilis (Forssk.) Galasso & Banfi","RF",0.7956
+"Ziziphus mauritiana Lam.","GAM",0.7428
+"Ziziphus mauritiana Lam.","GBM",0.7804
+"Ziziphus mauritiana Lam.","GLM",0.7583
+"Ziziphus mauritiana Lam.","MAXNET",0.7452
+"Ziziphus mauritiana Lam.","RF",0.7848

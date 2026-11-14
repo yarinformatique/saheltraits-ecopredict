@@ -1,0 +1,301 @@
+"species","algorithm","cv_fold","AUC_ROC","TSS","Sensitivity","Specificity","Retained_In_Ensemble"
+"Balanites aegyptiaca (L.) Delile","GLM",1,0.863,0.644,0.935,0.8,FALSE
+"Balanites aegyptiaca (L.) Delile","GLM",2,0.859,0.697,0.841,0.863,FALSE
+"Balanites aegyptiaca (L.) Delile","GLM",3,0.858,0.662,0.837,0.886,FALSE
+"Balanites aegyptiaca (L.) Delile","GLM",4,0.859,0.698,0.937,0.891,FALSE
+"Balanites aegyptiaca (L.) Delile","GLM",5,0.845,0.736,0.935,0.856,FALSE
+"Balanites aegyptiaca (L.) Delile","GAM",1,0.879,0.785,0.907,0.814,TRUE
+"Balanites aegyptiaca (L.) Delile","GAM",2,0.871,0.714,0.837,0.875,TRUE
+"Balanites aegyptiaca (L.) Delile","GAM",3,0.897,0.739,0.912,0.805,TRUE
+"Balanites aegyptiaca (L.) Delile","GAM",4,0.872,0.767,0.869,0.848,TRUE
+"Balanites aegyptiaca (L.) Delile","GAM",5,0.892,0.768,0.906,0.86,TRUE
+"Balanites aegyptiaca (L.) Delile","MAXNET",1,0.906,0.722,0.866,0.895,TRUE
+"Balanites aegyptiaca (L.) Delile","MAXNET",2,0.881,0.802,0.856,0.81,TRUE
+"Balanites aegyptiaca (L.) Delile","MAXNET",3,0.873,0.761,0.91,0.901,TRUE
+"Balanites aegyptiaca (L.) Delile","MAXNET",4,0.917,0.767,0.852,0.909,TRUE
+"Balanites aegyptiaca (L.) Delile","MAXNET",5,0.887,0.695,0.893,0.846,FALSE
+"Balanites aegyptiaca (L.) Delile","RF",1,0.923,0.819,0.935,0.907,TRUE
+"Balanites aegyptiaca (L.) Delile","RF",2,0.911,0.8,0.849,0.902,TRUE
+"Balanites aegyptiaca (L.) Delile","RF",3,0.939,0.822,0.829,0.88,TRUE
+"Balanites aegyptiaca (L.) Delile","RF",4,0.947,0.776,0.893,0.816,TRUE
+"Balanites aegyptiaca (L.) Delile","RF",5,0.949,0.778,0.939,0.852,TRUE
+"Balanites aegyptiaca (L.) Delile","GBM",1,0.917,0.76,0.939,0.908,TRUE
+"Balanites aegyptiaca (L.) Delile","GBM",2,0.934,0.764,0.872,0.924,TRUE
+"Balanites aegyptiaca (L.) Delile","GBM",3,0.9,0.785,0.861,0.849,TRUE
+"Balanites aegyptiaca (L.) Delile","GBM",4,0.903,0.777,0.894,0.929,TRUE
+"Balanites aegyptiaca (L.) Delile","GBM",5,0.903,0.788,0.944,0.839,TRUE
+"Adansonia digitata L.","GLM",1,0.829,0.703,0.9,0.888,FALSE
+"Adansonia digitata L.","GLM",2,0.881,0.705,0.828,0.874,TRUE
+"Adansonia digitata L.","GLM",3,0.866,0.713,0.882,0.801,TRUE
+"Adansonia digitata L.","GLM",4,0.895,0.667,0.862,0.85,FALSE
+"Adansonia digitata L.","GLM",5,0.825,0.718,0.863,0.903,FALSE
+"Adansonia digitata L.","GAM",1,0.858,0.735,0.924,0.917,TRUE
+"Adansonia digitata L.","GAM",2,0.907,0.719,0.904,0.838,TRUE
+"Adansonia digitata L.","GAM",3,0.854,0.707,0.921,0.889,TRUE
+"Adansonia digitata L.","GAM",4,0.88,0.674,0.892,0.816,FALSE
+"Adansonia digitata L.","GAM",5,0.88,0.674,0.866,0.823,FALSE
+"Adansonia digitata L.","MAXNET",1,0.893,0.77,0.933,0.866,TRUE
+"Adansonia digitata L.","MAXNET",2,0.896,0.765,0.913,0.891,TRUE
+"Adansonia digitata L.","MAXNET",3,0.896,0.725,0.847,0.918,TRUE
+"Adansonia digitata L.","MAXNET",4,0.921,0.794,0.888,0.803,TRUE
+"Adansonia digitata L.","MAXNET",5,0.907,0.759,0.917,0.872,TRUE
+"Adansonia digitata L.","RF",1,0.911,0.767,0.93,0.816,TRUE
+"Adansonia digitata L.","RF",2,0.96,0.819,0.871,0.863,TRUE
+"Adansonia digitata L.","RF",3,0.88,0.824,0.94,0.918,TRUE
+"Adansonia digitata L.","RF",4,0.914,0.757,0.888,0.85,TRUE
+"Adansonia digitata L.","RF",5,0.944,0.832,0.901,0.815,TRUE
+"Adansonia digitata L.","GBM",1,0.928,0.783,0.941,0.81,TRUE
+"Adansonia digitata L.","GBM",2,0.907,0.82,0.878,0.896,TRUE
+"Adansonia digitata L.","GBM",3,0.92,0.767,0.928,0.851,TRUE
+"Adansonia digitata L.","GBM",4,0.897,0.754,0.914,0.809,TRUE
+"Adansonia digitata L.","GBM",5,0.941,0.782,0.936,0.871,TRUE
+"Faidherbia albida (Delile) A.Chev.","GLM",1,0.869,0.702,0.834,0.856,TRUE
+"Faidherbia albida (Delile) A.Chev.","GLM",2,0.819,0.731,0.914,0.83,FALSE
+"Faidherbia albida (Delile) A.Chev.","GLM",3,0.857,0.743,0.845,0.907,TRUE
+"Faidherbia albida (Delile) A.Chev.","GLM",4,0.874,0.71,0.89,0.838,TRUE
+"Faidherbia albida (Delile) A.Chev.","GLM",5,0.836,0.677,0.873,0.924,FALSE
+"Faidherbia albida (Delile) A.Chev.","GAM",1,0.887,0.752,0.895,0.924,TRUE
+"Faidherbia albida (Delile) A.Chev.","GAM",2,0.844,0.78,0.894,0.914,FALSE
+"Faidherbia albida (Delile) A.Chev.","GAM",3,0.904,0.718,0.861,0.818,TRUE
+"Faidherbia albida (Delile) A.Chev.","GAM",4,0.892,0.765,0.933,0.822,TRUE
+"Faidherbia albida (Delile) A.Chev.","GAM",5,0.914,0.769,0.824,0.856,TRUE
+"Faidherbia albida (Delile) A.Chev.","MAXNET",1,0.901,0.702,0.87,0.863,TRUE
+"Faidherbia albida (Delile) A.Chev.","MAXNET",2,0.891,0.703,0.888,0.852,TRUE
+"Faidherbia albida (Delile) A.Chev.","MAXNET",3,0.862,0.737,0.887,0.886,TRUE
+"Faidherbia albida (Delile) A.Chev.","MAXNET",4,0.901,0.73,0.867,0.889,TRUE
+"Faidherbia albida (Delile) A.Chev.","MAXNET",5,0.902,0.742,0.883,0.819,TRUE
+"Faidherbia albida (Delile) A.Chev.","RF",1,0.954,0.756,0.892,0.862,TRUE
+"Faidherbia albida (Delile) A.Chev.","RF",2,0.939,0.802,0.828,0.88,TRUE
+"Faidherbia albida (Delile) A.Chev.","RF",3,0.904,0.784,0.86,0.816,TRUE
+"Faidherbia albida (Delile) A.Chev.","RF",4,0.923,0.732,0.929,0.899,TRUE
+"Faidherbia albida (Delile) A.Chev.","RF",5,0.942,0.782,0.849,0.823,TRUE
+"Faidherbia albida (Delile) A.Chev.","GBM",1,0.941,0.777,0.926,0.849,TRUE
+"Faidherbia albida (Delile) A.Chev.","GBM",2,0.954,0.779,0.847,0.869,TRUE
+"Faidherbia albida (Delile) A.Chev.","GBM",3,0.915,0.767,0.858,0.926,TRUE
+"Faidherbia albida (Delile) A.Chev.","GBM",4,0.928,0.798,0.925,0.896,TRUE
+"Faidherbia albida (Delile) A.Chev.","GBM",5,0.894,0.764,0.879,0.856,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GLM",1,0.886,0.732,0.899,0.823,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GLM",2,0.833,0.665,0.948,0.806,FALSE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GLM",3,0.829,0.765,0.94,0.923,FALSE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GLM",4,0.891,0.674,0.93,0.875,FALSE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GLM",5,0.857,0.725,0.918,0.807,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GAM",1,0.893,0.69,0.835,0.918,FALSE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GAM",2,0.872,0.76,0.826,0.892,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GAM",3,0.852,0.768,0.841,0.819,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GAM",4,0.884,0.723,0.944,0.826,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GAM",5,0.898,0.719,0.847,0.816,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","MAXNET",1,0.901,0.727,0.922,0.811,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","MAXNET",2,0.881,0.748,0.941,0.815,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","MAXNET",3,0.901,0.778,0.912,0.919,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","MAXNET",4,0.913,0.781,0.865,0.848,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","MAXNET",5,0.875,0.734,0.916,0.916,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","RF",1,0.943,0.798,0.906,0.885,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","RF",2,0.91,0.807,0.915,0.927,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","RF",3,0.947,0.794,0.902,0.914,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","RF",4,0.901,0.793,0.91,0.892,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","RF",5,0.889,0.786,0.833,0.914,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GBM",1,0.926,0.791,0.937,0.839,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GBM",2,0.92,0.756,0.858,0.877,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GBM",3,0.929,0.779,0.888,0.871,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GBM",4,0.899,0.725,0.832,0.908,TRUE
+"Vachellia tortilis (Forssk.) Galasso & Banfi","GBM",5,0.934,0.82,0.87,0.803,TRUE
+"Combretum glutinosum Perr. ex DC.","GLM",1,0.898,0.719,0.901,0.903,TRUE
+"Combretum glutinosum Perr. ex DC.","GLM",2,0.858,0.753,0.88,0.908,TRUE
+"Combretum glutinosum Perr. ex DC.","GLM",3,0.862,0.719,0.887,0.898,TRUE
+"Combretum glutinosum Perr. ex DC.","GLM",4,0.882,0.739,0.836,0.825,TRUE
+"Combretum glutinosum Perr. ex DC.","GLM",5,0.865,0.69,0.826,0.923,FALSE
+"Combretum glutinosum Perr. ex DC.","GAM",1,0.889,0.739,0.835,0.805,TRUE
+"Combretum glutinosum Perr. ex DC.","GAM",2,0.862,0.692,0.95,0.882,FALSE
+"Combretum glutinosum Perr. ex DC.","GAM",3,0.887,0.766,0.853,0.854,TRUE
+"Combretum glutinosum Perr. ex DC.","GAM",4,0.892,0.74,0.862,0.808,TRUE
+"Combretum glutinosum Perr. ex DC.","GAM",5,0.878,0.753,0.903,0.802,TRUE
+"Combretum glutinosum Perr. ex DC.","MAXNET",1,0.955,0.789,0.862,0.824,TRUE
+"Combretum glutinosum Perr. ex DC.","MAXNET",2,0.893,0.81,0.869,0.867,TRUE
+"Combretum glutinosum Perr. ex DC.","MAXNET",3,0.875,0.759,0.906,0.835,TRUE
+"Combretum glutinosum Perr. ex DC.","MAXNET",4,0.913,0.777,0.825,0.834,TRUE
+"Combretum glutinosum Perr. ex DC.","MAXNET",5,0.896,0.801,0.886,0.856,TRUE
+"Combretum glutinosum Perr. ex DC.","RF",1,0.921,0.755,0.949,0.921,TRUE
+"Combretum glutinosum Perr. ex DC.","RF",2,0.915,0.782,0.894,0.851,TRUE
+"Combretum glutinosum Perr. ex DC.","RF",3,0.95,0.825,0.903,0.863,TRUE
+"Combretum glutinosum Perr. ex DC.","RF",4,0.901,0.772,0.854,0.918,TRUE
+"Combretum glutinosum Perr. ex DC.","RF",5,0.945,0.766,0.823,0.892,TRUE
+"Combretum glutinosum Perr. ex DC.","GBM",1,0.9,0.784,0.902,0.837,TRUE
+"Combretum glutinosum Perr. ex DC.","GBM",2,0.907,0.83,0.836,0.815,TRUE
+"Combretum glutinosum Perr. ex DC.","GBM",3,0.937,0.814,0.888,0.826,TRUE
+"Combretum glutinosum Perr. ex DC.","GBM",4,0.921,0.799,0.885,0.893,TRUE
+"Combretum glutinosum Perr. ex DC.","GBM",5,0.917,0.797,0.867,0.911,TRUE
+"Ziziphus mauritiana Lam.","GLM",1,0.885,0.726,0.906,0.875,TRUE
+"Ziziphus mauritiana Lam.","GLM",2,0.84,0.706,0.937,0.886,FALSE
+"Ziziphus mauritiana Lam.","GLM",3,0.852,0.759,0.853,0.884,TRUE
+"Ziziphus mauritiana Lam.","GLM",4,0.865,0.79,0.949,0.838,TRUE
+"Ziziphus mauritiana Lam.","GLM",5,0.835,0.729,0.827,0.801,FALSE
+"Ziziphus mauritiana Lam.","GAM",1,0.873,0.771,0.899,0.824,TRUE
+"Ziziphus mauritiana Lam.","GAM",2,0.865,0.703,0.904,0.81,TRUE
+"Ziziphus mauritiana Lam.","GAM",3,0.862,0.73,0.836,0.909,TRUE
+"Ziziphus mauritiana Lam.","GAM",4,0.878,0.755,0.843,0.802,TRUE
+"Ziziphus mauritiana Lam.","GAM",5,0.875,0.755,0.93,0.816,TRUE
+"Ziziphus mauritiana Lam.","MAXNET",1,0.878,0.733,0.893,0.86,TRUE
+"Ziziphus mauritiana Lam.","MAXNET",2,0.896,0.71,0.935,0.919,TRUE
+"Ziziphus mauritiana Lam.","MAXNET",3,0.881,0.776,0.886,0.89,TRUE
+"Ziziphus mauritiana Lam.","MAXNET",4,0.922,0.775,0.878,0.863,TRUE
+"Ziziphus mauritiana Lam.","MAXNET",5,0.943,0.732,0.887,0.845,TRUE
+"Ziziphus mauritiana Lam.","RF",1,0.934,0.779,0.877,0.814,TRUE
+"Ziziphus mauritiana Lam.","RF",2,0.882,0.747,0.827,0.862,TRUE
+"Ziziphus mauritiana Lam.","RF",3,0.909,0.772,0.937,0.843,TRUE
+"Ziziphus mauritiana Lam.","RF",4,0.909,0.819,0.894,0.885,TRUE
+"Ziziphus mauritiana Lam.","RF",5,0.904,0.807,0.842,0.831,TRUE
+"Ziziphus mauritiana Lam.","GBM",1,0.881,0.834,0.857,0.893,TRUE
+"Ziziphus mauritiana Lam.","GBM",2,0.936,0.775,0.862,0.82,TRUE
+"Ziziphus mauritiana Lam.","GBM",3,0.943,0.816,0.892,0.826,TRUE
+"Ziziphus mauritiana Lam.","GBM",4,0.947,0.737,0.912,0.908,TRUE
+"Ziziphus mauritiana Lam.","GBM",5,0.92,0.74,0.888,0.899,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GLM",1,0.848,0.669,0.9,0.919,FALSE
+"Sclerocarya birrea (A.Rich.) Hochst.","GLM",2,0.85,0.677,0.898,0.914,FALSE
+"Sclerocarya birrea (A.Rich.) Hochst.","GLM",3,0.843,0.719,0.854,0.843,FALSE
+"Sclerocarya birrea (A.Rich.) Hochst.","GLM",4,0.864,0.727,0.915,0.827,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GLM",5,0.872,0.654,0.933,0.901,FALSE
+"Sclerocarya birrea (A.Rich.) Hochst.","GAM",1,0.894,0.736,0.904,0.825,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GAM",2,0.893,0.707,0.881,0.907,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GAM",3,0.902,0.729,0.928,0.879,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GAM",4,0.859,0.739,0.877,0.868,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GAM",5,0.91,0.739,0.859,0.889,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","MAXNET",1,0.873,0.798,0.887,0.902,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","MAXNET",2,0.907,0.74,0.852,0.837,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","MAXNET",3,0.896,0.811,0.868,0.807,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","MAXNET",4,0.897,0.798,0.923,0.876,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","MAXNET",5,0.919,0.773,0.922,0.866,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","RF",1,0.926,0.805,0.87,0.838,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","RF",2,0.899,0.758,0.87,0.827,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","RF",3,0.95,0.77,0.948,0.914,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","RF",4,0.923,0.822,0.904,0.828,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","RF",5,0.938,0.757,0.938,0.907,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GBM",1,0.9,0.774,0.904,0.89,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GBM",2,0.892,0.766,0.846,0.871,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GBM",3,0.892,0.843,0.936,0.889,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GBM",4,0.942,0.779,0.934,0.93,TRUE
+"Sclerocarya birrea (A.Rich.) Hochst.","GBM",5,0.901,0.809,0.881,0.9,TRUE
+"Tamarindus indica L.","GLM",1,0.868,0.708,0.912,0.869,TRUE
+"Tamarindus indica L.","GLM",2,0.849,0.724,0.841,0.867,FALSE
+"Tamarindus indica L.","GLM",3,0.891,0.727,0.839,0.885,TRUE
+"Tamarindus indica L.","GLM",4,0.887,0.682,0.898,0.898,FALSE
+"Tamarindus indica L.","GLM",5,0.863,0.721,0.823,0.821,TRUE
+"Tamarindus indica L.","GAM",1,0.889,0.766,0.895,0.863,TRUE
+"Tamarindus indica L.","GAM",2,0.875,0.757,0.822,0.91,TRUE
+"Tamarindus indica L.","GAM",3,0.903,0.715,0.883,0.875,TRUE
+"Tamarindus indica L.","GAM",4,0.915,0.745,0.937,0.835,TRUE
+"Tamarindus indica L.","GAM",5,0.898,0.709,0.858,0.927,TRUE
+"Tamarindus indica L.","MAXNET",1,0.923,0.782,0.891,0.803,TRUE
+"Tamarindus indica L.","MAXNET",2,0.905,0.79,0.931,0.85,TRUE
+"Tamarindus indica L.","MAXNET",3,0.909,0.714,0.83,0.801,TRUE
+"Tamarindus indica L.","MAXNET",4,0.894,0.767,0.889,0.87,TRUE
+"Tamarindus indica L.","MAXNET",5,0.888,0.728,0.829,0.857,TRUE
+"Tamarindus indica L.","RF",1,0.908,0.787,0.915,0.81,TRUE
+"Tamarindus indica L.","RF",2,0.914,0.778,0.941,0.839,TRUE
+"Tamarindus indica L.","RF",3,0.943,0.8,0.92,0.825,TRUE
+"Tamarindus indica L.","RF",4,0.961,0.793,0.925,0.884,TRUE
+"Tamarindus indica L.","RF",5,0.94,0.836,0.822,0.813,TRUE
+"Tamarindus indica L.","GBM",1,0.929,0.779,0.924,0.804,TRUE
+"Tamarindus indica L.","GBM",2,0.938,0.783,0.911,0.916,TRUE
+"Tamarindus indica L.","GBM",3,0.904,0.806,0.848,0.907,TRUE
+"Tamarindus indica L.","GBM",4,0.926,0.779,0.847,0.844,TRUE
+"Tamarindus indica L.","GBM",5,0.891,0.821,0.902,0.821,TRUE
+"Senegalia senegal (L.) Britton","GLM",1,0.896,0.743,0.834,0.838,TRUE
+"Senegalia senegal (L.) Britton","GLM",2,0.863,0.69,0.833,0.908,FALSE
+"Senegalia senegal (L.) Britton","GLM",3,0.841,0.73,0.877,0.813,FALSE
+"Senegalia senegal (L.) Britton","GLM",4,0.861,0.729,0.947,0.888,TRUE
+"Senegalia senegal (L.) Britton","GLM",5,0.838,0.656,0.876,0.901,FALSE
+"Senegalia senegal (L.) Britton","GAM",1,0.872,0.689,0.85,0.815,FALSE
+"Senegalia senegal (L.) Britton","GAM",2,0.865,0.712,0.925,0.829,TRUE
+"Senegalia senegal (L.) Britton","GAM",3,0.908,0.769,0.898,0.804,TRUE
+"Senegalia senegal (L.) Britton","GAM",4,0.879,0.718,0.885,0.837,TRUE
+"Senegalia senegal (L.) Britton","GAM",5,0.913,0.701,0.902,0.839,TRUE
+"Senegalia senegal (L.) Britton","MAXNET",1,0.894,0.837,0.935,0.839,TRUE
+"Senegalia senegal (L.) Britton","MAXNET",2,0.875,0.731,0.895,0.815,TRUE
+"Senegalia senegal (L.) Britton","MAXNET",3,0.889,0.801,0.922,0.888,TRUE
+"Senegalia senegal (L.) Britton","MAXNET",4,0.889,0.711,0.867,0.852,TRUE
+"Senegalia senegal (L.) Britton","MAXNET",5,0.916,0.757,0.89,0.876,TRUE
+"Senegalia senegal (L.) Britton","RF",1,0.897,0.822,0.885,0.856,TRUE
+"Senegalia senegal (L.) Britton","RF",2,0.94,0.866,0.857,0.871,TRUE
+"Senegalia senegal (L.) Britton","RF",3,0.877,0.773,0.912,0.862,TRUE
+"Senegalia senegal (L.) Britton","RF",4,0.9,0.768,0.828,0.928,TRUE
+"Senegalia senegal (L.) Britton","RF",5,0.931,0.773,0.842,0.827,TRUE
+"Senegalia senegal (L.) Britton","GBM",1,0.956,0.791,0.902,0.895,TRUE
+"Senegalia senegal (L.) Britton","GBM",2,0.913,0.751,0.889,0.859,TRUE
+"Senegalia senegal (L.) Britton","GBM",3,0.909,0.771,0.822,0.853,TRUE
+"Senegalia senegal (L.) Britton","GBM",4,0.911,0.78,0.858,0.82,TRUE
+"Senegalia senegal (L.) Britton","GBM",5,0.91,0.832,0.945,0.81,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GLM",1,0.86,0.73,0.919,0.802,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GLM",2,0.863,0.791,0.84,0.921,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GLM",3,0.856,0.696,0.946,0.928,FALSE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GLM",4,0.899,0.738,0.916,0.844,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GLM",5,0.917,0.723,0.864,0.896,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GAM",1,0.864,0.747,0.933,0.818,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GAM",2,0.904,0.723,0.941,0.898,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GAM",3,0.895,0.678,0.839,0.826,FALSE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GAM",4,0.891,0.717,0.908,0.882,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GAM",5,0.878,0.666,0.937,0.836,FALSE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","MAXNET",1,0.888,0.802,0.87,0.868,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","MAXNET",2,0.889,0.824,0.856,0.801,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","MAXNET",3,0.92,0.746,0.856,0.865,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","MAXNET",4,0.882,0.715,0.916,0.861,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","MAXNET",5,0.912,0.795,0.915,0.871,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","RF",1,0.917,0.803,0.943,0.831,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","RF",2,0.933,0.804,0.87,0.923,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","RF",3,0.901,0.83,0.909,0.927,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","RF",4,0.936,0.812,0.915,0.849,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","RF",5,0.915,0.776,0.946,0.906,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GBM",1,0.904,0.768,0.933,0.872,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GBM",2,0.92,0.781,0.899,0.921,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GBM",3,0.923,0.756,0.882,0.907,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GBM",4,0.931,0.844,0.922,0.923,TRUE
+"Parkia biglobosa (Jacq.) R.Br. ex G.Don","GBM",5,0.957,0.745,0.902,0.892,TRUE
+"Pterocarpus erinaceus Poir.","GLM",1,0.869,0.75,0.828,0.886,TRUE
+"Pterocarpus erinaceus Poir.","GLM",2,0.841,0.71,0.867,0.809,FALSE
+"Pterocarpus erinaceus Poir.","GLM",3,0.874,0.73,0.949,0.816,TRUE
+"Pterocarpus erinaceus Poir.","GLM",4,0.874,0.665,0.927,0.801,FALSE
+"Pterocarpus erinaceus Poir.","GLM",5,0.849,0.741,0.886,0.911,FALSE
+"Pterocarpus erinaceus Poir.","GAM",1,0.902,0.734,0.868,0.883,TRUE
+"Pterocarpus erinaceus Poir.","GAM",2,0.877,0.696,0.86,0.816,FALSE
+"Pterocarpus erinaceus Poir.","GAM",3,0.895,0.725,0.944,0.807,TRUE
+"Pterocarpus erinaceus Poir.","GAM",4,0.922,0.757,0.949,0.862,TRUE
+"Pterocarpus erinaceus Poir.","GAM",5,0.846,0.733,0.886,0.826,FALSE
+"Pterocarpus erinaceus Poir.","MAXNET",1,0.918,0.718,0.929,0.864,TRUE
+"Pterocarpus erinaceus Poir.","MAXNET",2,0.901,0.729,0.948,0.89,TRUE
+"Pterocarpus erinaceus Poir.","MAXNET",3,0.927,0.768,0.935,0.92,TRUE
+"Pterocarpus erinaceus Poir.","MAXNET",4,0.881,0.79,0.9,0.838,TRUE
+"Pterocarpus erinaceus Poir.","MAXNET",5,0.937,0.751,0.915,0.83,TRUE
+"Pterocarpus erinaceus Poir.","RF",1,0.909,0.782,0.829,0.924,TRUE
+"Pterocarpus erinaceus Poir.","RF",2,0.978,0.791,0.923,0.837,TRUE
+"Pterocarpus erinaceus Poir.","RF",3,0.939,0.804,0.828,0.879,TRUE
+"Pterocarpus erinaceus Poir.","RF",4,0.909,0.773,0.905,0.854,TRUE
+"Pterocarpus erinaceus Poir.","RF",5,0.939,0.784,0.894,0.808,TRUE
+"Pterocarpus erinaceus Poir.","GBM",1,0.872,0.785,0.889,0.853,TRUE
+"Pterocarpus erinaceus Poir.","GBM",2,0.9,0.763,0.883,0.917,TRUE
+"Pterocarpus erinaceus Poir.","GBM",3,0.924,0.795,0.872,0.929,TRUE
+"Pterocarpus erinaceus Poir.","GBM",4,0.923,0.83,0.865,0.914,TRUE
+"Pterocarpus erinaceus Poir.","GBM",5,0.906,0.748,0.858,0.889,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GLM",1,0.867,0.705,0.949,0.897,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GLM",2,0.834,0.702,0.895,0.801,FALSE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GLM",3,0.862,0.675,0.939,0.891,FALSE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GLM",4,0.849,0.764,0.825,0.85,FALSE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GLM",5,0.85,0.759,0.875,0.812,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GAM",1,0.863,0.733,0.872,0.842,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GAM",2,0.892,0.782,0.882,0.84,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GAM",3,0.885,0.786,0.851,0.802,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GAM",4,0.847,0.721,0.919,0.809,FALSE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GAM",5,0.858,0.721,0.924,0.814,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","MAXNET",1,0.919,0.746,0.856,0.801,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","MAXNET",2,0.923,0.75,0.908,0.824,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","MAXNET",3,0.919,0.78,0.823,0.825,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","MAXNET",4,0.905,0.782,0.894,0.869,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","MAXNET",5,0.914,0.726,0.883,0.829,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","RF",1,0.925,0.833,0.935,0.886,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","RF",2,0.924,0.807,0.821,0.928,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","RF",3,0.875,0.808,0.899,0.832,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","RF",4,0.929,0.754,0.918,0.809,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","RF",5,0.92,0.755,0.82,0.827,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GBM",1,0.937,0.796,0.84,0.842,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GBM",2,0.901,0.819,0.861,0.822,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GBM",3,0.94,0.781,0.902,0.901,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GBM",4,0.897,0.779,0.933,0.819,TRUE
+"Anogeissus leiocarpa (DC.) Guill. & Perr.","GBM",5,0.895,0.804,0.825,0.871,TRUE

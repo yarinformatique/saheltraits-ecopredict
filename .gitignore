@@ -1,0 +1,43 @@
+# Dependencies & Virtualenvs
+node_modules/
+**/node_modules/
+.venv/
+**/.venv/
+venv/
+**/venv/
+renv/library/
+**/renv/library/
+renv/local/
+**/renv/local/
+
+# Next.js & Build outputs
+.next/
+**/.next/
+out/
+**/out/
+dist/
+**/dist/
+build/
+**/build/
+
+# Python cache & tests
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+**/.pytest_cache/
+.coverage
+htmlcov/
+**/htmlcov/
+
+# Environment files
+.env
+**/.env
+.env.local
+.env.production
+
+# OS / Temporary files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk

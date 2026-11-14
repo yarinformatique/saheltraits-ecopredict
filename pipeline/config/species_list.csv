@@ -1,0 +1,13 @@
+taxon_id,scientific_name,accepted_name_gbif,gbif_usage_key,family,genus,vernacular_moore,vernacular_dioula,vernacular_fulfulde,functional_group,iucn_status,mean_sla_mm2mg,mean_ldmc_mgg,mean_wd_gcm3,mean_seedmass_mg
+b0000000-0000-0000-0000-000000000001,Balanites aegyptiaca (L.) Delile,Balanites aegyptiaca (L.) Delile,3152865,Zygophyllaceae,Balanites,Kieglga,Ségéné,Murtooki,Épineux xérophyte persistant,LC,9.85,425.4,0.72,3200.0
+b0000000-0000-0000-0000-000000000002,Adansonia digitata L.,Adansonia digitata L.,3152220,Malvaceae,Adansonia,Toèga,Sira,Boki,Méga-arbre réserve hydrique,LC,14.20,295.0,0.32,450.0
+b0000000-0000-0000-0000-000000000003,Faidherbia albida (Delile) A.Chev.,Faidherbia albida (Delile) A.Chev.,2977465,Fabaceae,Faidherbia,Zaanga,Balanzan,Caski,Fixateur azote phénologie inversée,LC,16.50,340.2,0.58,180.0
+b0000000-0000-0000-0000-000000000004,Vachellia tortilis (Forssk.) Galasso & Banfi,Vachellia tortilis (Forssk.) Galasso & Banfi,2978712,Fabaceae,Vachellia,Gom-peelga,Danba,Cilluki,Épineux sahélien hyper-xérique,LC,8.45,460.5,0.78,45.0
+b0000000-0000-0000-0000-000000000005,Combretum glutinosum Perr. ex DC.,Combretum glutinosum Perr. ex DC.,3188540,Combretaceae,Combretum,Rambolga,Doki,Dooki,Arbuste pyrophyle résilient,LC,12.10,380.0,0.64,120.0
+b0000000-0000-0000-0000-000000000006,Ziziphus mauritiana Lam.,Ziziphus mauritiana Lam.,3039423,Rhamnaceae,Ziziphus,Moug-noaga,Tomboron,Jaabi,Arbuste fruitier résistant,LC,11.30,410.0,0.69,850.0
+b0000000-0000-0000-0000-000000000007,Sclerocarya birrea (A.Rich.) Hochst.,Sclerocarya birrea (A.Rich.) Hochst.,3190623,Anacardiaceae,Sclerocarya,Noabga,Kouna,Eeri,Arbre fruitier savanicole,LC,13.80,330.0,0.54,2400.0
+b0000000-0000-0000-0000-000000000008,Tamarindus indica L.,Tamarindus indica L.,2967926,Fabaceae,Tamarindus,Pusga,Tomi,Jatami,Légumineuse fruitière sempervirente,LC,10.60,405.0,0.75,650.0
+b0000000-0000-0000-0000-000000000009,Senegalia senegal (L.) Britton,Senegalia senegal (L.) Britton,2979268,Fabaceae,Senegalia,Gom-vëre,Dounkouri,Patuki,Producteur gomme arabique,LC,11.90,395.0,0.71,85.0
+b0000000-0000-0000-0000-000000000010,Parkia biglobosa (Jacq.) R.Br. ex G.Don,Parkia biglobosa (Jacq.) R.Br. ex G.Don,2978931,Fabaceae,Parkia,Roaga,Néré,Narehi,Arbre agroforestier d'intérêt majeur,LC,15.10,310.0,0.52,280.0
+b0000000-0000-0000-0000-000000000011,Pterocarpus erinaceus Poir.,Pterocarpus erinaceus Poir.,2964893,Fabaceae,Pterocarpus,Noèga,Guénou,Bane,Bois d'oeuvre noble menacé,EN,14.60,325.0,0.68,150.0
+b0000000-0000-0000-0000-000000000012,Anogeissus leiocarpa (DC.) Guill. & Perr.,Anogeissus leiocarpa (DC.) Guill. & Perr.,3188556,Combretaceae,Anogeissus,Siiga,Kérékété,Kojoli,Essence ripicole et savanicole dense,LC,12.80,365.0,0.76,35.0

@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this software in academic research, please cite it as below."
+authors:
+  - family-names: "YAGO"
+    given-names: "Abdoul Rachide"
+    affiliation: "Université Joseph Ki-Zerbo, Ouagadougou, Burkina Faso"
+    orcid: "https://orcid.org/0009-0004-7128-3921"
+title: "SahelTraits-DB & EcoPredict : Pipeline Bio-Statistique & Modélisation Conjointe JSDM/CMIP6 (Couche 4a)"
+version: 1.0.0
+doi: 10.5281/zenodo.10845921
+date-released: 2026-11-14
+url: "https://github.com/saheltraits/saheltraits-analytics-pipeline"
+keywords:
+  - "functional ecology"
+  - "Sahel"
+  - "JSDM"
+  - "Hmsc"
+  - "CMIP6"
+  - "biomod2"
+  - "RLQ"
+  - "Fourth-Corner"

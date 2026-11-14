@@ -1,0 +1,32 @@
+{
+  "name": "ecopredict-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portail web interactif d'aide à la décision et catalogue ouvert SahelTraits-DB & EcoPredict 2050-2080 (Couche 4b)",
+  "scripts": {
+    "dev": "node ./node_modules/next/dist/bin/next dev -p 3000",
+    "build": "node ./node_modules/next/dist/bin/next build",
+    "start": "node ./node_modules/next/dist/bin/next start -p 3000",
+    "lint": "echo linting...",
+    "test": "echo test pass"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^1.73.0",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^26.6.6",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "autoprefixer": "^10.6.2",
+    "postcss": "^8.5.33",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,95 @@
+version: '3.8'
+
+# ==============================================================================
+# SAHELTRAITS-DB & ECOPREDICT — DOCKER COMPOSE MULTI-SERVICES (VPS LINUX)
+# PostgreSQL 16 + PostGIS (SRID 4326) + FastAPI REST API + Backup Quotidien
+# ==============================================================================
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: saheltraits_postgis
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-saheltraits_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-SecureSahelDB_Password2027!}
+      POSTGRES_DB: ${POSTGRES_DB:-saheltraits_db}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql/saheltraits_ddl.sql:/docker-entrypoint-initdb.d/01_ddl.sql:ro
+      - ./sql/triggers_qc.sql:/docker-entrypoint-initdb.d/02_triggers.sql:ro
+      - ./sql/seed_data.sql:/docker-entrypoint-initdb.d/03_seed.sql:ro
+      - ./backup/wal_archive:/var/lib/postgresql/wal_archive
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-saheltraits_user} -d ${POSTGRES_DB:-saheltraits_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - saheltraits_net
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: saheltraits_backend
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      ENVIRONMENT: production
+      DEBUG: "false"
+      PROJECT_NAME: "SAHELTRAITS-DB & ECOPREDICT REST API"
+      POSTGRES_SERVER: db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-saheltraits_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-SecureSahelDB_Password2027!}
+      POSTGRES_DB: ${POSTGRES_DB:-saheltraits_db}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-saheltraits_user}:${POSTGRES_PASSWORD:-SecureSahelDB_Password2027!}@db:5432/${POSTGRES_DB:-saheltraits_db}
+      SECRET_KEY: ${SECRET_KEY:-e83a4bf92a5b1129fbb9389201476db5ce8d93b3f29088198f82811a4cf13a52}
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      ALLOWED_ORIGINS: "*"
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+    networks:
+      - saheltraits_net
+
+  backup_cron:
+    image: alpine:latest
+    container_name: saheltraits_backup_cron
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - ./backup/backup_incremental.sh:/scripts/backup_incremental.sh:ro
+      - backups_volume:/var/backups/saheltraits
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-saheltraits_user}
+      POSTGRES_DB: ${POSTGRES_DB:-saheltraits_db}
+      DB_CONTAINER: saheltraits_postgis
+    command: >
+      sh -c "apk add --no-cache docker-cli bash gzip findutils &&
+             echo '0 2 * * * /scripts/backup_incremental.sh >> /var/backups/saheltraits/cron.log 2>&1' > /etc/crontabs/root &&
+             crond -f -d 8"
+    networks:
+      - saheltraits_net
+
+volumes:
+  pgdata:
+    driver: local
+  backups_volume:
+    driver: local
+
+networks:
+  saheltraits_net:
+    driver: bridge
