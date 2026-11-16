@@ -1,7 +1,7 @@
 import math
 from datetime import date
 from typing import Any, Dict, List, Optional
-from fastapi import APIRouter, Depends, HTTPException, Query, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status, File, UploadFile, Form
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.deps import require_roles
@@ -10,6 +10,7 @@ from app.models.taxonomy import Taxonomy
 from app.models.trait import TraitMeasurement
 from app.models.user import User
 from app.schemas.trait import (
+    LeafScanResult,
     TraitMeasurementCreate,
     TraitMeasurementOut,
     TraitMeasurementQCUpdate,
@@ -205,6 +206,68 @@ def get_traits_statistics(
         })
 
     return {"total_traits_analyzed": len(stats), "statistics": stats}
+
+
+@router.post(
+    "/leaf-scan",
+    response_model=LeafScanResult,
+    status_code=status.HTTP_200_OK,
+    summary="Segmentation du limbe foliaire et étalonnage métrique automatique (Traits Lab)",
+)
+async def scan_leaf_morphology(
+    file: UploadFile = File(..., description="Image capturée contenant la feuille et sa mire"),
+    ref_type: str = Form(
+        "coin_100",
+        description="Type de mire : coin_100, coin_50, ruler_50mm, coin_1euro, square_20",
+    ),
+    known_mm: Optional[float] = Form(
+        None,
+        description="Dimension physique connue en mm (ex: 26.0 pour 100 F CFA, 22.0 pour 50 F CFA, 50.0 pour règle)",
+    ),
+    ptA_x: Optional[int] = Form(None, description="Coordonnée X du Point A pour calibrage manuel tactile"),
+    ptA_y: Optional[int] = Form(None, description="Coordonnée Y du Point A pour calibrage manuel tactile"),
+    ptB_x: Optional[int] = Form(None, description="Coordonnée X du Point B pour calibrage manuel tactile"),
+    ptB_y: Optional[int] = Form(None, description="Coordonnée Y du Point B pour calibrage manuel tactile"),
+) -> Any:
+    """
+    Segmentation haute précision du limbe foliaire et étalonnage métrique automatique (Traits Lab) :
+    - Calcul de l'indice Excess Green (ExG = 2*G - R - B) normalisé en niveaux de gris
+    - Seuillage automatique d'Otsu et morphologie mathématique (noyau elliptique 5x5)
+    - Extraction et conservation stricte du plus grand contour (> 0.5% surface totale)
+    - Détection de la mire sélectionnée (Pièces 100/50 F CFA via HoughCircles+CLAHE, Règle 50mm, ou tactile)
+    - Calcul de la surface réelle (mm² et cm²), du périmètre (mm), et des dimensions maximales (mm)
+    - Rendu visuel avec masque vert semi-transparent (alpha 0.25) et contour cyan vif (épaisseur 3 px).
+    """
+    contents = await file.read()
+    if not contents:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Le fichier image est vide.")
+
+    manual_points = None
+    if ptA_x is not None and ptA_y is not None and ptB_x is not None and ptB_y is not None:
+        manual_points = ((int(ptA_x), int(ptA_y)), (int(ptB_x), int(ptB_y)))
+
+    try:
+        from app.services.leaf_analyzer import LeafMorphologyAnalyzer
+
+        result = LeafMorphologyAnalyzer.analyze(
+            image_bytes=contents,
+            ref_type=ref_type,
+            known_mm=known_mm,
+            manual_points=manual_points,
+        )
+        if not result.get("success"):
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=result.get("error", "Échec de détection du limbe."),
+            )
+        return result
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Erreur interne lors du traitement de l'image : {str(exc)}",
+        )
 
 
 @router.delete("/measurements/{meas_id}", status_code=status.HTTP_204_NO_CONTENT)

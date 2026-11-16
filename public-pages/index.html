@@ -605,17 +605,17 @@
           </span>
           <h2 class="text-2xl font-black text-slate-900">Laboratoire Numérique & Traçabilité QR-Codes</h2>
           <p class="text-slate-600 text-sm mt-1">
-            Analyse d'image par vision artificielle (Option A — Détection mire physique 20×20 mm), calcul en direct de la surface foliaire (mm²), du SLA (Specific Leaf Area) et du LDMC sans distorsion d'échelle.
+            Analyse d'image par vision artificielle haute précision (Pipeline FastAPI + OpenCV), isolation stricte du limbe (ExG + Otsu), calcul dynamique du SLA/LDMC et étalonnage métrique par mire certifiée ou calibrage tactile.
           </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-2">
           
-          <!-- LEFT: ADVANCED LEAF SCANNER & CALIBRATION (OPTION A) -->
+          <!-- LEFT: ADVANCED LEAF SCANNER & CALIBRATION -->
           <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 space-y-4">
             <div class="flex items-center justify-between border-b border-slate-200 pb-2">
               <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
-                <i class="fa-solid fa-camera text-emerald-700"></i> Scanner Morphométrique Foliaire (Option A)
+                <i class="fa-solid fa-camera text-emerald-700"></i> Scanner Morphométrique Foliaire Haute Précision
               </h3>
               <span class="text-[10px] bg-emerald-100 text-emerald-950 font-bold px-2 py-0.5 rounded">
                 Étalonnage Métrique Certifié
@@ -623,7 +623,7 @@
             </div>
 
             <p class="text-xs text-slate-600 leading-relaxed">
-              Importez une photo d'une feuille posée à plat avec votre étalon physique (Mire noire 20×20 mm ou pièce de monnaie). L'algorithme segmente les pixels foliaires (vert clair et vert foncé) et convertit automatiquement en mm² réels.
+              Importez une photo d'une feuille posée à plat avec votre étalon physique (Pièce CFA, double décimètre ou mire). L'algorithme élimine les reflets de coin et isole strictement le limbe principal avec contour cyan vif (3 px).
             </p>
 
             <!-- Étalon Selector -->
@@ -632,35 +632,68 @@
                 <label class="text-[10px] text-slate-600 uppercase font-bold flex items-center gap-1">
                   <i class="fa-solid fa-ruler-combined text-emerald-700"></i> Objet de Référence Physique (Mire / Étalon)
                 </label>
-                <span class="text-[10px] text-emerald-800 font-mono font-bold" id="deskTargetInfoLabel">Mire 20×20 mm (400 mm²)</span>
+                <span class="text-[10px] text-emerald-800 font-mono font-bold" id="deskTargetInfoLabel">Pièce 100 F CFA (26.0 mm)</span>
               </div>
               <select id="deskCalibrationTargetSelect" onchange="onDeskTargetSelectChange()" class="w-full py-2 px-2.5 rounded-lg border-2 border-slate-300 text-xs font-bold text-slate-900 bg-white">
-                <option value="square20" selected>Mire noire carrée 20×20 mm (400.0 mm²) [Recommandé Thèse]</option>
-                <option value="coin50cfa">Pièce 50 F CFA (Diamètre 22.0 mm / 380.1 mm²)</option>
-                <option value="coin100cfa">Pièce 100 F CFA (Diamètre 26.0 mm / 530.9 mm²)</option>
-                <option value="coin1euro">Pièce 1 Euro (Diamètre 23.25 mm / 424.6 mm²)</option>
-                <option value="square10">Mire carrée 10×10 mm (100.0 mm²)</option>
-                <option value="custom">Étalon personnalisé (mm² sur mesure)...</option>
+                <option value="coin_100" selected>Pièce 100 F CFA (Ø 26.0 mm) [Recommandé Sahel]</option>
+                <option value="coin_50">Pièce 50 F CFA (Ø 22.0 mm) [Recommandé Sahel]</option>
+                <option value="ruler_50mm">Double décimètre / Règle graduée (50 mm)</option>
+                <option value="coin_1euro">Pièce 1 Euro (Ø 23.25 mm)</option>
+                <option value="square_20">Mire carrée 20×20 mm (400.0 mm²)</option>
+                <option value="custom">Étalon personnalisé (mm sur mesure)...</option>
               </select>
               <div id="deskCustomTargetBox" class="hidden pt-1">
-                <span class="text-[10px] text-slate-600 block mb-0.5">Surface réelle de l'étalon (mm²) :</span>
-                <input type="number" id="deskCustomTargetMm2Input" value="400.0" step="1.0" oninput="if(currentDeskLeafImage) processDeskLeafImage(currentDeskLeafImage)" class="w-full py-1.5 px-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold text-slate-900">
+                <span class="text-[10px] text-slate-600 block mb-0.5">Dimension connue de l'étalon (mm) :</span>
+                <input type="number" id="deskCustomTargetMmInput" value="26.0" step="0.5" oninput="if(currentDeskLeafImage) processDeskLeafImage(currentDeskLeafImage)" class="w-full py-1.5 px-2 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold text-slate-900">
               </div>
             </div>
 
             <!-- Upload & Canvas Container -->
             <div class="p-4 bg-white border-2 border-dashed border-slate-300 rounded-xl text-center space-y-2">
               <input type="file" id="deskLeafFileInput" accept="image/*" onchange="runDeskAutoLeafScan(event)" class="hidden">
-              <button type="button" onclick="document.getElementById('deskLeafFileInput').click()" class="py-2.5 px-4 bg-[#0d4722] hover:bg-[#136335] text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-2 shadow-md">
-                <i class="fa-solid fa-camera"></i> Charger / Scanner Photo Feuille + Mire
-              </button>
+              <div class="flex flex-wrap gap-2 justify-center">
+                <button type="button" onclick="document.getElementById('deskLeafFileInput').click()" class="py-2.5 px-4 bg-[#0d4722] hover:bg-[#136335] text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-2 shadow-md">
+                  <i class="fa-solid fa-camera"></i> Charger / Scanner Photo Feuille + Mire
+                </button>
+                <button type="button" id="btnToggleDeskManualCalib" onclick="toggleDeskManualCalibration()" class="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-cyan-800 border-2 border-cyan-700/60 rounded-xl text-xs font-bold transition inline-flex items-center gap-1.5">
+                  <i class="fa-solid fa-ruler"></i> Calibrer manuellement sur la photo
+                </button>
+              </div>
               <span id="deskScanStatusText" class="block text-xs text-slate-500 font-medium">Prêt pour acquisition photographique</span>
 
               <!-- Canvas display -->
               <div id="deskCanvasBox" class="hidden space-y-2 pt-2">
-                <div class="relative overflow-hidden rounded-xl border border-slate-300 shadow inline-block">
-                  <canvas id="deskLeafCanvas" class="max-w-full h-auto mx-auto block"></canvas>
+                <div class="relative overflow-hidden rounded-xl border border-slate-300 shadow inline-block max-w-full touch-none select-none">
+                  <canvas id="deskLeafCanvas" class="max-w-full h-auto mx-auto block cursor-crosshair"></canvas>
+                  <div id="deskTouchCalibHint" class="hidden absolute top-2 left-2 right-2 bg-slate-900/90 text-cyan-300 border border-cyan-600 rounded-lg p-1.5 text-xs font-bold text-center">
+                    Glissez les poignées A (0 cm) et B (5 cm) sur les graduations de votre règle
+                  </div>
                 </div>
+
+                <!-- Métriques morphométriques complètes Desktop -->
+                <div id="deskMorphoMetricsGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                  <div class="bg-slate-50 p-2 rounded-xl border border-slate-300">
+                    <span class="text-[10px] text-slate-500 block font-bold">Surface Limbe</span>
+                    <span class="text-sm font-black text-emerald-800" id="deskMorphoAreaMm2">0.0 mm²</span>
+                    <span class="text-[9px] text-slate-500 block" id="deskMorphoAreaCm2">0.00 cm²</span>
+                  </div>
+                  <div class="bg-slate-50 p-2 rounded-xl border border-slate-300">
+                    <span class="text-[10px] text-slate-500 block font-bold">Périmètre Limbe</span>
+                    <span class="text-sm font-black text-cyan-800" id="deskMorphoPerimeterMm">0.0 mm</span>
+                    <span class="text-[9px] text-slate-500 block">Contour cyan 3 px</span>
+                  </div>
+                  <div class="bg-slate-50 p-2 rounded-xl border border-slate-300">
+                    <span class="text-[10px] text-slate-500 block font-bold">Dimensions Max</span>
+                    <span class="text-sm font-black text-amber-800" id="deskMorphoDimensionsMm">0 × 0 mm</span>
+                    <span class="text-[9px] text-slate-500 block">Longueur × Largeur</span>
+                  </div>
+                  <div class="bg-slate-50 p-2 rounded-xl border border-slate-300">
+                    <span class="text-[10px] text-slate-500 block font-bold">Statut Étalonnage</span>
+                    <span class="text-[10px] font-black inline-block mt-0.5 px-2 py-0.5 rounded-full bg-slate-200 text-slate-700" id="deskMorphoCalibBadge">En attente</span>
+                    <span class="text-[9px] text-slate-500 block mt-0.5" id="deskMorphoRatioPxMm">0.0 px/mm</span>
+                  </div>
+                </div>
+
                 <div id="deskAutoScanResultBadge" class="p-3 rounded-xl bg-slate-50 border-2 border-slate-300 font-bold text-xs space-y-1 text-left">
                   <!-- Results injected -->
                 </div>
@@ -693,50 +726,49 @@
                 </div>
               </div>
 
-              <!-- Computed SLA / LDMC Badges -->
-              <div class="grid grid-cols-2 gap-3">
-                <div class="bg-white p-3 rounded-xl border-2 border-emerald-300 text-center shadow-sm">
-                  <span class="text-[10px] font-bold text-slate-500 uppercase block">SLA (Specific Leaf Area)</span>
-                  <span class="text-xl font-black text-emerald-800" id="deskSla">9.90 mm²/mg</span>
-                  <span class="text-[10px] text-slate-500 block font-medium" id="deskSlaEquiv">équiv. 99.0 cm²/g • 9.9 m²/kg</span>
+              <!-- Badges de résultats -->
+              <div class="grid grid-cols-2 gap-3 text-center">
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                  <span class="text-[10px] text-slate-500 uppercase font-bold block">SLA (Specific Leaf Area)</span>
+                  <span class="text-xl font-black text-[#0d4722]" id="deskSla">9.90 mm²/mg</span>
+                  <span class="text-[10px] text-slate-500 block" id="deskSlaEquiv">équiv. 99.0 cm²/g • 9.9 m²/kg</span>
                 </div>
-                <div class="bg-white p-3 rounded-xl border-2 border-emerald-300 text-center shadow-sm">
-                  <span class="text-[10px] font-bold text-slate-500 uppercase block">LDMC (Dry Matter Content)</span>
-                  <span class="text-xl font-black text-emerald-800" id="deskLdmc">423.4 mg/g</span>
-                  <span class="text-[10px] text-slate-500 block font-medium" id="deskLdmcRatio">Ratio matière sèche : 42.3 %</span>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
+                  <span class="text-[10px] text-slate-500 uppercase font-bold block">LDMC (Leaf Dry Matter)</span>
+                  <span class="text-xl font-black text-[#0d4722]" id="deskLdmc">423.4 mg/g</span>
+                  <span class="text-[10px] text-slate-500 block" id="deskLdmcRatio">Ratio matière sèche : 42.3 %</span>
                 </div>
               </div>
 
-              <!-- Wood density section -->
-              <div class="p-3 bg-white rounded-xl border-2 border-amber-200 space-y-2">
-                <span class="text-[11px] font-bold text-amber-950 uppercase block">Carotte de Bois (Densité Basale)</span>
+              <!-- Wood Density Card -->
+              <div class="bg-white p-3 rounded-xl border border-slate-200 space-y-2">
+                <span class="text-[11px] font-bold text-slate-700 block border-b border-slate-100 pb-1">Densité Basale du Bois (Carotte Pressler)</span>
                 <div class="grid grid-cols-2 gap-2">
                   <div>
-                    <span class="text-[10px] text-slate-500 block">Volume Carotte (cm³)</span>
-                    <input type="number" id="deskWoodVol" value="15.4" step="0.1" oninput="calculateDesktopTraits()" class="w-full py-1.5 px-2 rounded-lg border border-slate-300 font-bold text-xs">
+                    <span class="text-[10px] text-slate-500 block">Volume Vert (cm³) :</span>
+                    <input type="number" id="deskWoodVol" value="15.4" step="0.1" oninput="calculateDesktopTraits()" class="w-full py-1.5 px-2 rounded border border-slate-300 text-xs font-bold">
                   </div>
                   <div>
-                    <span class="text-[10px] text-slate-500 block">Masse Sèche (g)</span>
-                    <input type="number" id="deskWoodMass" value="11.1" step="0.1" oninput="calculateDesktopTraits()" class="w-full py-1.5 px-2 rounded-lg border border-slate-300 font-bold text-xs">
+                    <span class="text-[10px] text-slate-500 block">Masse Sèche (g) :</span>
+                    <input type="number" id="deskWoodMass" value="11.1" step="0.1" oninput="calculateDesktopTraits()" class="w-full py-1.5 px-2 rounded border border-slate-300 text-xs font-bold">
                   </div>
                 </div>
-                <div class="text-center font-bold text-amber-900 text-xs pt-1">
-                  Densité du bois = <span id="deskWoodDensity" class="text-sm font-black">0.72 g/cm³</span>
+                <div class="flex items-center justify-between pt-1">
+                  <span class="text-xs text-slate-600 font-bold">Densité Basale :</span>
+                  <span class="font-mono font-black text-emerald-800 text-sm" id="deskWoodDensity">0.72 g/cm³</span>
                 </div>
               </div>
 
-              <!-- 3-Sigma validation message -->
               <div id="deskValidationMsg" class="p-3 rounded-xl bg-emerald-100 text-emerald-950 text-xs font-bold flex items-center gap-2 border border-emerald-300">
                 <i class="fa-solid fa-circle-check text-emerald-700 text-base"></i>
-                <span id="deskValidationText">Valeurs cohérentes avec le spectre fonctionnel des essences sahéliennes (3-Sigma).</span>
+                <span id="deskValidationText">Données validées : Conforme aux distributions biométriques des espèces sahéliennes (3-Sigma).</span>
               </div>
             </div>
           </div>
-
         </div>
 
-        <!-- BOTTOM: QR CODE GENERATOR SECTION -->
-        <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 space-y-4 pt-4">
+        <!-- BOTTOM: TRAÇABILITÉ & QR GENERATOR -->
+        <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 space-y-4">
           <div class="flex items-center justify-between border-b border-slate-200 pb-2">
             <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
               <i class="fa-solid fa-qrcode text-[#0d4722]"></i> Traçabilité & Générateur d'Étiquettes QR pour le Terrain
@@ -939,6 +971,1143 @@
         btn.className = "tab-btn tab-active px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap";
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // SHORTCUT MODAL LOGIC
+    function openShortcutModal() {
+      document.getElementById('shortcutModal').classList.remove('hidden');
+    }
+    function closeShortcutModal() {
+      document.getElementById('shortcutModal').classList.add('hidden');
+    }
+    function setShortcutDevice(dev) {
+      ['win', 'and', 'iph'].forEach(d => {
+        document.getElementById('btn-dev-' + d).className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700";
+      });
+      ['windows', 'android', 'iphone'].forEach(d => {
+        document.getElementById('inst-' + d).classList.add('hidden');
+      });
+
+      if (dev === 'windows') {
+        document.getElementById('btn-dev-win').className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0d4722] text-white";
+        document.getElementById('inst-windows').classList.remove('hidden');
+      } else if (dev === 'android') {
+        document.getElementById('btn-dev-and').className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0d4722] text-white";
+        document.getElementById('inst-android').classList.remove('hidden');
+      } else if (dev === 'iphone') {
+        document.getElementById('btn-dev-iph').className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0d4722] text-white";
+        document.getElementById('inst-iphone').classList.remove('hidden');
+      }
+    }
+
+    function downloadDesktopShortcut(type) {
+      const url = type === 'mobile' 
+        ? 'https://yarinformatique.github.io/saheltraits-ecopredict/mobile.html'
+        : 'https://yarinformatique.github.io/saheltraits-ecopredict/';
+      const name = type === 'mobile' ? 'SahelField_Mobile.url' : 'SahelTraits_Portail.url';
+      const content = `[InternetShortcut]\nURL=${url}\nIconIndex=0\n`;
+      downloadBlob(content, name, 'application/internet-shortcut');
+    }
+
+    // POPULATE DROPDOWNS
+    function initFilters() {
+      const famSelect = document.getElementById('familyFilter');
+      FAMILIES_DATA.forEach(f => {
+        const opt = document.createElement('option');
+        opt.value = f;
+        opt.textContent = f;
+        famSelect.appendChild(opt);
+      });
+
+      const grpSelect = document.getElementById('groupFilter');
+      GROUPS_DATA.forEach(g => {
+        const opt = document.createElement('option');
+        opt.value = g;
+        opt.textContent = g;
+        grpSelect.appendChild(opt);
+      });
+
+      const simSelect = document.getElementById('simSpeciesSelect');
+      SPECIES_DATA.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = s.scientific_name + ' (' + s.vernacular_moore + ')';
+        simSelect.appendChild(opt);
+      });
+    }
+
+    // RENDER SPECIES CARDS
+    function renderSpecies(list) {
+      const container = document.getElementById('speciesGrid');
+      container.innerHTML = '';
+      document.getElementById('speciesCount').textContent = list.length;
+
+      if (list.length === 0) {
+        container.innerHTML = '<div class="col-span-3 text-center py-12 text-slate-500 font-medium"><i class="fa-solid fa-tree text-4xl mb-2 text-slate-400"></i><p>Aucune espèce trouvée avec ces critères.</p></div>';
+        return;
+      }
+
+      list.forEach(sp => {
+        const card = document.createElement('div');
+        card.className = "card-solid rounded-2xl overflow-hidden flex flex-col justify-between cursor-pointer transition";
+        card.onclick = () => openSpeciesModal(sp.id);
+
+        const iucnColor = sp.iucn_status === 'CR' ? 'bg-red-600' : (sp.iucn_status === 'VU' ? 'bg-amber-600' : 'bg-emerald-700');
+
+        card.innerHTML = `
+          <div>
+            <div class="h-44 bg-slate-200 relative overflow-hidden group">
+              <img src="${sp.photo_url}" alt="${sp.scientific_name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
+              <div class="absolute top-3 right-3">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold text-white ${iucnColor} shadow-md border border-white/30">
+                  IUCN : ${sp.iucn_status}
+                </span>
+              </div>
+              <div class="absolute bottom-3 left-3 right-3 text-white">
+                <span class="text-[10px] font-black tracking-wider uppercase text-amber-300">${sp.family}</span>
+                <h3 class="text-base font-bold italic drop-shadow leading-snug">${sp.scientific_name}</h3>
+              </div>
+            </div>
+
+            <div class="p-4 space-y-3">
+              <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                <span class="bg-amber-100 text-amber-950 font-bold px-2 py-0.5 rounded border border-amber-300">Mooré : ${sp.vernacular_moore || '-'}</span>
+                <span class="bg-slate-100 text-slate-800 font-semibold px-2 py-0.5 rounded border border-slate-200">Dioula : ${sp.vernacular_dioula || '-'}</span>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-slate-100">
+                <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  <span class="text-[10px] text-slate-500 font-bold block">SLA (Surface Foliaire)</span>
+                  <span class="font-bold text-slate-900">${sp.traits.sla_mm2mg} mm²/mg</span>
+                </div>
+                <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  <span class="text-[10px] text-slate-500 font-bold block">Densité du Bois</span>
+                  <span class="font-bold text-slate-900">${sp.traits.wood_density_gcm3} g/cm³</span>
+                </div>
+                <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  <span class="text-[10px] text-slate-500 font-bold block">Tolérance Sécheresse</span>
+                  <span class="font-extrabold text-emerald-800">${sp.traits.drought_index} / 100</span>
+                </div>
+                <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  <span class="text-[10px] text-slate-500 font-bold block">Germination PEG (-0.8)</span>
+                  <span class="font-extrabold text-sky-800">${sp.germination.gp_peg_pct} %</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="px-4 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs font-bold">
+            <span class="text-slate-600 font-medium">${sp.functional_group}</span>
+            <span class="text-[#0d4722] flex items-center gap-1">
+              Fiche Détaillée <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // FILTER SPECIES
+    function filterSpecies() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const fam = document.getElementById('familyFilter').value;
+      const grp = document.getElementById('groupFilter').value;
+
+      const filtered = SPECIES_DATA.filter(s => {
+        const matchQ = !q || s.scientific_name.toLowerCase().includes(q) ||
+          (s.vernacular_moore && s.vernacular_moore.toLowerCase().includes(q)) ||
+          (s.vernacular_dioula && s.vernacular_dioula.toLowerCase().includes(q)) ||
+          (s.family && s.family.toLowerCase().includes(q));
+        const matchFam = fam === 'ALL' || s.family === fam;
+        const matchGrp = grp === 'ALL' || s.functional_group === grp;
+        return matchQ && matchFam && matchGrp;
+      });
+
+      renderSpecies(filtered);
+    }
+
+    // OPEN SPECIES DETAIL MODAL
+    function openSpeciesModal(spId) {
+      const sp = SPECIES_DATA.find(s => s.id === spId);
+      if (!sp) return;
+
+      const modal = document.getElementById('speciesModal');
+      const content = document.getElementById('modalContent');
+
+      content.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <img src="${sp.photo_url}" class="w-20 h-20 rounded-xl object-cover border-2 border-slate-300 flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=300&q=80'">
+            <div>
+              <span class="text-xs uppercase font-extrabold text-[#0d4722] tracking-wide">${sp.family} • GBIF Usage Key : ${sp.gbif_usage_key || 'N/A'}</span>
+              <h2 class="text-xl font-black italic text-slate-900">${sp.scientific_name}</h2>
+              <p class="text-xs text-slate-700 mt-1">
+                <strong>Noms locaux :</strong> Mooré : <span class="text-[#0d4722] font-bold">${sp.vernacular_moore || '-'}</span> | 
+                Dioula : <span class="text-[#0d4722] font-bold">${sp.vernacular_dioula || '-'}</span> | 
+                Fulfuldé : <span class="text-[#0d4722] font-bold">${sp.vernacular_fulfulde || '-'}</span>
+              </p>
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-700 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+            ${sp.description}
+          </p>
+
+          <!-- Traits continuous -->
+          <div>
+            <h4 class="text-xs font-bold uppercase text-slate-700 mb-2">Traits Morpho-Fonctionnels Continus</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">SLA</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.sla_mm2mg} mm²/mg</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">LDMC</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.ldmc_mgg} mg/g</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Densité Bois</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.wood_density_gcm3} g/cm³</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">P50 Hydraulique</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.p50_hydraulic_mpa} MPa</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Masse 100 Graines</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.seed_mass_mg} mg</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Épaisseur Feuille</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.leaf_thickness_um} µm</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Tolérance Sécheresse</span>
+                <span class="font-extrabold text-emerald-800">${sp.traits.drought_index} / 100</span>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Résistance Feux</span>
+                <span class="font-extrabold text-amber-800">${sp.traits.fire_resistance} / 100</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Germination Ecology -->
+          <div>
+            <h4 class="text-xs font-bold uppercase text-slate-700 mb-2">Écologie de la Germination & Contrainte Hydrique</h4>
+            <div class="grid grid-cols-3 gap-3 text-xs bg-sky-50 p-3 rounded-xl border border-sky-200">
+              <div>
+                <span class="text-[10px] text-slate-500 font-bold block">Temps T50</span>
+                <span class="font-black text-slate-900">${sp.germination.t50_days} jours</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-500 font-bold block">Germination Témoin</span>
+                <span class="font-black text-emerald-800">${sp.germination.gp_ctrl_pct} %</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-500 font-bold block">Sous PEG 6000 (-0.8 MPa)</span>
+                <span class="font-black text-sky-800">${sp.germination.gp_peg_pct} %</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projections CMIP6 -->
+          <div>
+            <h4 class="text-xs font-bold uppercase text-slate-700 mb-2">Projections Bioclimatiques CMIP6</h4>
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-200 text-slate-800 font-black">
+                  <tr>
+                    <th class="p-2.5">Scénario & Horizon</th>
+                    <th class="p-2.5">Variation Aire (%)</th>
+                    <th class="p-2.5">Indice Vulnérabilité</th>
+                    <th class="p-2.5">Diagnostic</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 bg-white">
+                  <tr>
+                    <td class="p-2.5 font-bold">SSP2-4.5 (2050)</td>
+                    <td class="p-2.5 font-black ${sp.projections.ssp245_2050.change_pct >= 0 ? 'text-emerald-700' : 'text-amber-700'}">${sp.projections.ssp245_2050.change_pct}%</td>
+                    <td class="p-2.5 font-bold">${sp.projections.ssp245_2050.vuln_idx} / 100</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-900 border border-emerald-300">${sp.projections.ssp245_2050.status}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold">SSP2-4.5 (2080)</td>
+                    <td class="p-2.5 font-black ${sp.projections.ssp245_2080.change_pct >= 0 ? 'text-emerald-700' : 'text-amber-700'}">${sp.projections.ssp245_2080.change_pct}%</td>
+                    <td class="p-2.5 font-bold">${sp.projections.ssp245_2080.vuln_idx} / 100</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">${sp.projections.ssp245_2080.status}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold">SSP5-8.5 (2050)</td>
+                    <td class="p-2.5 font-black ${sp.projections.ssp585_2050.change_pct >= 0 ? 'text-emerald-700' : 'text-red-700'}">${sp.projections.ssp585_2050.change_pct}%</td>
+                    <td class="p-2.5 font-bold">${sp.projections.ssp585_2050.vuln_idx} / 100</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-900 border border-red-300">${sp.projections.ssp585_2050.status}</span></td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold">SSP5-8.5 (2080)</td>
+                    <td class="p-2.5 font-black ${sp.projections.ssp585_2080.change_pct >= 0 ? 'text-emerald-700' : 'text-red-700'}">${sp.projections.ssp585_2080.change_pct}%</td>
+                    <td class="p-2.5 font-bold">${sp.projections.ssp585_2080.vuln_idx} / 100</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-900 border border-red-300">${sp.projections.ssp585_2080.status}</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Ethnobotany -->
+          <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-xs space-y-2">
+            <h4 class="font-black text-amber-950 uppercase">Usages Ethnobotaniques & Valeur Pastorale</h4>
+            <p><strong>Usages majeurs :</strong> ${sp.ethnobotany.traditional_uses.join(', ')}</p>
+            <p><strong>Importance culturelle :</strong> ${sp.ethnobotany.cultural_importance}</p>
+            <p><strong>Propriétés médicinales :</strong> ${sp.ethnobotany.medicinal_properties}</p>
+          </div>
+        </div>
+      `;
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('speciesModal').classList.add('hidden');
+    }
+
+    // CLIMATE SIMULATION ENGINE
+    function setScenario(sc) {
+      currentScenario = sc;
+      document.querySelectorAll('.ssp-btn').forEach(b => {
+        b.className = "ssp-btn py-2.5 px-2 text-xs rounded-xl font-bold border-2 border-slate-300 bg-white hover:bg-slate-100 transition text-center";
+      });
+      const active = document.getElementById('btn-' + sc);
+      if (active) {
+        active.className = "ssp-btn py-2.5 px-2 text-xs rounded-xl font-bold border-2 border-emerald-600 bg-emerald-100 text-emerald-900 transition text-center shadow-sm";
+      }
+
+      const tempMap = { 'ssp126': 1.5, 'ssp245': 2.4, 'ssp585': 4.4 };
+      const precMap = { 'ssp126': -5, 'ssp245': -12, 'ssp585': -25 };
+      document.getElementById('tempSlider').value = tempMap[sc];
+      document.getElementById('precipSlider').value = precMap[sc];
+      updateSliders();
+      runSimulation();
+      generateDesktopQR();
+      calculateDesktopTraits();
+    }
+
+    function setHorizon(h) {
+      currentHorizon = h;
+      document.querySelectorAll('.hor-btn').forEach(b => {
+        b.className = "hor-btn py-2.5 text-xs rounded-xl font-bold border-2 border-slate-300 bg-white hover:bg-slate-100 transition";
+      });
+      const active = document.getElementById('btn-' + h);
+      if (active) {
+        active.className = "hor-btn py-2.5 text-xs rounded-xl font-bold border-2 border-emerald-600 bg-emerald-100 text-emerald-900 transition shadow-sm";
+      }
+      runSimulation();
+      generateDesktopQR();
+      calculateDesktopTraits();
+    }
+
+    function updateSliders() {
+      const t = parseFloat(document.getElementById('tempSlider').value);
+      const p = parseInt(document.getElementById('precipSlider').value);
+      document.getElementById('tempVal').textContent = (t >= 0 ? '+' : '') + t.toFixed(1) + ' °C';
+      document.getElementById('precipVal').textContent = (p >= 0 ? '+' : '') + p + ' %';
+    }
+
+    function runSimulation() {
+      const spId = document.getElementById('simSpeciesSelect').value;
+      const sp = SPECIES_DATA.find(s => s.id === spId) || SPECIES_DATA[0];
+      const deltaT = parseFloat(document.getElementById('tempSlider').value);
+      const deltaP = parseInt(document.getElementById('precipSlider').value);
+
+      const droughtTol = sp.traits.drought_index;
+      const woodDens = sp.traits.wood_density_gcm3;
+
+      let changeRate = ((droughtTol - 60) * 0.3) - (deltaT * 4.2) + (deltaP * 0.5) + (woodDens * 10);
+      let retreatKm = Math.max(10, Math.round((deltaT * 18) - (droughtTol * 0.15)));
+      let refugiaScore = Math.min(95, Math.max(25, Math.round(droughtTol - (deltaT * 6) + (woodDens * 15))));
+
+      const changeEl = document.getElementById('simChange');
+      changeEl.textContent = (changeRate >= 0 ? '+' : '') + changeRate.toFixed(1) + ' %';
+      changeEl.className = "mt-2 text-3xl font-black " + (changeRate >= 0 ? 'text-emerald-800' : (changeRate > -15 ? 'text-amber-800' : 'text-red-700'));
+      document.getElementById('simChangeSub').textContent = changeRate >= 0 ? "Expansion bioclimatique" : "Régression / contraction";
+
+      document.getElementById('simRetreat').textContent = retreatKm + ' km';
+      document.getElementById('simRefugia').textContent = refugiaScore + ' / 100';
+
+      let hydrRisk = "Tolérance remarquable. La conductance stomatique est optimisée et le risque d'embolie reste très faible.";
+      if (droughtTol < 70) {
+        hydrRisk = "Vulnérabilité modérée à sévère à la cavitation du xylème sous stress hydrique continu.";
+      }
+      document.getElementById('simHydraulicRisk').textContent = hydrRisk;
+
+      let recText = "Encourager la Régénération Naturelle Assistée (RNA) dans les parcs agroforestiers. Aménagement de cordons pierreux et demi-lunes pour concentrer le ruissellement.";
+      if (changeRate < -15) {
+        recText = "Alerte de régression forte : planifier la migration assistée vers les couloirs fluviaux et les zones sud-soudaniennes. Mise en place de banques de graines ex-situ d'urgence.";
+      }
+      document.getElementById('simRecommendation').textContent = recText;
+    }
+
+    // VILLAGES TABLE RENDER
+    function renderVillages(list) {
+      const tbody = document.getElementById('villagesTableBody');
+      tbody.innerHTML = '';
+      list.forEach(v => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 transition";
+        const scoreColor = v.mean_decline_score < -1 ? 'text-red-700' : (v.mean_decline_score < 0 ? 'text-amber-700' : 'text-emerald-700');
+        tr.innerHTML = `
+          <td class="py-2.5 px-4 font-bold text-slate-900">${v.village_name}</td>
+          <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-800">${v.climatic_zone}</span></td>
+          <td class="py-2.5 px-4 font-mono text-slate-600">${v.latitude.toFixed(2)}°N, ${v.longitude.toFixed(2)}°W</td>
+          <td class="py-2.5 px-4 text-center font-black text-slate-800">${v.surveys_count}</td>
+          <td class="py-2.5 px-4 text-center font-black ${scoreColor}">${v.mean_decline_score > 0 ? '+' : ''}${v.mean_decline_score.toFixed(1)} / 2</td>
+          <td class="py-2.5 px-4 text-center font-bold text-amber-800">${v.phenology_shift_pct} %</td>
+          <td class="py-2.5 px-4 text-slate-700 font-medium">${v.primary_threat || 'Surpâturage & Sécheresse'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterVillages() {
+      const zone = document.getElementById('zoneFilter').value;
+      const filtered = zone === 'ALL' ? VILLAGES_DATA : VILLAGES_DATA.filter(v => v.climatic_zone === zone);
+      renderVillages(filtered);
+    }
+
+    // EXPORTS
+    function downloadSpeciesCSV() {
+      let csv = "id;scientific_name;family;vernacular_moore;vernacular_dioula;sla_mm2mg;ldmc_mgg;wood_density_gcm3;p50_hydraulic_mpa;drought_index;fire_resistance\n";
+      SPECIES_DATA.forEach(s => {
+        csv += `${s.id};"${s.scientific_name}";"${s.family}";"${s.vernacular_moore || ''}";"${s.vernacular_dioula || ''}";${s.traits.sla_mm2mg};${s.traits.ldmc_mgg};${s.traits.wood_density_gcm3};${s.traits.p50_hydraulic_mpa};${s.traits.drought_index};${s.traits.fire_resistance}\n`;
+      });
+      downloadBlob(csv, 'saheltraits_especes.csv', 'text/csv;charset=utf-8;');
+    }
+
+    function downloadVillagesCSV() {
+      let csv = "village_name;climatic_zone;latitude;longitude;surveys_count;mean_decline_score;phenology_shift_pct\n";
+      VILLAGES_DATA.forEach(v => {
+        csv += `"${v.village_name}";"${v.climatic_zone}";${v.latitude};${v.longitude};${v.surveys_count};${v.mean_decline_score};${v.phenology_shift_pct}\n`;
+      });
+      downloadBlob(csv, 'saheltraits_enquetes_villages.csv', 'text/csv;charset=utf-8;');
+    }
+
+    function downloadJSONBundle() {
+      const bundle = { species: SPECIES_DATA, villages: VILLAGES_DATA, summary: SUMMARY_DATA };
+      downloadBlob(JSON.stringify(bundle, null, 2), 'saheltraits_complete_bundle.json', 'application/json');
+    }
+
+    function downloadBlob(content, filename, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // =========================================================================
+    // DESKTOP LEAF SCANNER & CALIBRATION ENGINE (CAHIER DES CHARGES OPTION A)
+    // =========================================================================
+    // =========================================================================
+    // DESKTOP LEAF SCANNER & TRAITS LAB ENGINE (CAHIER DES CHARGES)
+    // Synchronisation FastAPI /api/v1/traits/leaf-scan + Moteur Canvas Offline
+    // =========================================================================
+    const DESK_CALIBRATION_TARGETS = {
+      'coin_100': { name: 'Pièce 100 F CFA', knownMm: 26.0, type: 'circle', label: 'Pièce 100 F CFA (Ø 26.0 mm)' },
+      'coin_50': { name: 'Pièce 50 F CFA', knownMm: 22.0, type: 'circle', label: 'Pièce 50 F CFA (Ø 22.0 mm)' },
+      'ruler_50mm': { name: 'Double décimètre / Règle (50 mm)', knownMm: 50.0, type: 'ruler', label: 'Règle graduée (50 mm)' },
+      'coin_1euro': { name: 'Pièce 1 Euro', knownMm: 23.25, type: 'circle', label: 'Pièce 1 Euro (Ø 23.25 mm)' },
+      'square_20': { name: 'Mire carrée 20×20 mm', knownMm: 20.0, type: 'square', label: 'Mire carrée 20×20 mm (400 mm²)' },
+      'custom': { name: 'Étalon personnalisé', knownMm: 26.0, type: 'custom', label: 'Étalon personnalisé' }
+    };
+
+    let currentDeskLeafImage = null;
+    let baseDeskRenderedImageData = null;
+
+    let isDeskManualCalibrating = false;
+    let deskManualPtA = { x: 80, y: 350 };
+    let deskManualPtB = { x: 380, y: 350 };
+    let deskDraggingPoint = null;
+    let activeDeskLeafMetrics = {
+      pixelCount: 0,
+      perimeterPx: 0,
+      maxLengthPx: 0,
+      maxWidthPx: 0,
+      knownMm: 26.0,
+      refType: 'coin_100'
+    };
+
+    function onDeskTargetSelectChange() {
+      const selectEl = document.getElementById('deskCalibrationTargetSelect');
+      if (!selectEl) return;
+      const val = selectEl.value;
+      const customBox = document.getElementById('deskCustomTargetBox');
+      const label = document.getElementById('deskTargetInfoLabel');
+      
+      if (val === 'custom') {
+        if (customBox) customBox.classList.remove('hidden');
+        if (label) label.textContent = "Étalon Personnalisé";
+      } else {
+        if (customBox) customBox.classList.add('hidden');
+        if (label && DESK_CALIBRATION_TARGETS[val]) {
+          label.textContent = DESK_CALIBRATION_TARGETS[val].label;
+        }
+      }
+      if (currentDeskLeafImage) {
+        processDeskLeafImage(currentDeskLeafImage);
+      }
+    }
+
+    function toggleDeskManualCalibration() {
+      isDeskManualCalibrating = !isDeskManualCalibrating;
+      const btn = document.getElementById('btnToggleDeskManualCalib');
+      const hint = document.getElementById('deskTouchCalibHint');
+
+      if (isDeskManualCalibrating) {
+        if (btn) {
+          btn.className = "py-2.5 px-3 bg-cyan-700 hover:bg-cyan-600 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-1.5 shadow-md";
+          btn.innerHTML = '<i class="fa-solid fa-check"></i> Terminer le calibrage tactile';
+        }
+        if (hint) hint.classList.remove('hidden');
+        const canvas = document.getElementById('deskLeafCanvas');
+        if (canvas) {
+          deskManualPtA = { x: Math.round(canvas.width * 0.15), y: Math.round(canvas.height * 0.85) };
+          deskManualPtB = { x: Math.round(canvas.width * 0.65), y: Math.round(canvas.height * 0.85) };
+        }
+        drawDeskManualCalibrationOverlay();
+      } else {
+        if (btn) {
+          btn.className = "py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-cyan-800 border-2 border-cyan-700/60 rounded-xl text-xs font-bold transition inline-flex items-center gap-1.5";
+          btn.innerHTML = '<i class="fa-solid fa-ruler"></i> Calibrer manuellement sur la photo';
+        }
+        if (hint) hint.classList.add('hidden');
+        restoreDeskBaseCanvas();
+      }
+    }
+
+    function setupDeskCanvasPointerEvents() {
+      const canvas = document.getElementById('deskLeafCanvas');
+      if (!canvas || canvas._hasPointerEvents) return;
+      canvas._hasPointerEvents = true;
+
+      function getCanvasCoordinates(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        return {
+          x: Math.round((e.clientX - rect.left) * scaleX),
+          y: Math.round((e.clientY - rect.top) * scaleY)
+        };
+      }
+
+      canvas.addEventListener('pointerdown', (e) => {
+        if (!isDeskManualCalibrating) return;
+        const pos = getCanvasCoordinates(e);
+        const distA = Math.hypot(pos.x - deskManualPtA.x, pos.y - deskManualPtA.y);
+        const distB = Math.hypot(pos.x - deskManualPtB.x, pos.y - deskManualPtB.y);
+
+        const hitRadius = 35;
+        if (distA <= hitRadius && distA <= distB) {
+          deskDraggingPoint = 'A';
+          canvas.setPointerCapture(e.pointerId);
+        } else if (distB <= hitRadius) {
+          deskDraggingPoint = 'B';
+          canvas.setPointerCapture(e.pointerId);
+        }
+      });
+
+      canvas.addEventListener('pointermove', (e) => {
+        if (!isDeskManualCalibrating || !deskDraggingPoint) return;
+        const pos = getCanvasCoordinates(e);
+        const clampedX = Math.max(5, Math.min(canvas.width - 5, pos.x));
+        const clampedY = Math.max(5, Math.min(canvas.height - 5, pos.y));
+
+        if (deskDraggingPoint === 'A') {
+          deskManualPtA = { x: clampedX, y: clampedY };
+        } else if (deskDraggingPoint === 'B') {
+          deskManualPtB = { x: clampedX, y: clampedY };
+        }
+
+        drawDeskManualCalibrationOverlay();
+        applyDeskManualCalibrationScale();
+      });
+
+      function onPointerEnd(e) {
+        if (deskDraggingPoint) {
+          try { canvas.releasePointerCapture(e.pointerId); } catch(err) {}
+          deskDraggingPoint = null;
+          applyDeskManualCalibrationScale();
+        }
+      }
+
+      canvas.addEventListener('pointerup', onPointerEnd);
+      canvas.addEventListener('pointercancel', onPointerEnd);
+    }
+
+    function drawDeskManualCalibrationOverlay() {
+      const canvas = document.getElementById('deskLeafCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      if (baseDeskRenderedImageData) {
+        ctx.putImageData(baseDeskRenderedImageData, 0, 0);
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(deskManualPtA.x, deskManualPtA.y);
+      ctx.lineTo(deskManualPtB.x, deskManualPtB.y);
+      ctx.strokeStyle = '#ef4444';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      const distPx = Math.hypot(deskManualPtB.x - deskManualPtA.x, deskManualPtB.y - deskManualPtA.y);
+      const midX = (deskManualPtA.x + deskManualPtB.x) / 2;
+      const midY = (deskManualPtA.y + deskManualPtB.y) / 2;
+
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.fillRect(midX - 45, midY - 14, 90, 20);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 11px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(distPx.toFixed(0) + " px (50 mm)", midX, midY);
+
+      drawHandle(ctx, deskManualPtA.x, deskManualPtA.y, "A (0 cm)");
+      drawHandle(ctx, deskManualPtB.x, deskManualPtB.y, "B (5 cm)");
+    }
+
+    function restoreDeskBaseCanvas() {
+      const canvas = document.getElementById('deskLeafCanvas');
+      if (canvas && baseDeskRenderedImageData) {
+        canvas.getContext('2d').putImageData(baseDeskRenderedImageData, 0, 0);
+      }
+    }
+
+    function applyDeskManualCalibrationScale() {
+      const distPx = Math.hypot(deskManualPtB.x - deskManualPtA.x, deskManualPtB.y - deskManualPtA.y);
+      if (distPx < 10) return;
+
+      const knownMm = 50.0;
+      const pixelsPerMm = distPx / knownMm;
+      updateDeskMetricsDisplay(pixelsPerMm, "MANUAL_TACTILE", "Étalonnage manuel tactile appliqué (Règle 50 mm).");
+    }
+
+    function runDeskAutoLeafScan(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const status = document.getElementById('deskScanStatusText');
+      if (status) {
+        status.innerHTML = '<span class="text-amber-600 font-bold animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Segmentation ExG + Détection Mire en cours...</span>';
+      }
+
+      const targetKey = document.getElementById('deskCalibrationTargetSelect').value;
+      const targetSpec = DESK_CALIBRATION_TARGETS[targetKey] || DESK_CALIBRATION_TARGETS['coin_100'];
+      let knownMm = targetSpec.knownMm;
+      if (targetKey === 'custom') {
+        const customInput = document.getElementById('deskCustomTargetMmInput');
+        knownMm = customInput ? (parseFloat(customInput.value) || 26.0) : 26.0;
+      }
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('ref_type', targetKey);
+      formData.append('known_mm', knownMm);
+
+      fetch('/api/v1/traits/leaf-scan', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('API indisponible ou standalone');
+        return response.json();
+      })
+      .then(res => {
+        if (res && res.success) {
+          applyDeskBackendScanResult(res);
+        } else {
+          fallbackDeskLocalScan(file);
+        }
+      })
+      .catch(err => {
+        console.info('Mode standalone/offline : traitement local Canvas', err);
+        fallbackDeskLocalScan(file);
+      });
+    }
+
+    function applyDeskBackendScanResult(res) {
+      const canvas = document.getElementById('deskLeafCanvas');
+      const ctx = canvas.getContext('2d');
+      document.getElementById('deskCanvasBox').classList.remove('hidden');
+
+      const img = new Image();
+      img.onload = () => {
+        currentDeskLeafImage = img;
+        canvas.width = res.image_width || img.width;
+        canvas.height = res.image_height || img.height;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        baseDeskRenderedImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        setupDeskCanvasPointerEvents();
+
+        activeDeskLeafMetrics = {
+          pixelCount: res.leaf_pixel_count,
+          perimeterPx: res.perimeter_mm * res.pixels_per_mm,
+          maxLengthPx: res.max_length_mm * res.pixels_per_mm,
+          maxWidthPx: res.max_width_mm * res.pixels_per_mm,
+          knownMm: res.known_mm,
+          refType: res.ref_type
+        };
+
+        updateDeskMetricsDisplay(res.pixels_per_mm, res.calibration_mode, res.status_message, res);
+      };
+      img.src = res.processed_image_base64;
+    }
+
+    function fallbackDeskLocalScan(file) {
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+          currentDeskLeafImage = img;
+          processDeskLeafImage(img);
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function processDeskLeafImage(img) {
+      const canvas = document.getElementById('deskLeafCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const canvasBox = document.getElementById('deskCanvasBox');
+      if (canvasBox) canvasBox.classList.remove('hidden');
+
+      const MAX_DIM = 900;
+      const scale = Math.min(1, MAX_DIM / Math.max(img.width, img.height));
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+      canvas.width = w;
+      canvas.height = h;
+
+      ctx.drawImage(img, 0, 0, w, h);
+      const imgData = ctx.getImageData(0, 0, w, h);
+      const pixels = imgData.data;
+
+      const targetSelect = document.getElementById('deskCalibrationTargetSelect');
+      const targetKey = targetSelect ? targetSelect.value : 'coin_100';
+      const targetSpec = DESK_CALIBRATION_TARGETS[targetKey] || DESK_CALIBRATION_TARGETS['coin_100'];
+      let knownMm = targetSpec.knownMm;
+      if (targetKey === 'custom') {
+        const customInput = document.getElementById('deskCustomTargetMmInput');
+        knownMm = customInput ? (parseFloat(customInput.value) || 26.0) : 26.0;
+      }
+
+      // ExG
+      const exgArray = new Float32Array(w * h);
+      let minExg = 9999, maxExg = -9999;
+      for (let i = 0; i < pixels.length; i += 4) {
+        const idx = i / 4;
+        const valExg = 2.0 * pixels[i + 1] - pixels[i] - pixels[i + 2];
+        exgArray[idx] = valExg;
+        if (valExg < minExg) minExg = valExg;
+        if (valExg > maxExg) maxExg = valExg;
+      }
+      const exgRange = maxExg > minExg ? (maxExg - minExg) : 1.0;
+      const isGreenCandidate = new Uint8Array(w * h);
+      for (let idx = 0; idx < exgArray.length; idx++) {
+        if ((exgArray[idx] - minExg) / exgRange >= 0.38) {
+          isGreenCandidate[idx] = 1;
+        }
+      }
+
+      // Morphologie 5x5
+      const morphTemp = new Uint8Array(w * h);
+      for (let y = 2; y < h - 2; y++) {
+        for (let x = 2; x < w - 2; x++) {
+          const idx = y * w + x;
+          if (isGreenCandidate[idx] || isGreenCandidate[idx - 1] || isGreenCandidate[idx + 1] || isGreenCandidate[idx - w] || isGreenCandidate[idx + w]) {
+            morphTemp[idx] = 1;
+          }
+        }
+      }
+      const isLeafClosed = new Uint8Array(w * h);
+      for (let y = 2; y < h - 2; y++) {
+        for (let x = 2; x < w - 2; x++) {
+          const idx = y * w + x;
+          if (morphTemp[idx] && morphTemp[idx - 1] && morphTemp[idx + 1] && morphTemp[idx - w] && morphTemp[idx + w]) {
+            isLeafClosed[idx] = 1;
+          }
+        }
+      }
+
+      // Plus grand composant connexe
+      const visited = new Uint8Array(w * h);
+      let largestBlob = [];
+      const minBlobSize = Math.round(w * h * 0.005);
+      for (let y = 3; y < h - 3; y += 2) {
+        for (let x = 3; x < w - 3; x += 2) {
+          const idx = y * w + x;
+          if (isLeafClosed[idx] && !visited[idx]) {
+            const blob = [];
+            const queue = [idx];
+            visited[idx] = 1;
+            while (queue.length > 0) {
+              const curr = queue.pop();
+              blob.push(curr);
+              for (let n of [curr - 1, curr + 1, curr - w, curr + w]) {
+                if (n >= 0 && n < w * h && isLeafClosed[n] && !visited[n]) {
+                  visited[n] = 1;
+                  queue.push(n);
+                }
+              }
+            }
+            if (blob.length > largestBlob.length && blob.length >= minBlobSize) {
+              largestBlob = blob;
+            }
+          }
+        }
+      }
+      if (largestBlob.length === 0) {
+        for (let i = 0; i < isLeafClosed.length; i++) {
+          if (isLeafClosed[i]) largestBlob.push(i);
+        }
+      }
+
+      const leafMaskStrict = new Uint8Array(w * h);
+      let minLx = w, maxLx = 0, minLy = h, maxLy = 0;
+      for (let idx of largestBlob) {
+        leafMaskStrict[idx] = 1;
+        const px = idx % w;
+        const py = Math.floor(idx / w);
+        if (px < minLx) minLx = px;
+        if (px > maxLx) maxLx = px;
+        if (py < minLy) minLy = py;
+        if (py > maxLy) maxLy = py;
+      }
+
+      const leafPixelCount = largestBlob.length;
+      const leafBoxW = maxLx >= minLx ? maxLx - minLx + 1 : 0;
+      const leafBoxH = maxLy >= minLy ? maxLy - minLy + 1 : 0;
+      const maxLengthPx = Math.max(leafBoxW, leafBoxH);
+      const maxWidthPx = Math.min(leafBoxW, leafBoxH);
+
+      let perimeterPx = 0;
+      const isPerimeter = new Uint8Array(w * h);
+      for (let idx of largestBlob) {
+        const px = idx % w;
+        const py = Math.floor(idx / w);
+        if (px === 0 || px === w - 1 || py === 0 || py === h - 1 ||
+            !leafMaskStrict[idx - 1] || !leafMaskStrict[idx + 1] || !leafMaskStrict[idx - w] || !leafMaskStrict[idx + w]) {
+          isPerimeter[idx] = 1;
+          perimeterPx++;
+        }
+      }
+
+      let targetDetected = false;
+      let targetInfo = null;
+      let pixelsPerMm = 4.72;
+      let calibMode = "DEFAULT_ESTIMATED";
+
+      if (targetSpec.type === 'circle') {
+        let minTx = w, maxTx = 0, minTy = h, maxTy = 0, darkTargetCount = 0;
+        for (let py = 10; py < h - 10; py++) {
+          for (let px = 10; px < w - 10; px++) {
+            const idx = py * w + px;
+            if (leafMaskStrict[idx]) continue;
+            const r = pixels[idx * 4];
+            const g = pixels[idx * 4 + 1];
+            const b = pixels[idx * 4 + 2];
+            const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+            const exg = 2 * g - r - b;
+            if (lum < 75 && exg < 10) {
+              darkTargetCount++;
+              if (px < minTx) minTx = px;
+              if (px > maxTx) maxTx = px;
+              if (py < minTy) minTy = py;
+              if (py > maxTy) maxTy = py;
+            }
+          }
+        }
+        const bW = maxTx >= minTx ? maxTx - minTx + 1 : 0;
+        const bH = maxTy >= minTy ? maxTy - minTy + 1 : 0;
+        const aspect = (bW > 0 && bH > 0) ? Math.min(bW, bH) / Math.max(bW, bH) : 0;
+        const areaB = bW * bH;
+        const solidity = areaB > 0 ? darkTargetCount / areaB : 0;
+
+        if (darkTargetCount >= 120 && aspect >= 0.70 && solidity >= 0.50) {
+          targetDetected = true;
+          const detectedDiamPx = (bW + bH) / 2.0;
+          pixelsPerMm = detectedDiamPx / knownMm;
+          calibMode = "CERTIFIED_TARGET";
+          targetInfo = {
+            cx: Math.round((minTx + maxTx) / 2),
+            cy: Math.round((minTy + maxTy) / 2),
+            r: Math.round(detectedDiamPx / 2),
+          };
+        }
+      }
+
+      // Rendu : masque vert semi-transparent (alpha 0.25)
+      for (let idx of largestBlob) {
+        const pIdx = idx * 4;
+        pixels[pIdx] = Math.round(pixels[pIdx] * 0.75 + 16 * 0.25);
+        pixels[pIdx + 1] = Math.round(pixels[pIdx + 1] * 0.75 + 210 * 0.25);
+        pixels[pIdx + 2] = Math.round(pixels[pIdx + 2] * 0.75 + 100 * 0.25);
+      }
+
+      // Ligne de contour cyan vif (#00FFFF, 3 px)
+      for (let idx = 0; idx < w * h; idx++) {
+        if (isPerimeter[idx]) {
+          const px = idx % w;
+          const py = Math.floor(idx / w);
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              const nx = px + dx;
+              const ny = py + dy;
+              if (nx >= 0 && nx < w && ny >= 0 && ny < h) {
+                const nIdx = (ny * w + nx) * 4;
+                pixels[nIdx] = 0;
+                pixels[nIdx + 1] = 255;
+                pixels[nIdx + 2] = 255;
+              }
+            }
+          }
+        }
+      }
+
+      ctx.putImageData(imgData, 0, 0);
+
+      if (targetDetected && targetInfo) {
+        ctx.strokeStyle = '#00ffff';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(targetInfo.cx, targetInfo.cy, targetInfo.r, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fillStyle = '#00ffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.fillText(`${targetSpec.name} (${knownMm.toFixed(1)} mm)`, targetInfo.cx - targetInfo.r, targetInfo.cy - targetInfo.r - 6);
+      }
+
+      baseDeskRenderedImageData = ctx.getImageData(0, 0, w, h);
+      setupDeskCanvasPointerEvents();
+
+      activeDeskLeafMetrics = {
+        pixelCount: leafPixelCount,
+        perimeterPx: perimeterPx,
+        maxLengthPx: maxLengthPx,
+        maxWidthPx: maxWidthPx,
+        knownMm: knownMm,
+        refType: targetKey
+      };
+
+      let statusMsg = "";
+      if (targetDetected) {
+        statusMsg = `Mire validée : ${targetSpec.name} (${knownMm.toFixed(1)} mm). Étalonnage certifié.`;
+      } else {
+        if (targetKey === 'coin_100') {
+          statusMsg = "Pièce de 100 F CFA (26.0 mm) non détectée : placez-la bien à plat sur le papier blanc à côté de la feuille.";
+        } else if (targetKey === 'coin_50') {
+          statusMsg = "Pièce de 50 F CFA (22.0 mm) non détectée : placez-la bien à plat sur le papier blanc à côté de la feuille.";
+        } else if (targetKey === 'ruler_50mm') {
+          statusMsg = "Double décimètre / règle graduée (50 mm) non détecté : placez la règle bien visible ou utilisez le calibrage tactile manuel ci-dessous.";
+        } else {
+          statusMsg = `${targetSpec.name} non détectée. Échelle standard appliquée ou calibrage manuel requis.`;
+        }
+      }
+
+      updateDeskMetricsDisplay(pixelsPerMm, calibMode, statusMsg);
+    }
+
+    function updateDeskMetricsDisplay(pixelsPerMm, calibMode, statusMsg, backendData) {
+      const mm2PerPx = 1.0 / (pixelsPerMm * pixelsPerMm);
+      const leafAreaMm2 = backendData ? backendData.leaf_area_mm2 : parseFloat((activeDeskLeafMetrics.pixelCount * mm2PerPx).toFixed(1));
+      const leafAreaCm2 = backendData ? backendData.leaf_area_cm2 : parseFloat((leafAreaMm2 / 100.0).toFixed(2));
+      const perimeterMm = backendData ? backendData.perimeter_mm : parseFloat((activeDeskLeafMetrics.perimeterPx / pixelsPerMm).toFixed(1));
+      const maxLengthMm = backendData ? backendData.max_length_mm : parseFloat((activeDeskLeafMetrics.maxLengthPx / pixelsPerMm).toFixed(1));
+      const maxWidthMm = backendData ? backendData.max_width_mm : parseFloat((activeDeskLeafMetrics.maxWidthPx / pixelsPerMm).toFixed(1));
+
+      const elAreaMm2 = document.getElementById('deskMorphoAreaMm2');
+      const elAreaCm2 = document.getElementById('deskMorphoAreaCm2');
+      const elPerim = document.getElementById('deskMorphoPerimeterMm');
+      const elDims = document.getElementById('deskMorphoDimensionsMm');
+      const elBadge = document.getElementById('deskMorphoCalibBadge');
+      const elRatio = document.getElementById('deskMorphoRatioPxMm');
+
+      if (elAreaMm2) elAreaMm2.textContent = leafAreaMm2.toLocaleString() + " mm²";
+      if (elAreaCm2) elAreaCm2.textContent = leafAreaCm2.toFixed(2) + " cm²";
+      if (elPerim) elPerim.textContent = perimeterMm.toFixed(1) + " mm";
+      if (elDims) elDims.textContent = `${maxLengthMm.toFixed(1)} × ${maxWidthMm.toFixed(1)} mm`;
+      if (elRatio) elRatio.textContent = pixelsPerMm.toFixed(2) + " px/mm";
+
+      if (elBadge) {
+        if (calibMode === 'CERTIFIED_TARGET') {
+          elBadge.className = "text-[10px] font-black inline-block mt-0.5 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900 border border-emerald-300";
+          elBadge.textContent = "Certifié par mire";
+        } else if (calibMode === 'MANUAL_TACTILE') {
+          elBadge.className = "text-[10px] font-black inline-block mt-0.5 px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-900 border border-cyan-300";
+          elBadge.textContent = "Manuel (50 mm)";
+        } else {
+          elBadge.className = "text-[10px] font-black inline-block mt-0.5 px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300";
+          elBadge.textContent = "Estimé standard";
+        }
+      }
+
+      const areaInput = document.getElementById('deskArea');
+      if (areaInput) {
+        areaInput.value = leafAreaMm2;
+      }
+      calculateDesktopTraits();
+
+      const status = document.getElementById('deskScanStatusText');
+      if (status) {
+        status.innerHTML = `<span class="text-emerald-700 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Détourage haute précision terminé (${activeDeskLeafMetrics.pixelCount.toLocaleString()} px)</span>`;
+      }
+
+      const badge = document.getElementById('deskAutoScanResultBadge');
+      if (badge) {
+        if (calibMode === 'CERTIFIED_TARGET') {
+          badge.className = "p-3 rounded-xl bg-emerald-50 border-2 border-emerald-300 font-bold text-xs space-y-1 text-left";
+          badge.innerHTML = `
+            <div class="flex items-center justify-between text-emerald-900 border-b border-emerald-200 pb-1">
+              <span><i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Étalonnage Physique Réussi</span>
+              <span class="font-mono bg-emerald-200 px-2 py-0.5 rounded text-[10px] text-emerald-950">Mire Certifiée</span>
+            </div>
+            <p class="text-[11px] text-slate-700 font-normal pt-1">${statusMsg}</p>
+            <div class="pt-1 text-xs font-bold text-emerald-800">
+              Surface : <strong class="text-slate-900">${leafAreaMm2.toLocaleString()} mm²</strong> (${leafAreaCm2} cm²) • Périmètre : <strong class="text-slate-900">${perimeterMm} mm</strong>
+            </div>
+          `;
+        } else if (calibMode === 'MANUAL_TACTILE') {
+          badge.className = "p-3 rounded-xl bg-cyan-50 border-2 border-cyan-300 font-bold text-xs space-y-1 text-left";
+          badge.innerHTML = `
+            <div class="flex items-center justify-between text-cyan-900 border-b border-cyan-200 pb-1">
+              <span><i class="fa-solid fa-ruler-combined text-cyan-600 mr-1"></i> Calibrage Manuel Tactile</span>
+              <span class="font-mono bg-cyan-200 px-2 py-0.5 rounded text-[10px] text-cyan-950">Règle 50 mm</span>
+            </div>
+            <p class="text-[11px] text-slate-700 font-normal pt-1">${statusMsg}</p>
+            <div class="pt-1 text-xs font-bold text-cyan-800">
+              Surface : <strong class="text-slate-900">${leafAreaMm2.toLocaleString()} mm²</strong> (${leafAreaCm2} cm²) • Échelle : <strong class="text-slate-900">${pixelsPerMm.toFixed(2)} px/mm</strong>
+            </div>
+          `;
+        } else {
+          badge.className = "p-3 rounded-xl bg-amber-50 border-2 border-amber-300 font-bold text-xs space-y-1 text-left";
+          badge.innerHTML = `
+            <div class="flex items-center justify-between text-amber-900 border-b border-amber-200 pb-1">
+              <span><i class="fa-solid fa-triangle-exclamation text-amber-600 mr-1"></i> Mire Non Détectée</span>
+              <span class="font-mono bg-amber-200 px-2 py-0.5 rounded text-[10px] text-amber-950">Échelle Standard</span>
+            </div>
+            <p class="text-[11px] text-slate-700 font-normal pt-1">${statusMsg}</p>
+            <div class="pt-1 flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-800">Surface estimée : <strong class="text-slate-900">${leafAreaMm2.toLocaleString()} mm²</strong></span>
+              <button type="button" onclick="toggleDeskManualCalibration()" class="py-1 px-2.5 bg-cyan-700 hover:bg-cyan-600 text-white rounded-lg text-[10px] font-bold">
+                <i class="fa-solid fa-ruler"></i> Activer calibrage manuel
+              </button>
+            </div>
+          `;
+        }
+      }
+    }
+
+    function calculateDesktopTraits() {
+      const areaEl = document.getElementById('deskArea');
+      const freshEl = document.getElementById('deskFresh');
+      const dryEl = document.getElementById('deskDry');
+
+      if (!areaEl || !freshEl || !dryEl) return;
+
+      const area = parseFloat(areaEl.value) || 0;
+      const fresh = parseFloat(freshEl.value) || 0;
+      const dry = parseFloat(dryEl.value) || 0;
+
+      const badge = document.getElementById('deskValidationMsg');
+      const textEl = document.getElementById('deskValidationText');
+
+      if (dry > fresh && fresh > 0) {
+        if (badge) badge.className = "p-3 rounded-xl bg-red-100 text-red-950 text-xs font-bold flex items-center gap-2 border border-red-300";
+        if (textEl) textEl.innerHTML = `<strong class="text-red-700">Blocage :</strong> La masse sèche (${dry} mg) ne peut pas dépasser la masse fraîche (${fresh} mg) !`;
+        return;
+      }
+
+      const sla = dry > 0 ? (area / dry).toFixed(2) : '0.00';
+      const slaCm2g = (parseFloat(sla) * 10).toFixed(1);
+      const slaM2kg = sla;
+
+      const ldmc = fresh > 0 ? ((dry / fresh) * 1000).toFixed(1) : '0.0';
+      const ldmcRatio = fresh > 0 ? ((dry / fresh) * 100).toFixed(1) : '0.0';
+
+      const slaEl = document.getElementById('deskSla');
+      const slaEquivEl = document.getElementById('deskSlaEquiv');
+      const ldmcEl = document.getElementById('deskLdmc');
+      const ldmcRatioEl = document.getElementById('deskLdmcRatio');
+
+      if (slaEl) slaEl.textContent = sla + ' mm²/mg';
+      if (slaEquivEl) slaEquivEl.textContent = `équiv. ${slaCm2g} cm²/g • ${slaM2kg} m²/kg`;
+
+      if (ldmcEl) ldmcEl.textContent = ldmc + ' mg/g';
+      if (ldmcRatioEl) ldmcRatioEl.textContent = `Ratio matière sèche : ${ldmcRatio} %`;
+
+      const wVolEl = document.getElementById('deskWoodVol');
+      const wMassEl = document.getElementById('deskWoodMass');
+      const wDensEl = document.getElementById('deskWoodDensity');
+      if (wVolEl && wMassEl && wDensEl) {
+        const wVol = parseFloat(wVolEl.value) || 0;
+        const wMass = parseFloat(wMassEl.value) || 0;
+        const wDens = wVol > 0 ? (wMass / wVol).toFixed(2) : '0.00';
+        wDensEl.textContent = wDens + ' g/cm³';
+      }
+
+      if (badge && textEl) {
+        badge.className = "p-3 rounded-xl bg-emerald-100 text-emerald-950 text-xs font-bold flex items-center gap-2 border border-emerald-300";
+        textEl.innerHTML = `Données validées : SLA = ${sla} mm²/mg, LDMC = ${ldmc} mg/g. Conforme 3-Sigma.`;
+      }
+    }
+
+    function generateDesktopQR() {
+      const typeEl = document.getElementById('deskQrType');
+      if (!typeEl) return;
+      const type = typeEl.value;
+      const plot = (document.getElementById('deskQrPlot').value || 'PLOT').trim().toUpperCase();
+      const sp = (document.getElementById('deskQrSp').value || 'SP').trim().toUpperCase();
+      const num = (document.getElementById('deskQrNum').value || '001').trim();
+
+      let tag = `TAG-${plot}-${sp}-${num}`;
+      if (type === 'LEAF') tag = `TAG-LEAF-${plot}-${sp}-${num}-A`;
+      else if (type === 'WOOD') tag = `TAG-WOOD-${plot}-${sp}-${num}`;
+      else if (type === 'SEED') tag = `LOT-${sp}-${plot}-2026-${num}`;
+      else if (type === 'SOIL') tag = `TAG-SOIL-${plot}-S${num}`;
+
+      const labelEl = document.getElementById('deskQrTagLabel');
+      if (labelEl) labelEl.textContent = tag;
+
+      const container = document.getElementById('deskQrContainer');
+      if (container) {
+        container.innerHTML = '';
+        if (typeof QRCode !== 'undefined') {
+          new QRCode(container, {
+            text: tag,
+            width: 140,
+            height: 140,
+            colorDark: "#0d4722",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+          });
+        }
+      }
+    }
+
+    function copyDeskQrTag() {
+      const el = document.getElementById('deskQrTagLabel');
+      if (!el) return;
+      const t = el.textContent;
+      navigator.clipboard.writeText(t).then(() => {
+        alert("Identifiant copié : " + t);
+      }).catch(() => {
+        prompt("Copier le tag :", t);
+      });
     }
 
     // SHORTCUT MODAL LOGIC

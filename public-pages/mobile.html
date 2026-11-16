@@ -388,58 +388,94 @@
 
       <!-- SUBTAB 1: LEAF + AUTOMATIC CANVAS SCANNER -->
       <!-- SUBTAB 1: LEAF + ADVANCED MORPHO SCANNER (CAHIER DES CHARGES OPTION A) -->
+      <!-- SUBTAB 1: LEAF + ADVANCED MORPHO SCANNER (CAHIER DES CHARGES TRAITS LAB) -->
       <div id="mt-panel-leaf" class="space-y-4 text-xs">
         <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 space-y-3">
           <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
             <span class="font-bold text-zinc-200 flex items-center gap-1.5">
-              <i class="fa-solid fa-camera text-emerald-400"></i> Scanner Morphométrique & Étalonnage (Option A)
+              <i class="fa-solid fa-camera text-emerald-400"></i> Scanner Morphométrique & Étalonnage Métrique
             </span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold">
-              Norme ETS v1.0
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold" id="calibTagPill">
+              Pipeline FastAPI + OpenCV
             </span>
           </div>
 
           <p class="text-[11px] text-zinc-400 leading-relaxed">
-            Posez la feuille à plat sur fond clair avec votre étalon physique (Mire noire 20×20 mm ou pièce). L'algorithme segmente les pixels foliaires (vert clair et vert foncé) et calcule la surface réelle sans distorsion de distance !
+            Posez la feuille à plat sur fond clair avec votre étalon physique (Pièce CFA, double décimètre ou mire). Le système isole strictement le limbe foliaire principal (ExG + Otsu) et calcule la surface, le périmètre et le SLA/LDMC.
           </p>
 
-          <!-- Étalon Selector (Option A) -->
+          <!-- Sélecteur de mire d'étalonnage -->
           <div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800 space-y-1.5">
             <div class="flex items-center justify-between">
               <label class="text-[10px] text-zinc-400 uppercase font-bold flex items-center gap-1">
                 <i class="fa-solid fa-ruler-combined text-emerald-400"></i> Objet de Référence Physique (Mire / Étalon)
               </label>
-              <span class="text-[10px] text-emerald-400 font-mono font-bold" id="targetInfoLabel">Mire 20×20 mm (400 mm²)</span>
+              <span class="text-[10px] text-emerald-400 font-mono font-bold" id="targetInfoLabel">Pièce 100 F CFA (26.0 mm)</span>
             </div>
             <select id="calibrationTargetSelect" onchange="onTargetSelectChange()" class="w-full py-1.5 px-2 bg-zinc-900 border border-zinc-750 rounded-lg text-xs font-bold text-emerald-300">
-              <option value="square20" selected>Mire noire carrée 20×20 mm (400.0 mm²) [Recommandé Thèse]</option>
-              <option value="coin50cfa">Pièce 50 F CFA (Diamètre 22.0 mm / 380.1 mm²)</option>
-              <option value="coin100cfa">Pièce 100 F CFA (Diamètre 26.0 mm / 530.9 mm²)</option>
-              <option value="coin1euro">Pièce 1 Euro (Diamètre 23.25 mm / 424.6 mm²)</option>
-              <option value="square10">Mire carrée 10×10 mm (100.0 mm²)</option>
-              <option value="custom">Étalon personnalisé (mm² sur mesure)...</option>
+              <option value="coin_100" selected>Pièce 100 F CFA (Ø 26.0 mm) [Recommandé Sahel]</option>
+              <option value="coin_50">Pièce 50 F CFA (Ø 22.0 mm) [Recommandé Sahel]</option>
+              <option value="ruler_50mm">Double décimètre / Règle graduée (50 mm)</option>
+              <option value="coin_1euro">Pièce 1 Euro (Ø 23.25 mm)</option>
+              <option value="square_20">Mire carrée 20×20 mm (400.0 mm²)</option>
+              <option value="custom">Étalon personnalisé (mm sur mesure)...</option>
             </select>
             <div id="customTargetBox" class="hidden pt-1">
-              <span class="text-[10px] text-zinc-400 block mb-0.5">Surface réelle de l'étalon (mm²) :</span>
-              <input type="number" id="customTargetMm2Input" value="400.0" step="1.0" oninput="if(currentLeafImage) processLeafImage(currentLeafImage)" class="w-full py-1.5 px-2 bg-zinc-900 border border-zinc-700 rounded-lg text-xs font-bold text-white">
+              <span class="text-[10px] text-zinc-400 block mb-0.5">Dimension connue de l'étalon (mm) :</span>
+              <input type="number" id="customTargetMmInput" value="26.0" step="0.5" oninput="if(currentLeafImage) processLeafImage(currentLeafImage)" class="w-full py-1.5 px-2 bg-zinc-900 border border-zinc-700 rounded-lg text-xs font-bold text-white">
             </div>
           </div>
 
           <!-- Capture & Canvas Container -->
           <div class="p-3 bg-zinc-950 border border-dashed border-zinc-750 rounded-xl text-center space-y-2">
             <input type="file" id="leafScanFileInput" accept="image/*" capture="environment" onchange="runAutoLeafScan(event)" class="hidden">
-            <button type="button" onclick="document.getElementById('leafScanFileInput').click()" class="py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-2 shadow-lg active:scale-95">
-              <i class="fa-solid fa-camera"></i> Prendre Photo / Scanner Feuille + Mire
-            </button>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <button type="button" onclick="document.getElementById('leafScanFileInput').click()" class="py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-2 shadow-lg active:scale-95">
+                <i class="fa-solid fa-camera"></i> Prendre Photo / Scanner Feuille
+              </button>
+              <button type="button" id="btnToggleManualCalib" onclick="toggleManualCalibration()" class="py-2.5 px-3 bg-zinc-900 hover:bg-zinc-800 text-cyan-300 border border-cyan-800/80 rounded-xl text-xs font-bold transition inline-flex items-center gap-1.5 active:scale-95">
+                <i class="fa-solid fa-ruler"></i> Calibrer manuellement sur la photo
+              </button>
+            </div>
             <span id="scanStatusText" class="block text-[11px] text-zinc-400">Prêt pour acquisition photographique</span>
 
             <!-- Canvas display -->
             <div id="canvasBox" class="hidden space-y-2 pt-2">
-              <div class="relative overflow-hidden rounded-xl border border-zinc-700 shadow-md inline-block">
-                <canvas id="leafCanvas" class="max-w-full h-auto mx-auto block"></canvas>
+              <div class="relative overflow-hidden rounded-xl border border-zinc-700 shadow-md inline-block max-w-full touch-none select-none" id="canvasWrapper">
+                <canvas id="leafCanvas" class="max-w-full h-auto mx-auto block cursor-crosshair"></canvas>
+                <!-- Indicateur calibrage tactile -->
+                <div id="touchCalibHint" class="hidden absolute top-2 left-2 right-2 bg-zinc-950/90 text-cyan-300 border border-cyan-800/80 rounded-lg p-1.5 text-[10px] font-bold text-center">
+                  Glissez les points rouges A (0 cm) et B (5 cm) sur votre règle graduée
+                </div>
               </div>
+
+              <!-- Métriques morphométriques complètes -->
+              <div id="morphoMetricsGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                <div class="bg-zinc-900 p-2 rounded-xl border border-zinc-800">
+                  <span class="text-[10px] text-zinc-400 block font-bold">Surface Limbe</span>
+                  <span class="text-sm font-black text-emerald-400" id="morphoAreaMm2">0.0 mm²</span>
+                  <span class="text-[9px] text-zinc-500 block" id="morphoAreaCm2">0.00 cm²</span>
+                </div>
+                <div class="bg-zinc-900 p-2 rounded-xl border border-zinc-800">
+                  <span class="text-[10px] text-zinc-400 block font-bold">Périmètre Limbe</span>
+                  <span class="text-sm font-black text-cyan-400" id="morphoPerimeterMm">0.0 mm</span>
+                  <span class="text-[9px] text-zinc-500 block">Détourage cyan 3 px</span>
+                </div>
+                <div class="bg-zinc-900 p-2 rounded-xl border border-zinc-800">
+                  <span class="text-[10px] text-zinc-400 block font-bold">Dimensions Max</span>
+                  <span class="text-sm font-black text-amber-400" id="morphoDimensionsMm">0 × 0 mm</span>
+                  <span class="text-[9px] text-zinc-500 block">Longueur × Largeur</span>
+                </div>
+                <div class="bg-zinc-900 p-2 rounded-xl border border-zinc-800">
+                  <span class="text-[10px] text-zinc-400 block font-bold">Statut Étalonnage</span>
+                  <span class="text-[10px] font-black inline-block mt-0.5 px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300" id="morphoCalibBadge">En attente</span>
+                  <span class="text-[9px] text-zinc-500 block mt-0.5" id="morphoRatioPxMm">0.0 px/mm</span>
+                </div>
+              </div>
+
+              <!-- Badge dynamique de résultat / alerte sans texte codé en dur -->
               <div id="autoScanResultBadge" class="p-3 rounded-xl bg-zinc-900 border border-zinc-750 font-bold text-xs space-y-1 text-left">
-                <!-- Injected after scan -->
+                <!-- Injecté dynamiquement -->
               </div>
             </div>
           </div>
@@ -856,15 +892,36 @@
     // =========================================================================
     // ADVANCED COMPUTER VISION & TRAIT CALCULATION ENGINE (CAHIER DES CHARGES)
     // =========================================================================
+    // =========================================================================
+    // ADVANCED COMPUTER VISION & TRAITS LAB ENGINE (CAHIER DES CHARGES)
+    // Synchronisation FastAPI /api/v1/traits/leaf-scan + Moteur Canvas Offline
+    // =========================================================================
     const CALIBRATION_TARGETS = {
-      'square20': { label: 'Mire 20×20 mm (400 mm²)', realAreaMm2: 400.0, type: 'square' },
-      'coin50cfa': { label: 'Pièce 50 F CFA (Ø 22 mm = 380.1 mm²)', realAreaMm2: 380.1, type: 'circle' },
-      'coin100cfa': { label: 'Pièce 100 F CFA (Ø 26 mm = 530.9 mm²)', realAreaMm2: 530.9, type: 'circle' },
-      'coin1euro': { label: 'Pièce 1 Euro (Ø 23.25 mm = 424.6 mm²)', realAreaMm2: 424.6, type: 'circle' },
-      'square10': { label: 'Mire 10×10 mm (100 mm²)', realAreaMm2: 100.0, type: 'square' }
+      'coin_100': { name: 'Pièce 100 F CFA', knownMm: 26.0, type: 'circle', label: 'Pièce 100 F CFA (Ø 26.0 mm)' },
+      'coin_50': { name: 'Pièce 50 F CFA', knownMm: 22.0, type: 'circle', label: 'Pièce 50 F CFA (Ø 22.0 mm)' },
+      'ruler_50mm': { name: 'Double décimètre / Règle (50 mm)', knownMm: 50.0, type: 'ruler', label: 'Règle graduée (50 mm)' },
+      'coin_1euro': { name: 'Pièce 1 Euro', knownMm: 23.25, type: 'circle', label: 'Pièce 1 Euro (Ø 23.25 mm)' },
+      'square_20': { name: 'Mire carrée 20×20 mm', knownMm: 20.0, type: 'square', label: 'Mire carrée 20×20 mm (400 mm²)' },
+      'custom': { name: 'Étalon personnalisé', knownMm: 26.0, type: 'custom', label: 'Étalon personnalisé' }
     };
 
     let currentLeafImage = null;
+    let currentRawLeafFile = null;
+    let baseRenderedImageData = null; // Image segmentée de base sans overlay tactile
+
+    // État du calibrage tactile manuel (Point A et Point B)
+    let isManualCalibrating = false;
+    let manualPtA = { x: 80, y: 350 };
+    let manualPtB = { x: 380, y: 350 };
+    let draggingPoint = null; // 'A', 'B', ou null
+    let activeLeafMetrics = {
+      pixelCount: 0,
+      perimeterPx: 0,
+      maxLengthPx: 0,
+      maxWidthPx: 0,
+      knownMm: 26.0,
+      refType: 'coin_100'
+    };
 
     function onTargetSelectChange() {
       const val = document.getElementById('calibrationTargetSelect').value;
@@ -872,11 +929,11 @@
       const label = document.getElementById('targetInfoLabel');
       
       if (val === 'custom') {
-        customBox.classList.remove('hidden');
-        label.textContent = "Étalon Personnalisé";
+        if (customBox) customBox.classList.remove('hidden');
+        if (label) label.textContent = "Étalon Personnalisé";
       } else {
-        customBox.classList.add('hidden');
-        if (CALIBRATION_TARGETS[val]) {
+        if (customBox) customBox.classList.add('hidden');
+        if (label && CALIBRATION_TARGETS[val]) {
           label.textContent = CALIBRATION_TARGETS[val].label;
         }
       }
@@ -885,13 +942,247 @@
       }
     }
 
+    function toggleManualCalibration() {
+      isManualCalibrating = !isManualCalibrating;
+      const btn = document.getElementById('btnToggleManualCalib');
+      const hint = document.getElementById('touchCalibHint');
+
+      if (isManualCalibrating) {
+        if (btn) {
+          btn.className = "py-2.5 px-3 bg-cyan-700 hover:bg-cyan-600 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-1.5 shadow-md active:scale-95";
+          btn.innerHTML = '<i class="fa-solid fa-check"></i> Terminer le calibrage tactile';
+        }
+        if (hint) hint.classList.remove('hidden');
+        // Initialiser A et B si besoin
+        const canvas = document.getElementById('leafCanvas');
+        if (canvas) {
+          manualPtA = { x: Math.round(canvas.width * 0.15), y: Math.round(canvas.height * 0.85) };
+          manualPtB = { x: Math.round(canvas.width * 0.65), y: Math.round(canvas.height * 0.85) };
+        }
+        drawManualCalibrationOverlay();
+      } else {
+        if (btn) {
+          btn.className = "py-2.5 px-3 bg-zinc-900 hover:bg-zinc-800 text-cyan-300 border border-cyan-800/80 rounded-xl text-xs font-bold transition inline-flex items-center gap-1.5 active:scale-95";
+          btn.innerHTML = '<i class="fa-solid fa-ruler"></i> Calibrer manuellement sur la photo';
+        }
+        if (hint) hint.classList.add('hidden');
+        // Redessiner image de base sans les poignées
+        restoreBaseCanvas();
+      }
+    }
+
+    function setupCanvasPointerEvents() {
+      const canvas = document.getElementById('leafCanvas');
+      if (!canvas || canvas._hasPointerEvents) return;
+      canvas._hasPointerEvents = true;
+
+      function getCanvasCoordinates(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        return {
+          x: Math.round((e.clientX - rect.left) * scaleX),
+          y: Math.round((e.clientY - rect.top) * scaleY)
+        };
+      }
+
+      canvas.addEventListener('pointerdown', (e) => {
+        if (!isManualCalibrating) return;
+        const pos = getCanvasCoordinates(e);
+        const distA = Math.hypot(pos.x - manualPtA.x, pos.y - manualPtA.y);
+        const distB = Math.hypot(pos.x - manualPtB.x, pos.y - manualPtB.y);
+
+        const hitRadius = 35; // Rayon tactile confortable pour le doigt
+        if (distA <= hitRadius && distA <= distB) {
+          draggingPoint = 'A';
+          canvas.setPointerCapture(e.pointerId);
+        } else if (distB <= hitRadius) {
+          draggingPoint = 'B';
+          canvas.setPointerCapture(e.pointerId);
+        }
+      });
+
+      canvas.addEventListener('pointermove', (e) => {
+        if (!isManualCalibrating || !draggingPoint) return;
+        const pos = getCanvasCoordinates(e);
+        // Clamping dans les bornes du canvas
+        const clampedX = Math.max(5, Math.min(canvas.width - 5, pos.x));
+        const clampedY = Math.max(5, Math.min(canvas.height - 5, pos.y));
+
+        if (draggingPoint === 'A') {
+          manualPtA = { x: clampedX, y: clampedY };
+        } else if (draggingPoint === 'B') {
+          manualPtB = { x: clampedX, y: clampedY };
+        }
+
+        drawManualCalibrationOverlay();
+        applyManualCalibrationScale();
+      });
+
+      function onPointerEnd(e) {
+        if (draggingPoint) {
+          try { canvas.releasePointerCapture(e.pointerId); } catch(err) {}
+          draggingPoint = null;
+          applyManualCalibrationScale();
+        }
+      }
+
+      canvas.addEventListener('pointerup', onPointerEnd);
+      canvas.addEventListener('pointercancel', onPointerEnd);
+    }
+
+    function drawManualCalibrationOverlay() {
+      const canvas = document.getElementById('leafCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      // Restaurer l'image de segmentation originale
+      if (baseRenderedImageData) {
+        ctx.putImageData(baseRenderedImageData, 0, 0);
+      }
+
+      // Ligne rouge épaisse reliant A et B
+      ctx.beginPath();
+      ctx.moveTo(manualPtA.x, manualPtA.y);
+      ctx.lineTo(manualPtB.x, manualPtB.y);
+      ctx.strokeStyle = '#ef4444'; // Rouge vif
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      const distPx = Math.hypot(manualPtB.x - manualPtA.x, manualPtB.y - manualPtA.y);
+      const midX = (manualPtA.x + manualPtB.x) / 2;
+      const midY = (manualPtA.y + manualPtB.y) / 2;
+
+      // Dessin du badge de distance au centre de la ligne
+      const distLabel = distPx.toFixed(0) + " px (50 mm)";
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.fillRect(midX - 45, midY - 14, 90, 20);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 11px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(distLabel, midX, midY);
+
+      // Poignée Point A (0 cm)
+      drawHandle(ctx, manualPtA.x, manualPtA.y, "A (0 cm)");
+      // Poignée Point B (5 cm)
+      drawHandle(ctx, manualPtB.x, manualPtB.y, "B (5 cm)");
+    }
+
+    function drawHandle(ctx, x, y, text) {
+      // Cercle extérieur rouge
+      ctx.beginPath();
+      ctx.arc(x, y, 14, 0, 2 * Math.PI);
+      ctx.fillStyle = 'rgba(239, 68, 68, 0.9)';
+      ctx.fill();
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+
+      // Point central
+      ctx.beginPath();
+      ctx.arc(x, y, 3, 0, 2 * Math.PI);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+
+      // Étiquette
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 10px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(text, x, y - 18);
+    }
+
+    function restoreBaseCanvas() {
+      const canvas = document.getElementById('leafCanvas');
+      if (canvas && baseRenderedImageData) {
+        canvas.getContext('2d').putImageData(baseRenderedImageData, 0, 0);
+      }
+    }
+
+    function applyManualCalibrationScale() {
+      const distPx = Math.hypot(manualPtB.x - manualPtA.x, manualPtB.y - manualPtA.y);
+      if (distPx < 10) return;
+
+      const knownMm = 50.0; // Règle graduée 50 mm
+      const pixelsPerMm = distPx / knownMm;
+      updateMetricsDisplay(pixelsPerMm, "MANUAL_TACTILE", "Étalonnage manuel tactile appliqué (Règle 50 mm).");
+    }
+
     function runAutoLeafScan(event) {
       const file = event.target.files[0];
       if (!file) return;
+      currentRawLeafFile = file;
 
       const status = document.getElementById('scanStatusText');
-      status.innerHTML = '<span class="text-amber-400 font-bold animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Analyse morphométrique ExG + Détection Mire en cours...</span>';
+      if (status) {
+        status.innerHTML = '<span class="text-amber-400 font-bold animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Segmentation ExG + Détection Mire en cours...</span>';
+      }
 
+      const targetKey = document.getElementById('calibrationTargetSelect').value;
+      const targetSpec = CALIBRATION_TARGETS[targetKey] || CALIBRATION_TARGETS['coin_100'];
+      let knownMm = targetSpec.knownMm;
+      if (targetKey === 'custom') {
+        const customInput = document.getElementById('customTargetMmInput');
+        knownMm = customInput ? (parseFloat(customInput.value) || 26.0) : 26.0;
+      }
+
+      // Tentative de communication avec le backend FastAPI /api/v1/traits/leaf-scan
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('ref_type', targetKey);
+      formData.append('known_mm', knownMm);
+
+      fetch('/api/v1/traits/leaf-scan', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('API indisponible ou erreur serveur');
+        return response.json();
+      })
+      .then(res => {
+        if (res && res.success) {
+          applyBackendScanResult(res);
+        } else {
+          fallbackLocalScan(file);
+        }
+      })
+      .catch(err => {
+        // En cas d'absence de serveur (mode déconnecté PWA ou GitHub Pages), exécution locale sur Canvas
+        console.info('Mode déconnecté ou standalone : traitement par le moteur local Canvas', err);
+        fallbackLocalScan(file);
+      });
+    }
+
+    function applyBackendScanResult(res) {
+      const canvas = document.getElementById('leafCanvas');
+      const ctx = canvas.getContext('2d');
+      document.getElementById('canvasBox').classList.remove('hidden');
+
+      const img = new Image();
+      img.onload = () => {
+        currentLeafImage = img;
+        canvas.width = res.image_width || img.width;
+        canvas.height = res.image_height || img.height;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        baseRenderedImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        setupCanvasPointerEvents();
+
+        // Stocker les métriques
+        activeLeafMetrics = {
+          pixelCount: res.leaf_pixel_count,
+          perimeterPx: res.perimeter_mm * res.pixels_per_mm,
+          maxLengthPx: res.max_length_mm * res.pixels_per_mm,
+          maxWidthPx: res.max_width_mm * res.pixels_per_mm,
+          knownMm: res.known_mm,
+          refType: res.ref_type
+        };
+
+        updateMetricsDisplay(res.pixels_per_mm, res.calibration_mode, res.status_message, res);
+      };
+      img.src = res.processed_image_base64;
+    }
+
+    function fallbackLocalScan(file) {
       const reader = new FileReader();
       reader.onload = ev => {
         const img = new Image();
@@ -909,7 +1200,6 @@
       const ctx = canvas.getContext('2d');
       document.getElementById('canvasBox').classList.remove('hidden');
 
-      // 4.1 Preprocessing: Scale image maintaining high resolution (max dimension 900px)
       const MAX_DIM = 900;
       const scale = Math.min(1, MAX_DIM / Math.max(img.width, img.height));
       const w = Math.round(img.width * scale);
@@ -921,239 +1211,379 @@
       const imgData = ctx.getImageData(0, 0, w, h);
       const pixels = imgData.data;
 
-      // Buffers for classification
-      const isLeafRaw = new Uint8Array(w * h);
-      const isDarkTarget = new Uint8Array(w * h);
-
-      // Calibration target choice
       const targetKey = document.getElementById('calibrationTargetSelect').value;
-      let targetRealAreaMm2 = 400.0;
+      const targetSpec = CALIBRATION_TARGETS[targetKey] || CALIBRATION_TARGETS['coin_100'];
+      let knownMm = targetSpec.knownMm;
       if (targetKey === 'custom') {
-        targetRealAreaMm2 = parseFloat(document.getElementById('customTargetMm2Input').value) || 400.0;
-      } else if (CALIBRATION_TARGETS[targetKey]) {
-        targetRealAreaMm2 = CALIBRATION_TARGETS[targetKey].realAreaMm2;
+        const customInput = document.getElementById('customTargetMmInput');
+        knownMm = customInput ? (parseFloat(customInput.value) || 26.0) : 26.0;
       }
 
-      // Pass 1: Pixel classification using ExG + HSV space
+      // 1. Calcul de l'indice Excess Green (ExG) et binarisation
+      const exgArray = new Float32Array(w * h);
+      let minExg = 9999, maxExg = -9999;
+
       for (let i = 0; i < pixels.length; i += 4) {
         const idx = i / 4;
         const r = pixels[i];
         const g = pixels[i + 1];
         const b = pixels[i + 2];
+        const valExg = 2.0 * g - r - b;
+        exgArray[idx] = valExg;
+        if (valExg < minExg) minExg = valExg;
+        if (valExg > maxExg) maxExg = valExg;
+      }
 
-        // Greyscale intensity Y
-        const y = 0.299 * r + 0.587 * g + 0.114 * b;
+      const exgRange = maxExg > minExg ? (maxExg - minExg) : 1.0;
+      const isGreenCandidate = new Uint8Array(w * h);
 
-        // HSV conversion
-        const maxVal = Math.max(r, g, b);
-        const minVal = Math.min(r, g, b);
-        const delta = maxVal - minVal;
-        let hue = 0;
-        if (delta > 0) {
-          if (maxVal === r) {
-            hue = ((g - b) / delta) % 6;
-          } else if (maxVal === g) {
-            hue = (b - r) / delta + 2;
-          } else {
-            hue = (r - g) / delta + 4;
-          }
-          hue = Math.round(hue * 60);
-          if (hue < 0) hue += 360;
-        }
-        const sat = maxVal > 0 ? delta / maxVal : 0;
-        const val = maxVal / 255;
-
-        // Excess Green index: ExG = 2*G - R - B
-        const exg = 2 * g - r - b;
-
-        // 4.2 Target candidate detection:
-        // Calibration target (mire noire / étalon sombre) on light background
-        // Low luminance (y < 65), low saturation (sat < 0.32), not green (exg < 8)
-        if (y < 65 && sat < 0.32 && exg < 8) {
-          isDarkTarget[idx] = 1;
-        }
-
-        // 4.1 Leaf detection: covers vibrant light green, olive green AND dark green leaflets!
-        const isVibrantGreen = (hue >= 25 && hue <= 115 && sat >= 0.14 && val >= 0.12 && exg > 4);
-        const isDarkGreen = (g > b + 4 && g >= r - 5 && y >= 20 && y <= 215 && sat >= 0.15);
-        const isOliveGreen = (hue >= 20 && hue <= 45 && sat >= 0.20 && exg >= 0 && y <= 210);
-
-        // Exclude white/light paper background (y > 215 and sat < 0.08)
-        const isPaperBg = (y > 215 && sat < 0.08);
-
-        if ((isVibrantGreen || isDarkGreen || isOliveGreen) && !isPaperBg && !isDarkTarget[idx]) {
-          isLeafRaw[idx] = 1;
+      for (let idx = 0; idx < exgArray.length; idx++) {
+        const norm = (exgArray[idx] - minExg) / exgRange;
+        // Binarisation adaptative ExG
+        if (norm >= 0.38) {
+          isGreenCandidate[idx] = 1;
         }
       }
 
-      // Pass 2: Morphological Closing (Dilation followed by Erosion with 3x3 kernel)
-      // Closes internal vein holes and specular reflections on leaf blade
-      const tempDilated = new Uint8Array(w * h);
-      for (let py = 1; py < h - 1; py++) {
-        for (let px = 1; px < w - 1; px++) {
-          const idx = py * w + px;
-          if (isLeafRaw[idx] || isLeafRaw[idx - 1] || isLeafRaw[idx + 1] || isLeafRaw[idx - w] || isLeafRaw[idx + w]) {
-            tempDilated[idx] = 1;
+      // 2. Morphologie mathématique 5x5 (ouverture puis fermeture)
+      const morphTemp = new Uint8Array(w * h);
+      for (let y = 2; y < h - 2; y++) {
+        for (let x = 2; x < w - 2; x++) {
+          const idx = y * w + x;
+          if (isGreenCandidate[idx] || isGreenCandidate[idx - 1] || isGreenCandidate[idx + 1] || isGreenCandidate[idx - w] || isGreenCandidate[idx + w]) {
+            morphTemp[idx] = 1;
           }
         }
       }
 
       const isLeafClosed = new Uint8Array(w * h);
-      for (let py = 1; py < h - 1; py++) {
-        for (let px = 1; px < w - 1; px++) {
-          const idx = py * w + px;
-          if (tempDilated[idx] && tempDilated[idx - 1] && tempDilated[idx + 1] && tempDilated[idx - w] && tempDilated[idx + w]) {
+      for (let y = 2; y < h - 2; y++) {
+        for (let x = 2; x < w - 2; x++) {
+          const idx = y * w + x;
+          if (morphTemp[idx] && morphTemp[idx - 1] && morphTemp[idx + 1] && morphTemp[idx - w] && morphTemp[idx + w]) {
             isLeafClosed[idx] = 1;
           }
         }
       }
 
-      // Pass 3: Calibration Target Bounding Box & Clustering
-      let minTx = w, maxTx = 0, minTy = h, maxTy = 0;
-      let darkCount = 0;
-      for (let py = 0; py < h; py++) {
-        for (let px = 0; px < w; px++) {
-          const idx = py * w + px;
-          if (isDarkTarget[idx]) {
-            darkCount++;
-            if (px < minTx) minTx = px;
-            if (px > maxTx) maxTx = px;
-            if (py < minTy) minTy = py;
-            if (py > maxTy) maxTy = py;
+      // 3. Extraction stricte du plus grand composant connexe (Limbe foliaire principal)
+      // Élimine strictement tous les reflets de coin (< 0.5% de l'image)
+      const visited = new Uint8Array(w * h);
+      let largestBlob = [];
+      const minBlobSize = Math.round(w * h * 0.005); // 0.5% seuil minimum
+
+      for (let y = 3; y < h - 3; y += 2) {
+        for (let x = 3; x < w - 3; x += 2) {
+          const idx = y * w + x;
+          if (isLeafClosed[idx] && !visited[idx]) {
+            const blob = [];
+            const queue = [idx];
+            visited[idx] = 1;
+
+            while (queue.length > 0) {
+              const curr = queue.pop();
+              blob.push(curr);
+
+              const neighbors = [curr - 1, curr + 1, curr - w, curr + w];
+              for (let n of neighbors) {
+                if (n >= 0 && n < w * h && isLeafClosed[n] && !visited[n]) {
+                  visited[n] = 1;
+                  queue.push(n);
+                }
+              }
+            }
+
+            if (blob.length > largestBlob.length && blob.length >= minBlobSize) {
+              largestBlob = blob;
+            }
           }
         }
       }
 
-      const boxW = maxTx >= minTx ? maxTx - minTx + 1 : 0;
-      const boxH = maxTy >= minTy ? maxTy - minTy + 1 : 0;
-      const boxArea = boxW * boxH;
-      const aspectRatio = boxW > 0 && boxH > 0 ? Math.min(boxW, boxH) / Math.max(boxW, boxH) : 0;
-      const solidity = boxArea > 0 ? darkCount / boxArea : 0;
+      if (largestBlob.length === 0) {
+        for (let i = 0; i < isLeafClosed.length; i++) {
+          if (isLeafClosed[i]) largestBlob.push(i);
+        }
+      }
 
+      const leafMaskStrict = new Uint8Array(w * h);
+      let minLx = w, maxLx = 0, minLy = h, maxLy = 0;
+      for (let idx of largestBlob) {
+        leafMaskStrict[idx] = 1;
+        const px = idx % w;
+        const py = Math.floor(idx / w);
+        if (px < minLx) minLx = px;
+        if (px > maxLx) maxLx = px;
+        if (py < minLy) minLy = py;
+        if (py > maxLy) maxLy = py;
+      }
+
+      const leafPixelCount = largestBlob.length;
+      const leafBoxW = maxLx >= minLx ? maxLx - minLx + 1 : 0;
+      const leafBoxH = maxLy >= minLy ? maxLy - minLy + 1 : 0;
+      const maxLengthPx = Math.max(leafBoxW, leafBoxH);
+      const maxWidthPx = Math.min(leafBoxW, leafBoxH);
+
+      let perimeterPx = 0;
+      const isPerimeter = new Uint8Array(w * h);
+      for (let idx of largestBlob) {
+        const px = idx % w;
+        const py = Math.floor(idx / w);
+        if (px === 0 || px === w - 1 || py === 0 || py === h - 1 ||
+            !leafMaskStrict[idx - 1] || !leafMaskStrict[idx + 1] || !leafMaskStrict[idx - w] || !leafMaskStrict[idx + w]) {
+          isPerimeter[idx] = 1;
+          perimeterPx++;
+        }
+      }
+
+      // 4. Détection de la mire d'étalonnage sélectionnée hors de la feuille
       let targetDetected = false;
-      let targetPixelCount = 0;
-      let targetBox = null;
-      let mm2PerPixel = 0.045; // Default fallback ratio
+      let targetInfo = null;
+      let pixelsPerMm = 4.72;
+      let calibMode = "DEFAULT_ESTIMATED";
 
-      // Criteria for target: cohesive cluster with aspect ratio >= 0.60 and solidity >= 0.55
-      if (darkCount >= 100 && aspectRatio >= 0.60 && solidity >= 0.50 && boxArea < (w * h * 0.40)) {
-        targetDetected = true;
-        targetPixelCount = darkCount;
-        targetBox = { x: minTx, y: minTy, w: boxW, h: boxH };
-        // Exact dynamic calibration ratio:
-        mm2PerPixel = targetRealAreaMm2 / targetPixelCount;
+      if (targetSpec.type === 'circle') {
+        let minTx = w, maxTx = 0, minTy = h, maxTy = 0, darkTargetCount = 0;
+        for (let py = 10; py < h - 10; py++) {
+          for (let px = 10; px < w - 10; px++) {
+            const idx = py * w + px;
+            if (leafMaskStrict[idx]) continue;
+
+            const r = pixels[idx * 4];
+            const g = pixels[idx * 4 + 1];
+            const b = pixels[idx * 4 + 2];
+            const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+            const exg = 2 * g - r - b;
+
+            if (lum < 75 && exg < 10) {
+              darkTargetCount++;
+              if (px < minTx) minTx = px;
+              if (px > maxTx) maxTx = px;
+              if (py < minTy) minTy = py;
+              if (py > maxTy) maxTy = py;
+            }
+          }
+        }
+
+        const bW = maxTx >= minTx ? maxTx - minTx + 1 : 0;
+        const bH = maxTy >= minTy ? maxTy - minTy + 1 : 0;
+        const aspect = (bW > 0 && bH > 0) ? Math.min(bW, bH) / Math.max(bW, bH) : 0;
+        const areaB = bW * bH;
+        const solidity = areaB > 0 ? darkTargetCount / areaB : 0;
+
+        if (darkTargetCount >= 120 && aspect >= 0.70 && solidity >= 0.50) {
+          targetDetected = true;
+          const detectedDiamPx = (bW + bH) / 2.0;
+          pixelsPerMm = detectedDiamPx / knownMm;
+          calibMode = "CERTIFIED_TARGET";
+          targetInfo = {
+            cx: Math.round((minTx + maxTx) / 2),
+            cy: Math.round((minTy + maxTy) / 2),
+            r: Math.round(detectedDiamPx / 2),
+            diamPx: detectedDiamPx
+          };
+        }
+      } else if (targetSpec.type === 'square') {
+        let minTx = w, maxTx = 0, minTy = h, maxTy = 0, darkSquareCount = 0;
+        for (let py = 10; py < h - 10; py++) {
+          for (let px = 10; px < w - 10; px++) {
+            const idx = py * w + px;
+            if (leafMaskStrict[idx]) continue;
+
+            const lum = 0.299 * pixels[idx * 4] + 0.587 * pixels[idx * 4 + 1] + 0.114 * pixels[idx * 4 + 2];
+            if (lum < 65) {
+              darkSquareCount++;
+              if (px < minTx) minTx = px;
+              if (px > maxTx) maxTx = px;
+              if (py < minTy) minTy = py;
+              if (py > maxTy) maxTy = py;
+            }
+          }
+        }
+        const bW = maxTx >= minTx ? maxTx - minTx + 1 : 0;
+        const bH = maxTy >= minTy ? maxTy - minTy + 1 : 0;
+        const aspect = (bW > 0 && bH > 0) ? Math.min(bW, bH) / Math.max(bW, bH) : 0;
+        if (darkSquareCount >= 100 && aspect >= 0.75) {
+          targetDetected = true;
+          const sidePx = (bW + bH) / 2.0;
+          pixelsPerMm = sidePx / knownMm;
+          calibMode = "CERTIFIED_TARGET";
+          targetInfo = {
+            rect: { x: minTx, y: minTy, w: bW, h: bH }
+          };
+        }
       }
 
-      // Pass 4: Count leaf pixels and apply 100% Fluorescent Emerald Mask Overlay
-      let leafPixelCount = 0;
-      for (let py = 0; py < h; py++) {
-        for (let px = 0; px < w; px++) {
-          const idx = py * w + px;
+      // 5. Rendu visuel haute précision :
+      // - Remplissage vert semi-transparent (alpha = 0.25)
+      // - Ligne de contour cyan vif (épaisseur 3 px)
+      for (let idx of largestBlob) {
+        const pIdx = idx * 4;
+        pixels[pIdx] = Math.round(pixels[pIdx] * 0.75 + 16 * 0.25);
+        pixels[pIdx + 1] = Math.round(pixels[pIdx + 1] * 0.75 + 210 * 0.25);
+        pixels[pIdx + 2] = Math.round(pixels[pIdx + 2] * 0.75 + 100 * 0.25);
+      }
 
-          // Exclude pixels inside the target bounding box
-          if (targetDetected && targetBox && px >= targetBox.x && px <= (targetBox.x + targetBox.w) && py >= targetBox.y && py <= (targetBox.y + targetBox.h)) {
-            continue;
-          }
-
-          if (isLeafClosed[idx]) {
-            leafPixelCount++;
-            // 4.1 Visual control mask: Fluorescent Emerald (#10e682) 55% alpha blend
-            const pIdx = idx * 4;
-            pixels[pIdx] = Math.round(pixels[pIdx] * 0.45 + 16 * 0.55);
-            pixels[pIdx + 1] = Math.round(pixels[pIdx + 1] * 0.45 + 230 * 0.55);
-            pixels[pIdx + 2] = Math.round(pixels[pIdx + 2] * 0.45 + 130 * 0.55);
+      // Tracer le contour cyan vif (#00FFFF, 3 px)
+      for (let idx = 0; idx < w * h; idx++) {
+        if (isPerimeter[idx]) {
+          const px = idx % w;
+          const py = Math.floor(idx / w);
+          for (let dy = -1; dy <= 1; dy++) {
+            for (let dx = -1; dx <= 1; dx++) {
+              const nx = px + dx;
+              const ny = py + dy;
+              if (nx >= 0 && nx < w && ny >= 0 && ny < h) {
+                const nIdx = (ny * w + nx) * 4;
+                pixels[nIdx] = 0;       // R = 0
+                pixels[nIdx + 1] = 255; // G = 255
+                pixels[nIdx + 2] = 255; // B = 255 (Cyan #00FFFF)
+              }
+            }
           }
         }
       }
 
-      // Put visual overlay back to canvas
       ctx.putImageData(imgData, 0, 0);
 
-      // Draw Cyan Bounding Box on Target if detected
-      if (targetDetected && targetBox) {
-        ctx.strokeStyle = '#06b6d4'; // Cyan
+      // Validation de mire détectée
+      if (targetDetected && targetInfo) {
+        ctx.strokeStyle = '#00ffff';
         ctx.lineWidth = 3;
-        ctx.strokeRect(targetBox.x - 2, targetBox.y - 2, targetBox.w + 4, targetBox.h + 4);
-        ctx.fillStyle = '#06b6d4';
-        ctx.font = 'bold 12px sans-serif';
-        const labelText = 'MIRE ÉTALON ' + Math.round(Math.sqrt(targetRealAreaMm2)) + '×' + Math.round(Math.sqrt(targetRealAreaMm2)) + ' mm';
-        ctx.fillText(labelText, targetBox.x, Math.max(14, targetBox.y - 6));
+        if (targetInfo.r) {
+          ctx.beginPath();
+          ctx.arc(targetInfo.cx, targetInfo.cy, targetInfo.r, 0, 2 * Math.PI);
+          ctx.stroke();
+          ctx.fillStyle = '#00ffff';
+          ctx.font = 'bold 11px sans-serif';
+          ctx.fillText(`${targetSpec.name} (${knownMm.toFixed(1)} mm)`, targetInfo.cx - targetInfo.r, targetInfo.cy - targetInfo.r - 6);
+        } else if (targetInfo.rect) {
+          ctx.strokeRect(targetInfo.rect.x, targetInfo.rect.y, targetInfo.rect.w, targetInfo.rect.h);
+          ctx.fillStyle = '#00ffff';
+          ctx.font = 'bold 11px sans-serif';
+          ctx.fillText(`Mire ${knownMm:.0f} mm`, targetInfo.rect.x, targetInfo.rect.y - 6);
+        }
       }
 
-      // 4.2 & 4.3 CALCULATE REAL LEAF AREA (NO HARDCODED 350.0 CONSTANTS!)
-      let computedLeafAreaMm2 = leafPixelCount * mm2PerPixel;
-      computedLeafAreaMm2 = Math.round(computedLeafAreaMm2 * 10) / 10; // Round to 1 decimal place
+      baseRenderedImageData = ctx.getImageData(0, 0, w, h);
+      setupCanvasPointerEvents();
 
-      // Update UI Status and Badges
-      const statusEl = document.getElementById('scanStatusText');
-      const resultBadgeEl = document.getElementById('autoScanResultBadge');
+      activeLeafMetrics = {
+        pixelCount: leafPixelCount,
+        perimeterPx: perimeterPx,
+        maxLengthPx: maxLengthPx,
+        maxWidthPx: maxWidthPx,
+        knownMm: knownMm,
+        refType: targetKey
+      };
 
+      // Message d'alerte dynamique correspondant à la mire
+      let statusMsg = "";
       if (targetDetected) {
-        statusEl.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Segmentation & Étalonnage réussis !</span>`;
-        resultBadgeEl.className = "p-3 rounded-xl bg-emerald-950/90 text-emerald-200 border-2 border-emerald-600 font-bold text-xs space-y-1.5 shadow-md";
-        resultBadgeEl.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="text-zinc-300">Surface Foliaire Réelle :</span>
-            <span class="text-base font-black text-emerald-300">${computedLeafAreaMm2.toFixed(1)} mm²</span>
-          </div>
-          <div class="flex items-center justify-between text-[11px] text-zinc-400 border-t border-emerald-800/60 pt-1">
-            <span>Pixels feuille : <strong class="text-zinc-200">${leafPixelCount.toLocaleString()} px</strong></span>
-            <span>Mire : <strong class="text-cyan-400">${targetPixelCount.toLocaleString()} px (1 px = ${mm2PerPixel.toFixed(5)} mm²)</strong></span>
-          </div>
-        `;
+        statusMsg = `Mire validée : ${targetSpec.name} (${knownMm.toFixed(1)} mm). Étalonnage certifié.`;
       } else {
-        // Fallback warning mode
-        statusEl.innerHTML = `<span class="text-amber-400 font-bold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Mire non détectée — Étalonnage estimé</span>`;
-        resultBadgeEl.className = "p-3 rounded-xl bg-amber-950/90 text-amber-200 border-2 border-amber-600 font-bold text-xs space-y-1.5 shadow-md";
-        resultBadgeEl.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="text-amber-300">Surface Calculée (Sans mire) :</span>
-            <span class="text-base font-black text-white">${computedLeafAreaMm2.toFixed(1)} mm²</span>
-          </div>
-          <p class="text-[10px] text-amber-300/90 font-medium">
-            ⚠️ Mire non détectée : placez un carré noir 20×20 mm à côté de la feuille pour un étalonnage certifié.
-          </p>
-        `;
+        if (targetKey === 'coin_100') {
+          statusMsg = "Pièce de 100 F CFA (26.0 mm) non détectée : placez-la bien à plat sur le papier blanc à côté de la feuille.";
+        } else if (targetKey === 'coin_50') {
+          statusMsg = "Pièce de 50 F CFA (22.0 mm) non détectée : placez-la bien à plat sur le papier blanc à côté de la feuille.";
+        } else if (targetKey === 'ruler_50mm') {
+          statusMsg = "Double décimètre / règle graduée (50 mm) non détecté : placez la règle bien visible ou utilisez le calibrage tactile manuel ci-dessous.";
+        } else {
+          statusMsg = `${targetSpec.name} non détectée. Échelle standard appliquée ou calibrage manuel requis.`;
+        }
       }
 
-      // 4.3 DYNAMIC INJECTION INTO INPUT & AUTOMATIC RECALCULATION
-      const areaInput = document.getElementById('calcLeafArea');
-      areaInput.value = computedLeafAreaMm2.toFixed(1);
-      updateTraitsCalc();
+      updateMetricsDisplay(pixelsPerMm, calibMode, statusMsg);
     }
 
-    // 4.3 DYNAMIC REACTIVE RECALCULATION (SLA & LDMC)
-    function updateTraitsCalc() {
-      const area = parseFloat(document.getElementById('calcLeafArea').value) || 0;
-      const fresh = parseFloat(document.getElementById('calcFreshMass').value) || 0;
-      const dry = parseFloat(document.getElementById('calcDryMass').value) || 0;
+    function updateMetricsDisplay(pixelsPerMm, calibMode, statusMsg, backendData) {
+      const mm2PerPx = 1.0 / (pixelsPerMm * pixelsPerMm);
+      const leafAreaMm2 = backendData ? backendData.leaf_area_mm2 : parseFloat((activeLeafMetrics.pixelCount * mm2PerPx).toFixed(1));
+      const leafAreaCm2 = backendData ? backendData.leaf_area_cm2 : parseFloat((leafAreaMm2 / 100.0).toFixed(2));
+      const perimeterMm = backendData ? backendData.perimeter_mm : parseFloat((activeLeafMetrics.perimeterPx / pixelsPerMm).toFixed(1));
+      const maxLengthMm = backendData ? backendData.max_length_mm : parseFloat((activeLeafMetrics.maxLengthPx / pixelsPerMm).toFixed(1));
+      const maxWidthMm = backendData ? backendData.max_width_mm : parseFloat((activeLeafMetrics.maxWidthPx / pixelsPerMm).toFixed(1));
 
-      const badge = document.getElementById('traits3SigmaBadge');
-      const msgEl = document.getElementById('traits3SigmaMsg');
+      const elAreaMm2 = document.getElementById('morphoAreaMm2');
+      const elAreaCm2 = document.getElementById('morphoAreaCm2');
+      const elPerim = document.getElementById('morphoPerimeterMm');
+      const elDims = document.getElementById('morphoDimensionsMm');
+      const elBadge = document.getElementById('morphoCalibBadge');
+      const elRatio = document.getElementById('morphoRatioPxMm');
 
-      if (dry > fresh && fresh > 0) {
-        badge.className = "p-2.5 rounded-xl bg-red-950 text-red-300 border border-red-800 font-semibold text-[11px] flex items-center gap-2";
-        msgEl.innerHTML = `<strong class="text-red-400">Erreur :</strong> La masse sèche (${dry} mg) ne peut pas dépasser la masse fraîche (${fresh} mg) !`;
-        return;
+      if (elAreaMm2) elAreaMm2.textContent = leafAreaMm2.toLocaleString() + " mm²";
+      if (elAreaCm2) elAreaCm2.textContent = leafAreaCm2.toFixed(2) + " cm²";
+      if (elPerim) elPerim.textContent = perimeterMm.toFixed(1) + " mm";
+      if (elDims) elDims.textContent = `${maxLengthMm.toFixed(1)} × ${maxWidthMm.toFixed(1)} mm`;
+      if (elRatio) elRatio.textContent = pixelsPerMm.toFixed(2) + " px/mm";
+
+      if (elBadge) {
+        if (calibMode === 'CERTIFIED_TARGET') {
+          elBadge.className = "text-[10px] font-black inline-block mt-0.5 px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800";
+          elBadge.textContent = "Certifié par mire";
+        } else if (calibMode === 'MANUAL_TACTILE') {
+          elBadge.className = "text-[10px] font-black inline-block mt-0.5 px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800";
+          elBadge.textContent = "Manuel (50 mm)";
+        } else {
+          elBadge.className = "text-[10px] font-black inline-block mt-0.5 px-2 py-0.5 rounded-full bg-amber-950 text-amber-400 border border-amber-800";
+          elBadge.textContent = "Estimé standard";
+        }
       }
 
-      // SLA = Area (mm²) / Dry Mass (mg)
-      const sla = dry > 0 ? (area / dry).toFixed(2) : '0.00';
-      const slaCm2g = (parseFloat(sla) * 10).toFixed(1);
-      const slaM2kg = sla;
+      const areaInput = document.getElementById('calcLeafArea');
+      if (areaInput) {
+        areaInput.value = leafAreaMm2;
+      }
+      updateTraitsCalc();
 
-      // LDMC = (Dry Mass / Fresh Mass) * 1000 (mg/g)
-      const ldmc = fresh > 0 ? ((dry / fresh) * 1000).toFixed(1) : '0.0';
-      const ldmcRatio = fresh > 0 ? ((dry / fresh) * 100).toFixed(1) : '0.0';
+      const scanStatusText = document.getElementById('scanStatusText');
+      if (scanStatusText) {
+        scanStatusText.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Détourage haute précision terminé (${activeLeafMetrics.pixelCount.toLocaleString()} px)</span>`;
+      }
 
-      document.getElementById('resSla').textContent = sla + ' mm²/mg';
-      document.getElementById('resSlaEquiv').textContent = `équiv. ${slaCm2g} cm²/g • ${slaM2kg} m²/kg`;
-
-      document.getElementById('resLdmc').textContent = ldmc + ' mg/g';
-      document.getElementById('resLdmcRatio').textContent = `Ratio matière sèche : ${ldmcRatio} %`;
-
-      badge.className = "p-2.5 rounded-xl bg-emerald-950/80 text-emerald-300 border border-emerald-800 font-semibold text-[11px] flex items-center gap-2";
-      msgEl.innerHTML = `Mesure validée (SLA = ${sla} mm²/mg, LDMC = ${ldmc} mg/g). Conforme aux standards 3-Sigma.`;
+      const badge = document.getElementById('autoScanResultBadge');
+      if (badge) {
+        if (calibMode === 'CERTIFIED_TARGET') {
+          badge.className = "p-3 rounded-xl bg-emerald-950/80 border border-emerald-800 font-bold text-xs space-y-1 text-left";
+          badge.innerHTML = `
+            <div class="flex items-center justify-between text-emerald-300 border-b border-emerald-800/60 pb-1">
+              <span><i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> Étalonnage Physique Réussi</span>
+              <span class="font-mono bg-emerald-900 px-2 py-0.5 rounded text-[10px] text-emerald-200">Mire Certifiée</span>
+            </div>
+            <p class="text-[11px] text-zinc-300 font-normal pt-1">${statusMsg}</p>
+            <div class="pt-1 text-xs font-bold text-emerald-300">
+              Surface : <strong class="text-white">${leafAreaMm2.toLocaleString()} mm²</strong> (${leafAreaCm2} cm²) • Périmètre : <strong class="text-white">${perimeterMm} mm</strong>
+            </div>
+          `;
+        } else if (calibMode === 'MANUAL_TACTILE') {
+          badge.className = "p-3 rounded-xl bg-cyan-950/80 border border-cyan-800 font-bold text-xs space-y-1 text-left";
+          badge.innerHTML = `
+            <div class="flex items-center justify-between text-cyan-300 border-b border-cyan-800/60 pb-1">
+              <span><i class="fa-solid fa-ruler-combined text-cyan-400 mr-1"></i> Calibrage Tactile Manuel</span>
+              <span class="font-mono bg-cyan-900 px-2 py-0.5 rounded text-[10px] text-cyan-200">Règle 50 mm</span>
+            </div>
+            <p class="text-[11px] text-zinc-300 font-normal pt-1">${statusMsg}</p>
+            <div class="pt-1 text-xs font-bold text-cyan-300">
+              Surface : <strong class="text-white">${leafAreaMm2.toLocaleString()} mm²</strong> (${leafAreaCm2} cm²) • Échelle : <strong class="text-white">${pixelsPerMm.toFixed(2)} px/mm</strong>
+            </div>
+          `;
+        } else {
+          badge.className = "p-3 rounded-xl bg-amber-950/80 border border-amber-800 font-bold text-xs space-y-1 text-left";
+          badge.innerHTML = `
+            <div class="flex items-center justify-between text-amber-300 border-b border-amber-800/60 pb-1">
+              <span><i class="fa-solid fa-triangle-exclamation text-amber-400 mr-1"></i> Mire Non Détectée</span>
+              <span class="font-mono bg-amber-900 px-2 py-0.5 rounded text-[10px] text-amber-200">Échelle Standard</span>
+            </div>
+            <p class="text-[11px] text-zinc-300 font-normal pt-1">${statusMsg}</p>
+            <div class="pt-1 flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-300">Surface estimée : <strong class="text-white">${leafAreaMm2.toLocaleString()} mm²</strong></span>
+              <button type="button" onclick="toggleManualCalibration()" class="py-1 px-2.5 bg-cyan-800 hover:bg-cyan-700 text-cyan-100 rounded-lg text-[10px] font-bold">
+                <i class="fa-solid fa-ruler"></i> Activer calibrage tactile
+              </button>
+            </div>
+          `;
+        }
+      }
     }
 
     function calcWood() {

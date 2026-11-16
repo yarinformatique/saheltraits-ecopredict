@@ -58,3 +58,25 @@ class TraitMeasurementOut(TraitMeasurementBase):
 
     class Config:
         from_attributes = True
+
+
+class LeafScanResult(BaseModel):
+    success: bool
+    leaf_detected: bool
+    target_detected: bool
+    calibration_mode: str = Field(..., description="CERTIFIED_TARGET, MANUAL_TACTILE ou DEFAULT_ESTIMATED")
+    ref_type: str
+    known_mm: float
+    pixels_per_mm: float
+    leaf_area_mm2: float
+    leaf_area_cm2: float
+    perimeter_mm: float
+    max_length_mm: float
+    max_width_mm: float
+    leaf_pixel_count: int
+    image_width: int
+    image_height: int
+    status_message: str
+    contour_points: Optional[list] = None
+    processed_image_base64: Optional[str] = None
+
