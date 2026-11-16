@@ -1,153 +1,227 @@
 <!DOCTYPE html>
-<html lang="fr" class="h-full bg-slate-50">
+<html lang="fr" class="h-full bg-slate-100">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SahelTraits-DB & EcoPredict 2050-2080 | Plateforme Décisionnelle Doctorale</title>
+  <title>SahelTraits-DB & EcoPredict 2050-2080 | Portail Décisionnel Doctoral</title>
   <meta name="description" content="Plateforme doctorale d'aide à la décision : dynamique fonctionnelle des ligneux sahéliens et vulnérabilité éco-climatique CMIP6 (2050-2080). Thèse de Doctorat Unique - M. YAGO Abdoul Rachide, Université Joseph KI-ZERBO (EDST).">
+  
+  <!-- Favicon / PWA -->
+  <meta name="theme-color" content="#0d4722">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            sahel: {
-              50: '#fbf8f1',
-              100: '#f5edd9',
-              200: '#ebdaa9',
-              300: '#dfc274',
-              400: '#d5aa46',
-              500: '#b8892d',
-              600: '#9b6c23',
-              700: '#7c511e',
-              800: '#67421e',
-              900: '#56371c',
-            },
-            forest: {
-              50: '#f2f9f5',
-              100: '#e1f2e8',
-              500: '#1b7a43',
-              600: '#136335',
-              700: '#104f2c',
-              800: '#0f3f24',
-              900: '#0c341f',
-            }
-          }
-        }
-      }
-    }
-  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    :root {
+      --primary-dark: #0a2917;
+      --primary-forest: #0d4722;
+      --primary-leaf: #136335;
+      --primary-emerald: #1b7a43;
+      --accent-gold: #d97706;
+      --accent-amber: #f59e0b;
+    }
+    
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    
     code, pre { font-family: 'JetBrains Mono', monospace; }
-    .tab-active { border-bottom: 3px solid #1b7a43; color: #1b7a43; font-weight: 700; }
-    .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); }
+    
+    /* Header Solid Theme */
+    .header-solid {
+      background-color: #0d4722 !important;
+      color: #ffffff !important;
+      border-bottom: 3px solid #f59e0b;
+    }
+    
+    .nav-solid {
+      background-color: #082412 !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Active Tab */
+    .tab-active {
+      background-color: #1b7a43 !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    }
+    
+    .tab-inactive {
+      color: #d1fae5;
+    }
+    .tab-inactive:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+    
+    /* High contrast cards */
+    .card-solid {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .card-solid:hover {
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    }
   </style>
 </head>
-<body class="min-h-full flex flex-col text-slate-800 antialiased">
+<body class="min-h-full flex flex-col antialiased">
 
-  <!-- TOP ACADEMIC HEADER -->
-  <header class="bg-gradient-to-r from-forest-900 via-forest-800 to-sahel-900 text-white shadow-xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-emerald-400 text-2xl font-bold shadow-inner border border-white/20">
-            <i class="fa-solid fa-seedling"></i>
+  <!-- ======================================================== -->
+  <!-- INSTITUTIONAL TOP BAR (ACADEMIC ACCREDITATION)           -->
+  <!-- ======================================================== -->
+  <div class="bg-slate-900 text-slate-300 text-[11px] py-1.5 px-4 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span class="font-semibold text-slate-200">RÉPUBLIQUE DU BURKINA FASO</span>
+        <span>•</span>
+        <span>Ministère de l'Enseignement Supérieur, de la Recherche et de l'Innovation (MESRI)</span>
+      </div>
+      <div class="flex items-center gap-3 font-medium text-slate-300">
+        <span>Université Joseph KI-ZERBO (UJKZ)</span>
+        <span>•</span>
+        <span class="text-amber-400 font-semibold">EDST / Laboratoire LaBEV</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MAIN DOCTORAL HEADER (SOLID FOREST GREEN)                -->
+  <!-- ======================================================== -->
+  <header class="header-solid shadow-lg sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        
+        <!-- Left: Logo & Thesis Titles -->
+        <div class="flex items-center gap-3.5">
+          <div class="w-13 h-13 p-2.5 rounded-xl bg-white text-[#0d4722] flex items-center justify-center text-2xl font-black shadow-md border-2 border-amber-400 flex-shrink-0">
+            <i class="fa-solid fa-tree"></i>
           </div>
           <div>
-            <div class="flex items-center gap-2">
-              <span class="text-xs uppercase tracking-wider font-semibold text-sahel-300">Thèse de Doctorat Unique en Écologie Végétale & Changements Globaux</span>
-              <span class="bg-emerald-500/30 text-emerald-300 text-[10px] px-2 py-0.5 rounded-full font-mono border border-emerald-400/30">v2.4 Production</span>
+            <div class="flex flex-wrap items-center gap-2 mb-0.5">
+              <span class="text-[10px] uppercase tracking-wider font-extrabold bg-amber-500 text-slate-900 px-2 py-0.5 rounded shadow-sm">
+                Thèse de Doctorat Unique
+              </span>
+              <span class="text-xs text-emerald-200 font-medium">
+                Écologie Végétale & Changements Globaux
+              </span>
             </div>
-            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">SahelTraits-DB & EcoPredict 2050-2080</h1>
-            <p class="text-xs text-slate-300">Université Joseph KI-ZERBO (UJKZ) • EDST • Candidat : <strong class="text-white">M. YAGO Abdoul Rachide</strong></p>
+            <h1 class="text-lg sm:text-2xl font-black text-white tracking-tight leading-snug">
+              SahelTraits-DB & EcoPredict 2050-2080
+            </h1>
+            <p class="text-xs text-emerald-100 font-normal">
+              Dynamique fonctionnelle des ligneux et vulnérabilité éco-climatique au Sahel • Candidat : <strong class="text-white underline decoration-amber-400 font-bold">M. YAGO Abdoul Rachide</strong>
+            </p>
           </div>
         </div>
-        <div class="flex flex-wrap items-center gap-2 text-xs">
-          <a href="https://github.com/yarinformatique/saheltraits-ecopredict" target="_blank" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition flex items-center gap-2 border border-white/10">
-            <i class="fa-brands fa-github"></i> Dépôt GitHub
+
+        <!-- Right: Action Buttons -->
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Button to trigger shortcut modal -->
+          <button onclick="openShortcutModal()" class="px-3.5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition flex items-center gap-2 border border-amber-500">
+            <i class="fa-solid fa-arrow-down-to-square text-sm"></i>
+            <span>Créer un Raccourci</span>
+          </button>
+
+          <a href="mobile.html" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition flex items-center gap-2 border border-emerald-400/40">
+            <i class="fa-solid fa-mobile-screen text-sm"></i>
+            <span>SahelField Mobile</span>
           </a>
-          <a href="mobile.html" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition flex items-center gap-1.5 shadow">
-            <i class="fa-solid fa-mobile-screen"></i> SahelField PWA
+
+          <a href="docs.html" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs transition flex items-center gap-1.5 border border-slate-700">
+            <i class="fa-solid fa-book"></i>
+            <span>API Docs</span>
           </a>
-          <a href="docs.html" class="px-3 py-1.5 rounded-lg bg-sahel-600 hover:bg-sahel-500 text-white font-semibold transition flex items-center gap-1.5 shadow">
-            <i class="fa-solid fa-book"></i> API Docs
+
+          <a href="https://github.com/yarinformatique/saheltraits-ecopredict" target="_blank" class="px-3 py-2 rounded-xl bg-black/40 hover:bg-black/60 text-white font-semibold text-xs transition flex items-center gap-1.5 border border-white/20">
+            <i class="fa-brands fa-github text-sm"></i>
+            <span>GitHub</span>
           </a>
         </div>
+
       </div>
     </div>
 
     <!-- NAVIGATION TABS -->
-    <div class="bg-forest-950/60 border-t border-white/10">
+    <div class="nav-solid">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav class="flex space-x-1 sm:space-x-8 overflow-x-auto py-2.5 text-sm font-medium" id="mainTabs">
-          <button onclick="switchTab('explorer')" id="tab-explorer" class="tab-btn px-3 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/5 transition flex items-center gap-2 whitespace-nowrap bg-white/10 text-white font-semibold">
-            <i class="fa-solid fa-leaf text-emerald-400"></i> Explorateur Taxonomique
+        <nav class="flex space-x-2 overflow-x-auto py-2 text-xs sm:text-sm font-semibold" id="mainTabs">
+          <button onclick="switchTab('explorer')" id="tab-explorer" class="tab-btn tab-active px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap">
+            <i class="fa-solid fa-leaf text-amber-300"></i>
+            <span>Explorateur Taxonomique</span>
           </button>
-          <button onclick="switchTab('climate')" id="tab-climate" class="tab-btn px-3 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/5 transition flex items-center gap-2 whitespace-nowrap">
-            <i class="fa-solid fa-earth-africa text-amber-400"></i> Simulateur CMIP6 (2050-2080)
+          <button onclick="switchTab('climate')" id="tab-climate" class="tab-btn tab-inactive px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap">
+            <i class="fa-solid fa-earth-africa"></i>
+            <span>Simulateur Climatique CMIP6</span>
           </button>
-          <button onclick="switchTab('surveys')" id="tab-surveys" class="tab-btn px-3 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/5 transition flex items-center gap-2 whitespace-nowrap">
-            <i class="fa-solid fa-clipboard-question text-sky-400"></i> Enquêtes Socio-Écologiques
+          <button onclick="switchTab('surveys')" id="tab-surveys" class="tab-btn tab-inactive px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap">
+            <i class="fa-solid fa-clipboard-question"></i>
+            <span>Enquêtes de Terrain</span>
           </button>
-          <button onclick="switchTab('justification')" id="tab-justification" class="tab-btn px-3 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/5 transition flex items-center gap-2 whitespace-nowrap">
-            <i class="fa-solid fa-graduation-cap text-purple-400"></i> Justification Scientifique
+          <button onclick="switchTab('justification')" id="tab-justification" class="tab-btn tab-inactive px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Justification Scientifique</span>
           </button>
-          <button onclick="switchTab('export')" id="tab-export" class="tab-btn px-3 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/5 transition flex items-center gap-2 whitespace-nowrap">
-            <i class="fa-solid fa-download text-emerald-300"></i> Exportation Données
+          <button onclick="switchTab('export')" id="tab-export" class="tab-btn tab-inactive px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap">
+            <i class="fa-solid fa-download"></i>
+            <span>Exportation Données</span>
           </button>
         </nav>
       </div>
     </div>
   </header>
 
-  <!-- MAIN CONTENT CONTAINER -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- ======================================================== -->
+  <!-- MAIN CONTENT CONTAINER                                   -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
     <!-- ========================================== -->
     <!-- TAB 1: EXPLORATEUR TAXONOMIQUE (SAHELTRAITS) -->
     <!-- ========================================== -->
-    <section id="panel-explorer" class="tab-panel">
+    <section id="panel-explorer" class="tab-panel space-y-6">
       <!-- Search & Filters Header -->
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 mb-8">
+      <div class="card-solid rounded-2xl p-5 border border-slate-200">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div class="md:col-span-2 relative">
-            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Recherche Botanique Multi-critères</label>
-            <div class="relative">
-              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
-              <input type="text" id="searchInput" oninput="filterSpecies()" placeholder="Nom scientifique, famille, Mooré (ex: Zaanga, Kieglga)..." 
-                class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-forest-500 focus:border-transparent text-sm">
-            </div>
+          <div class="md:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">
+              <i class="fa-solid fa-magnifying-glass text-emerald-700 mr-1"></i> Recherche Espèce / Nom Vernaculaire
+            </label>
+            <input type="text" id="searchInput" oninput="filterSpecies()" placeholder="Nom scientifique, famille, nom en Mooré (Zaanga, Kieglga...)" 
+              class="w-full px-3.5 py-2.5 rounded-xl border-2 border-slate-300 focus:outline-none focus:border-emerald-600 text-sm font-medium bg-white text-slate-900">
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Famille Botanique</label>
-            <select id="familyFilter" onchange="filterSpecies()" class="w-full py-2.5 px-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-forest-500">
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Famille Botanique</label>
+            <select id="familyFilter" onchange="filterSpecies()" class="w-full py-2.5 px-3 rounded-xl border-2 border-slate-300 text-sm font-medium bg-white text-slate-900 focus:outline-none focus:border-emerald-600">
               <option value="ALL">Toutes les familles</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Groupe Fonctionnel</label>
-            <select id="groupFilter" onchange="filterSpecies()" class="w-full py-2.5 px-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-forest-500">
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Groupe Fonctionnel</label>
+            <select id="groupFilter" onchange="filterSpecies()" class="w-full py-2.5 px-3 rounded-xl border-2 border-slate-300 text-sm font-medium bg-white text-slate-900 focus:outline-none focus:border-emerald-600">
               <option value="ALL">Tous les groupes</option>
             </select>
           </div>
         </div>
 
-        <!-- Quick stats summary bar -->
-        <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600">
+        <div class="mt-4 pt-3 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600">
           <div class="flex items-center gap-2">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-forest-100 text-forest-800">
-              <i class="fa-solid fa-check-circle mr-1 text-forest-600"></i> <span id="speciesCount">15</span> espèces répertoriées
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+              <i class="fa-solid fa-check-circle mr-1.5 text-emerald-700"></i> <span id="speciesCount">15</span> espèces affichées
             </span>
             <span class="text-slate-400">•</span>
-            <span>8 traits morpho-fonctionnels continus</span>
-            <span class="text-slate-400">•</span>
-            <span>Écologie de germination (PEG -0.8 MPa)</span>
+            <span>8 traits morpho-fonctionnels continus mesurés</span>
           </div>
-          <div class="text-slate-500 italic">
+          <div class="text-slate-500 font-medium">
             Référentiel taxonomique harmonisé GBIF Backbone & APG IV
           </div>
         </div>
@@ -162,135 +236,135 @@
     <!-- ========================================== -->
     <!-- TAB 2: SIMULATEUR CLIMATIQUE CMIP6          -->
     <!-- ========================================== -->
-    <section id="panel-climate" class="tab-panel hidden">
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
+    <section id="panel-climate" class="tab-panel hidden space-y-6">
+      <div class="card-solid rounded-2xl p-6 border border-slate-200">
         <div class="max-w-3xl mb-6">
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 mb-2">
-            <i class="fa-solid fa-satellite-dish"></i> Modélisation Niche Climatique CMIP6 • Résolution 30 arc-sec (~1 km)
-          </div>
-          <h2 class="text-2xl font-bold text-slate-900">Simulateur Éco-Climatique Sahel 2050-2080</h2>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 mb-2 border border-amber-300">
+            <i class="fa-solid fa-satellite-dish"></i> Modélisation de Niche CMIP6 • Résolution 30 arc-sec (~1 km)
+          </span>
+          <h2 class="text-2xl font-black text-slate-900">Simulateur Éco-Climatique Sahel 2050-2080</h2>
           <p class="text-sm text-slate-600 mt-1">
-            Évaluez l'impact des forçages radiatifs du GIEC (SSP1-2.6, SSP2-4.5, SSP5-8.5) sur la dynamique d'aire bioclimatique, le risque de contraction de l'aire septentrionale et la viabilité des refuges hydriques.
+            Évaluez l'impact des forçages radiatifs du GIEC (SSP1-2.6, SSP2-4.5, SSP5-8.5) sur la contraction d'aire, la vulnérabilité hydraulique et la viabilité des refuges hydriques.
           </p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <!-- Controls Column -->
-          <div class="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-5">
+          <div class="bg-slate-50 rounded-2xl p-5 border-2 border-slate-200 space-y-5">
             <div>
-              <label class="block text-xs font-bold uppercase text-slate-600 mb-2">1. Sélectionner l'Espèce Cible</label>
-              <select id="simSpeciesSelect" onchange="runSimulation()" class="w-full py-2.5 px-3 rounded-xl border border-slate-300 text-sm font-semibold text-slate-800 bg-white">
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-2">1. Sélectionner l'Espèce Cible</label>
+              <select id="simSpeciesSelect" onchange="runSimulation()" class="w-full py-2.5 px-3 rounded-xl border-2 border-slate-300 text-sm font-bold text-slate-900 bg-white">
                 <!-- Injected via JS -->
               </select>
             </div>
 
             <div>
-              <label class="block text-xs font-bold uppercase text-slate-600 mb-2">2. Scénario Radiatif GIEC (SSP)</label>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-2">2. Scénario Radiatif GIEC (SSP)</label>
               <div class="grid grid-cols-3 gap-2">
-                <button type="button" onclick="setScenario('ssp126')" id="btn-ssp126" class="ssp-btn py-2 px-2 text-xs rounded-lg font-bold border border-slate-300 bg-white hover:bg-slate-100 transition text-center">
+                <button type="button" onclick="setScenario('ssp126')" id="btn-ssp126" class="ssp-btn py-2.5 px-2 text-xs rounded-xl font-bold border-2 border-slate-300 bg-white hover:bg-slate-100 transition text-center">
                   SSP1-2.6<br><span class="text-[10px] font-normal text-slate-500">+1.5°C</span>
                 </button>
-                <button type="button" onclick="setScenario('ssp245')" id="btn-ssp245" class="ssp-btn py-2 px-2 text-xs rounded-lg font-bold border-2 border-forest-600 bg-forest-50 text-forest-800 transition text-center">
-                  SSP2-4.5<br><span class="text-[10px] font-normal text-forest-600">+2.4°C</span>
+                <button type="button" onclick="setScenario('ssp245')" id="btn-ssp245" class="ssp-btn py-2.5 px-2 text-xs rounded-xl font-bold border-2 border-emerald-600 bg-emerald-100 text-emerald-900 transition text-center shadow-sm">
+                  SSP2-4.5<br><span class="text-[10px] font-semibold text-emerald-700">+2.4°C</span>
                 </button>
-                <button type="button" onclick="setScenario('ssp585')" id="btn-ssp585" class="ssp-btn py-2 px-2 text-xs rounded-lg font-bold border border-slate-300 bg-white hover:bg-slate-100 transition text-center">
+                <button type="button" onclick="setScenario('ssp585')" id="btn-ssp585" class="ssp-btn py-2.5 px-2 text-xs rounded-xl font-bold border-2 border-slate-300 bg-white hover:bg-slate-100 transition text-center">
                   SSP5-8.5<br><span class="text-[10px] font-normal text-slate-500">+4.4°C</span>
                 </button>
               </div>
             </div>
 
             <div>
-              <label class="block text-xs font-bold uppercase text-slate-600 mb-2">3. Horizon Temporel</label>
+              <label class="block text-xs font-bold uppercase text-slate-700 mb-2">3. Horizon Temporel</label>
               <div class="grid grid-cols-2 gap-3">
-                <button type="button" onclick="setHorizon('2050')" id="btn-2050" class="hor-btn py-2.5 text-xs rounded-lg font-bold border-2 border-forest-600 bg-forest-50 text-forest-800 transition">
+                <button type="button" onclick="setHorizon('2050')" id="btn-2050" class="hor-btn py-2.5 text-xs rounded-xl font-bold border-2 border-emerald-600 bg-emerald-100 text-emerald-900 transition shadow-sm">
                   <i class="fa-solid fa-clock-rotate-left mr-1"></i> Horizon 2050
                 </button>
-                <button type="button" onclick="setHorizon('2080')" id="btn-2080" class="hor-btn py-2.5 text-xs rounded-lg font-bold border border-slate-300 bg-white hover:bg-slate-100 transition">
+                <button type="button" onclick="setHorizon('2080')" id="btn-2080" class="hor-btn py-2.5 text-xs rounded-xl font-bold border-2 border-slate-300 bg-white hover:bg-slate-100 transition">
                   <i class="fa-solid fa-hourglass-end mr-1"></i> Horizon 2080
                 </button>
               </div>
             </div>
 
-            <div class="space-y-4 pt-2 border-t border-slate-200">
+            <div class="space-y-4 pt-3 border-t border-slate-200">
               <div>
-                <div class="flex justify-between text-xs font-semibold mb-1">
+                <div class="flex justify-between text-xs font-bold mb-1">
                   <span>Anomalie Thermique (ΔT)</span>
-                  <span id="tempVal" class="text-amber-600 font-bold">+2.4 °C</span>
+                  <span id="tempVal" class="text-amber-700 font-extrabold">+2.4 °C</span>
                 </div>
-                <input type="range" id="tempSlider" min="1.0" max="5.0" step="0.1" value="2.4" oninput="updateSliders()" class="w-full accent-amber-600">
+                <input type="range" id="tempSlider" min="1.0" max="5.0" step="0.1" value="2.4" oninput="updateSliders()" class="w-full accent-amber-600 h-2 bg-slate-200 rounded-lg">
               </div>
 
               <div>
-                <div class="flex justify-between text-xs font-semibold mb-1">
+                <div class="flex justify-between text-xs font-bold mb-1">
                   <span>Anomalie Précipitations (ΔP)</span>
-                  <span id="precipVal" class="text-sky-600 font-bold">-12 %</span>
+                  <span id="precipVal" class="text-sky-700 font-extrabold">-12 %</span>
                 </div>
-                <input type="range" id="precipSlider" min="-35" max="15" step="1" value="-12" oninput="updateSliders()" class="w-full accent-sky-600">
+                <input type="range" id="precipSlider" min="-35" max="15" step="1" value="-12" oninput="updateSliders()" class="w-full accent-sky-600 h-2 bg-slate-200 rounded-lg">
               </div>
             </div>
 
-            <button onclick="runSimulation()" class="w-full py-3 bg-forest-600 hover:bg-forest-700 text-white rounded-xl font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
-              <i class="fa-solid fa-play"></i> Recalculer les Métriques Écologiques
+            <button onclick="runSimulation()" class="w-full py-3 bg-[#0d4722] hover:bg-[#136335] text-white rounded-xl font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+              <i class="fa-solid fa-play"></i> Recalculer les Métriques
             </button>
           </div>
 
           <!-- Simulation Results Dashboard -->
           <div class="lg:col-span-2 space-y-6">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-xl p-4">
-                <span class="text-xs font-bold text-emerald-800 uppercase">Évolution Aire Favorable</span>
-                <div class="mt-2 text-2xl font-black text-emerald-700 flex items-center gap-2" id="simChange">
+              <div class="bg-emerald-50 border-2 border-emerald-300 rounded-2xl p-4">
+                <span class="text-xs font-bold text-emerald-900 uppercase">Évolution Aire Favorable</span>
+                <div class="mt-2 text-3xl font-black text-emerald-800" id="simChange">
                   -8.4 %
                 </div>
-                <span class="text-[11px] text-emerald-900" id="simChangeSub">Surface bioclimatique stable</span>
+                <span class="text-xs text-emerald-950 font-medium" id="simChangeSub">Surface bioclimatique</span>
               </div>
 
-              <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-4">
-                <span class="text-xs font-bold text-amber-800 uppercase">Retrait Limite Nord</span>
-                <div class="mt-2 text-2xl font-black text-amber-700 flex items-center gap-2" id="simRetreat">
+              <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4">
+                <span class="text-xs font-bold text-amber-900 uppercase">Retrait Limite Nord</span>
+                <div class="mt-2 text-3xl font-black text-amber-800" id="simRetreat">
                   42 km
                 </div>
-                <span class="text-[11px] text-amber-900" id="simRetreatSub">Migration vers le Sud soudanien</span>
+                <span class="text-xs text-amber-950 font-medium" id="simRetreatSub">Déplacement vers le Sud</span>
               </div>
 
-              <div class="bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-200 rounded-xl p-4">
-                <span class="text-xs font-bold text-sky-800 uppercase">Viabilité Microrefuges</span>
-                <div class="mt-2 text-2xl font-black text-sky-700 flex items-center gap-2" id="simRefugia">
+              <div class="bg-sky-50 border-2 border-sky-300 rounded-2xl p-4">
+                <span class="text-xs font-bold text-sky-900 uppercase">Viabilité Microrefuges</span>
+                <div class="mt-2 text-3xl font-black text-sky-800" id="simRefugia">
                   78 / 100
                 </div>
-                <span class="text-[11px] text-sky-900" id="simRefugiaSub">Bas-fonds et dépressions</span>
+                <span class="text-xs text-sky-950 font-medium" id="simRefugiaSub">Bas-fonds & dépressions</span>
               </div>
             </div>
 
             <!-- Detailed Impact Analysis Card -->
-            <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm">
               <h3 class="text-sm font-bold uppercase text-slate-800 flex items-center gap-2">
-                <i class="fa-solid fa-microscope text-forest-600"></i> Diagnostic Éco-Physiologique & Risque de Dépérissement
+                <i class="fa-solid fa-microscope text-emerald-700"></i> Diagnostic Éco-Physiologique & Risque Hydraulique
               </h3>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="bg-white p-3.5 rounded-lg border border-slate-200">
-                  <span class="font-bold text-slate-700 block mb-1">Marge de Sécurité Hydraulique (MSH)</span>
-                  <p class="text-slate-600" id="simHydraulicRisk">
-                    Risque d'embolie et cavitation du xylème faible à modéré. La conductance stomatique est régulée efficacement en saison sèche.
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                  <span class="font-bold text-slate-900 block mb-1">Marge de Sécurité Hydraulique (MSH)</span>
+                  <p class="text-slate-700 leading-relaxed" id="simHydraulicRisk">
+                    Risque d'embolie et cavitation du xylème faible à modéré.
                   </p>
                 </div>
 
-                <div class="bg-white p-3.5 rounded-lg border border-slate-200">
-                  <span class="font-bold text-slate-700 block mb-1">Stress Thermique & Phénologie</span>
-                  <p class="text-slate-600" id="simPhenoRisk">
-                    Risque d'avortement des fleurs sous températures caniculaires (> 42°C). Décalage anticipé de la défoliation de 15 à 22 jours.
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                  <span class="font-bold text-slate-900 block mb-1">Stress Thermique & Phénologie</span>
+                  <p class="text-slate-700 leading-relaxed" id="simPhenoRisk">
+                    Risque d'avortement des fleurs sous températures caniculaires (> 42°C).
                   </p>
                 </div>
               </div>
 
               <!-- Recommendation Box -->
-              <div class="p-4 rounded-xl bg-forest-50 border border-forest-200">
-                <span class="text-xs font-bold uppercase text-forest-800 block mb-1 flex items-center gap-1.5">
-                  <i class="fa-solid fa-shield-halved"></i> Stratégie Recommandée d'Adaptation & Restauration (RNA)
+              <div class="p-4 rounded-xl bg-emerald-50 border-2 border-emerald-300">
+                <span class="text-xs font-bold uppercase text-emerald-950 block mb-1 flex items-center gap-1.5">
+                  <i class="fa-solid fa-shield-halved text-emerald-700"></i> Stratégie Recommandée d'Adaptation & Restauration (RNA)
                 </span>
-                <p class="text-xs text-forest-900 leading-relaxed font-medium" id="simRecommendation">
-                  Intégration prioritaire dans les parcs agroforestiers. Pratique de la Régénération Naturelle Assistée (RNA), création de demi-lunes hydriques et protection contre les feux de brousse précoces.
+                <p class="text-xs text-emerald-950 leading-relaxed font-medium" id="simRecommendation">
+                  Intégration prioritaire dans les parcs agroforestiers. Pratique de la Régénération Naturelle Assistée (RNA).
                 </p>
               </div>
             </div>
@@ -302,68 +376,69 @@
     <!-- ========================================== -->
     <!-- TAB 3: ENQUÊTES SOCIO-ÉCOLOGIQUES           -->
     <!-- ========================================== -->
-    <section id="panel-surveys" class="tab-panel hidden">
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
+    <section id="panel-surveys" class="tab-panel hidden space-y-6">
+      <div class="card-solid rounded-2xl p-6 border border-slate-200">
         <div class="max-w-3xl mb-6">
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800 mb-2">
-            <i class="fa-solid fa-users"></i> Données Empiriques & Savoirs Locaux (450 enquêtes, 28 villages)
-          </div>
-          <h2 class="text-2xl font-bold text-slate-900">Enquêtes Socio-Écologiques de Terrain</h2>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-sky-100 text-sky-900 mb-2 border border-sky-300">
+            <i class="fa-solid fa-users"></i> Données Empiriques & Savoirs Locaux (450 enquêtes, 28 terroirs)
+          </span>
+          <h2 class="text-2xl font-black text-slate-900">Enquêtes Socio-Écologiques de Terrain</h2>
           <p class="text-sm text-slate-600 mt-1">
-            Validation par les connaissances écologiques traditionnelles des agropasteurs et experts forestiers sur le gradient bioclimatique sahélien, soudano-sahélien et soudanien au Burkina Faso.
+            Validation par les connaissances écologiques traditionnelles des agropasteurs et techniciens forestiers sur le gradient bioclimatique du Burkina Faso.
           </p>
         </div>
 
         <!-- Metric Stat Cards -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
-            <div class="text-3xl font-black text-slate-800">450</div>
-            <div class="text-xs font-semibold text-slate-500 uppercase mt-1">Enquêtés Totaux</div>
-            <div class="text-[11px] text-slate-400 mt-0.5">360 producteurs + 90 techniciens</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white border-2 border-slate-200 rounded-xl p-4 text-center shadow-sm">
+            <div class="text-3xl font-black text-slate-900">450</div>
+            <div class="text-xs font-bold text-slate-600 uppercase mt-1">Enquêtés Totaux</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">360 producteurs + 90 experts</div>
           </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
-            <div class="text-3xl font-black text-red-600">71.4 %</div>
-            <div class="text-xs font-semibold text-slate-500 uppercase mt-1">Dépérissement Observé</div>
-            <div class="text-[11px] text-slate-400 mt-0.5">Régression nette perçue</div>
+          <div class="bg-white border-2 border-red-200 rounded-xl p-4 text-center shadow-sm">
+            <div class="text-3xl font-black text-red-700">71.4 %</div>
+            <div class="text-xs font-bold text-red-900 uppercase mt-1">Dépérissement Observé</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Régression perçue</div>
           </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
-            <div class="text-3xl font-black text-amber-600">78.2 %</div>
-            <div class="text-xs font-semibold text-slate-500 uppercase mt-1">Décalage Phénologique</div>
-            <div class="text-[11px] text-slate-400 mt-0.5">Retard floraison / feuillaison</div>
+          <div class="bg-white border-2 border-amber-200 rounded-xl p-4 text-center shadow-sm">
+            <div class="text-3xl font-black text-amber-700">78.2 %</div>
+            <div class="text-xs font-bold text-amber-900 uppercase mt-1">Décalage Phénologique</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">Floraison / fructification</div>
           </div>
-          <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
-            <div class="text-3xl font-black text-forest-600">28</div>
-            <div class="text-xs font-semibold text-slate-500 uppercase mt-1">Villages Échantillonnés</div>
-            <div class="text-[11px] text-slate-400 mt-0.5">Du Sahel au Sud Soudanien</div>
+          <div class="bg-white border-2 border-emerald-200 rounded-xl p-4 text-center shadow-sm">
+            <div class="text-3xl font-black text-emerald-800">28</div>
+            <div class="text-xs font-bold text-emerald-950 uppercase mt-1">Villages Échantillonnés</div>
+            <div class="text-[11px] text-slate-500 mt-0.5">3 zones bioclimatiques</div>
           </div>
         </div>
 
-        <!-- Village Table Filters & Listing -->
+        <!-- Filter bar -->
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
           <div class="flex items-center gap-2">
-            <label class="text-xs font-bold uppercase text-slate-500">Filtrer par Zone :</label>
-            <select id="zoneFilter" onchange="filterVillages()" class="py-1.5 px-3 rounded-lg border border-slate-300 text-xs font-medium bg-white">
+            <label class="text-xs font-bold uppercase text-slate-700">Filtrer par Zone :</label>
+            <select id="zoneFilter" onchange="filterVillages()" class="py-2 px-3 rounded-xl border-2 border-slate-300 text-xs font-bold bg-white text-slate-800">
               <option value="ALL">Toutes les zones (28 villages)</option>
               <option value="Sahélienne">Zone Sahélienne (< 600 mm)</option>
               <option value="Soudano-Sahélienne">Zone Soudano-Sahélienne (600-900 mm)</option>
               <option value="Soudanienne">Zone Soudanienne (> 900 mm)</option>
             </select>
           </div>
-          <div class="text-xs text-slate-500 italic">
-            Échelle de régression : -2 (Forte régression) à +2 (Forte expansion)
+          <div class="text-xs text-slate-600 font-medium">
+            Score de déclin : <strong>-2 (Forte régression)</strong> à <strong>+2 (Forte expansion)</strong>
           </div>
         </div>
 
+        <!-- Table -->
         <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
           <table class="w-full text-left text-xs">
-            <thead class="bg-slate-100 text-slate-700 uppercase font-bold text-[11px]">
+            <thead class="bg-slate-200 text-slate-800 uppercase font-black text-[11px]">
               <tr>
                 <th class="py-3 px-4">Village</th>
                 <th class="py-3 px-4">Zone Bioclimatique</th>
                 <th class="py-3 px-4">Coordonnées GPS</th>
                 <th class="py-3 px-4 text-center">Enquêtes</th>
-                <th class="py-3 px-4 text-center">Score Déclin Moyen</th>
-                <th class="py-3 px-4 text-center">Décalage Phénologique</th>
+                <th class="py-3 px-4 text-center">Score Déclin</th>
+                <th class="py-3 px-4 text-center">Décalage Phéno</th>
                 <th class="py-3 px-4">Menace Principale</th>
               </tr>
             </thead>
@@ -378,100 +453,73 @@
     <!-- ========================================== -->
     <!-- TAB 4: JUSTIFICATION SCIENTIFIQUE           -->
     <!-- ========================================== -->
-    <section id="panel-justification" class="tab-panel hidden">
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-8">
+    <section id="panel-justification" class="tab-panel hidden space-y-6">
+      <div class="card-solid rounded-2xl p-6 md:p-8 space-y-8 border border-slate-200">
         <div>
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 mb-2">
-            <i class="fa-solid fa-scroll"></i> Rigueur Méthodologique & Références Doctorales
-          </div>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Justification Scientifique de la Thèse</h2>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-900 mb-2 border border-purple-300">
+            <i class="fa-solid fa-scroll"></i> Rigueur Méthodologique & Références de Thèse
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Justification Scientifique du Dispositif Doctoral</h2>
           <p class="text-slate-600 text-sm mt-1">
-            Réponses détaillées et argumentées aux questions de fond : origine des espèces, représentativité fonctionnelle, sources empiriques et validation des protocoles d'enquête.
+            Éléments fondamentaux de justification pour le mémoire de thèse et la soutenance.
           </p>
         </div>
 
-        <!-- Question 1 Card -->
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg bg-forest-600 text-white flex items-center justify-center text-xs">1</span>
-            D'où viennent les espèces répertoriées et pourquoi ce choix spécifique ?
+        <!-- Question 1 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-4">
+          <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-[#0d4722] text-white flex items-center justify-center text-xs font-bold">1</span>
+            D'où viennent ces espèces et comment justifier scientifiquement leur choix ?
           </h3>
           <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
             <p>
-              Le cortège floristique retenu (15 espèces prioritaires) ne résulte pas d'un choix arbitraire, mais répond à une <strong>triple justification écologique, fonctionnelle et socio-économique</strong> strictement cadrée par les objectifs de la thèse :
+              Le choix des 15 espèces ligneuses prioritaires repose sur une <strong>triple justification écologique, fonctionnelle et socio-économique</strong> :
             </p>
             <ul class="list-disc pl-5 space-y-2 text-xs sm:text-sm">
               <li>
-                <strong>Gradient d'aridité bioclimatique :</strong> Les espèces couvrent l'intégralité du gradient latitudinal burkinabé (du Sahel aride < 400 mm à la zone soudanienne subhumide > 1000 mm). Des espèces comme <em>Balanites aegyptiaca</em> et <em>Vachellia tortilis</em> représentent les sentinelles du front pionnier sahélien, tandis que <em>Khaya senegalensis</em> et <em>Pterocarpus erinaceus</em> caractérisent les savanes arborées soudaniennes.
+                <strong>Gradient latitudinal d'aridité :</strong> Les espèces s'échelonnent du Sahel aride (&lt; 400 mm) au Sud soudanien (&gt; 1000 mm). Des espèces sentinelles comme <em>Balanites aegyptiaca</em> et <em>Vachellia tortilis</em> marquent la limite nord, tandis que <em>Khaya senegalensis</em> et <em>Pterocarpus erinaceus</em> caractérisent le domaine soudanien.
               </li>
               <li>
-                <strong>Spectre contrasté de stratégies écophysiologiques :</strong> Le choix intègre des espèces à phénologie inversée (ex: <em>Faidherbia albida</em> qui perd ses feuilles en saison pluvieuse pour fertiliser les céréales), des espèces à forte succulence foliaire et hydrique (ex: <em>Adansonia digitata</em>), des ligneux à haute densité de bois et résistance au feu (ex: <em>Anogeissus leiocarpa</em>), et des fixatrices d'azote (Fabaceae).
+                <strong>Stratégies fonctionnelles contrastées :</strong> Le panel comprend des phénologies inversées (<em>Faidherbia albida</em>), des espèces à forte capacité de rétention d'eau (<em>Adansonia digitata</em>), des bois denses résistants au feu (<em>Anogeissus leiocarpa</em>) et des fixatrices d'azote.
               </li>
               <li>
-                <strong>Valeur utilitaire et PFNL vitaux :</strong> Ce sont les espèces clés de voûte des parcs agroforestiers burkinabé, fournissant les Produits Forestiers Non Ligneux (PFNL) majeurs : karité (<em>Vitellaria paradoxa</em>), néré (<em>Parkia biglobosa</em>), gomme arabique (<em>Senegalia senegal</em>), tamarin (<em>Tamarindus indica</em>), et fourrage de soudure pour le cheptel pastoral.
+                <strong>Valeur vitale en PFNL :</strong> Ces essences constituent l'ossature des parcs agroforestiers burkinabé pour l'alimentation, le fourrage aérien, la pharmacopée et les revenus ruraux.
               </li>
               <li>
-                <strong>Bases de données de référence :</strong> Les traits continus proviennent de mesures in situ complétées et harmonisées via la base mondiale <strong>TRY Plant Trait Database</strong>, le <strong>Seed Information Database (SID - Kew Gardens)</strong>, et les occurrences géoréférencées vérifiées du <strong>GBIF</strong>.
+                <strong>Bases de données de référence :</strong> Les données sont issues de collectes de terrain complétées par les bases mondiales <strong>TRY Plant Trait Database</strong>, <strong>GBIF</strong>, et le <strong>Seed Information Database (Kew Gardens)</strong>.
               </li>
             </ul>
           </div>
         </div>
 
-        <!-- Question 2 Card -->
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg bg-sky-600 text-white flex items-center justify-center text-xs">2</span>
-            D'où viennent les questions de l'enquête socio-écologique et comment ont-elles été conçues ?
+        <!-- Question 2 -->
+        <div class="p-6 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-4">
+          <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-sky-700 text-white flex items-center justify-center text-xs font-bold">2</span>
+            D'où viennent les questions de l'enquête socio-écologique ?
           </h3>
           <div class="text-sm text-slate-700 space-y-3 leading-relaxed">
             <p>
-              Le formulaire d'enquête de terrain (déployé dans l'application mobile SahelField et exporté sous standard international <strong>XLSForm / ODK</strong>) est structuré selon les protocoles standardisés d'ethnobotanique quantitative (Martin 1995 ; Cotton 1996 ; FAO Non-Wood Forest Products) :
+              Le protocole d'enquête suit les normes internationales d'ethnobotanique quantitative (Martin 1995 ; Cotton 1996 ; Directives FAO Produits Forestiers Non Ligneux) :
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs pt-1">
               <div class="bg-white p-3.5 rounded-xl border border-slate-200">
-                <strong class="text-slate-900 block mb-1">Module 1 : Démographie & Profil de l'Enquêté</strong>
-                Âge, genre, appartenance ethnoculturelle (Mossi, Peulh, Bobo, Gourmantché), ancienneté d'observation dans le terroir villageois (> 20 ans pour valider la mémoire climatique).
+                <strong class="text-slate-900 block mb-1">Module 1 : Démographie & Mémoire Climatique</strong>
+                Âge, ethnie, ancienneté d'observation dans le terroir (&gt; 20 ans d'ancrage local).
               </div>
               <div class="bg-white p-3.5 rounded-xl border border-slate-200">
-                <strong class="text-slate-900 block mb-1">Module 2 : Free-Listing & Indice de Smith</strong>
-                Citations spontanées des espèces les plus utiles, fréquence relative, ordre d'évocation cognitive pour calculer la saillance culturelle.
+                <strong class="text-slate-900 block mb-1">Module 2 : Free-Listing & Saillance Culturelle</strong>
+                Fréquence de citation spontanée pour calculer l'indice de saillance de Smith.
               </div>
               <div class="bg-white p-3.5 rounded-xl border border-slate-200">
                 <strong class="text-slate-900 block mb-1">Module 3 : Perception du Dépérissement (Likert)</strong>
-                Évaluation semi-quantitative de la dynamique des populations sur 30 ans (-2 : forte régression, -1 : légère régression, 0 : stable, +1 : légère expansion, +2 : forte expansion).
+                Échelle de perception de la dynamique des populations sur 30 ans (-2 à +2).
               </div>
               <div class="bg-white p-3.5 rounded-xl border border-slate-200">
-                <strong class="text-slate-900 block mb-1">Module 4 : Phénologie & Calendrier Saisonnier</strong>
-                Modifications perceptibles des périodes de floraison, feuillaison, fructification par rapport aux repères coutumiers.
-              </div>
-              <div class="bg-white p-3.5 rounded-xl border border-slate-200">
-                <strong class="text-slate-900 block mb-1">Module 5 : Menaces & Facteurs Anthropiques</strong>
-                Surpâturage, feux de brousse tardifs, coupe de bois d'énergie, défrichage agricole, assèchement des mares.
-              </div>
-              <div class="bg-white p-3.5 rounded-xl border border-slate-200">
-                <strong class="text-slate-900 block mb-1">Module 6 : Stratégies Locales d'Adaptation (RNA)</strong>
-                Pratiques paysannes de protection des régénérations spontanées, techniques de conservation des sols (cordons pierreux, zaï, demi-lunes).
+                <strong class="text-slate-900 block mb-1">Module 4 : Phénologie & Pratiques RNA</strong>
+                Décalages constatés de floraison et pratiques locales de régénération assistée.
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Question 3 Card -->
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
-          <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg bg-amber-600 text-white flex items-center justify-center text-xs">3</span>
-            Comment fonctionne le couplage CMIP6 et traits fonctionnels dans la plateforme ?
-          </h3>
-          <div class="text-sm text-slate-700 space-y-2 leading-relaxed">
-            <p>
-              Contrairement aux modèles de niche classiques (corrélation pure climat-présence), la plateforme EcoPredict intègre un <strong>modèle hybride biomécanique</strong> :
-            </p>
-            <p class="text-xs bg-amber-50 p-3 rounded-lg border border-amber-200 text-amber-900 font-mono">
-              Score_Vulnérabilité = f(ΔT, ΔP, P50_hydraulique, Densité_Bois, SLA, Tolérance_Sécheresse, Pression_Pastorale)
-            </p>
-            <p class="text-xs">
-              Les projections climatiques proviennent de l'ensemble multi-modèle CMIP6 (BCC-CSM2-MR, CanESM5, CNRM-CM6-1, IPSL-CM6A-LR, MIROC6) désagrégé à haute résolution spatiale (WorldClim 2.1).
-            </p>
           </div>
         </div>
       </div>
@@ -480,78 +528,162 @@
     <!-- ========================================== -->
     <!-- TAB 5: EXPORTATION DONNÉES                  -->
     <!-- ========================================== -->
-    <section id="panel-export" class="tab-panel hidden">
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-6">
+    <section id="panel-export" class="tab-panel hidden space-y-6">
+      <div class="card-solid rounded-2xl p-6 md:p-8 space-y-6 border border-slate-200">
         <div class="max-w-3xl">
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 mb-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-900 mb-2 border border-emerald-300">
             <i class="fa-solid fa-file-export"></i> Données Ouvertes pour la Recherche (FAIR Data)
-          </div>
-          <h2 class="text-2xl font-bold text-slate-900">Centre d'Exportation Scientifique</h2>
+          </span>
+          <h2 class="text-2xl font-black text-slate-900">Centre de Téléchargement & Exportation</h2>
           <p class="text-slate-600 text-sm mt-1">
-            Téléchargez les jeux de données bruts et traités pour vos analyses statistiques sous R (ade4, vegan, biomod2) ou Python (pandas, geopandas, scikit-learn).
+            Exportez les matrices de traits et les données d'enquête pour vos traitements sous R (packages <em>ade4</em>, <em>vegan</em>, <em>biomod2</em>) ou Python.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-          <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+          <div class="p-5 rounded-2xl border-2 border-slate-200 bg-white flex flex-col justify-between shadow-sm">
             <div>
-              <div class="w-10 h-10 rounded-lg bg-forest-100 text-forest-700 flex items-center justify-center font-bold text-lg mb-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg mb-3">
                 <i class="fa-solid fa-table"></i>
               </div>
-              <h3 class="font-bold text-slate-800 text-sm">Base de Traits Fonctionnels (CSV)</h3>
+              <h3 class="font-bold text-slate-900 text-sm">Traits Fonctionnels (CSV)</h3>
               <p class="text-xs text-slate-600 mt-1">
-                Matrice complète des 15 espèces, 8 traits morpho-fonctionnels, écologie germinative et scores ethnobotaniques.
+                15 espèces, 8 traits morpho-fonctionnels continus, germination sous PEG 6000.
               </p>
             </div>
-            <button onclick="downloadSpeciesCSV()" class="mt-4 w-full py-2.5 px-3 bg-forest-600 hover:bg-forest-700 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5">
-              <i class="fa-solid fa-file-csv"></i> Télécharger (saheltraits.csv)
+            <button onclick="downloadSpeciesCSV()" class="mt-4 w-full py-2.5 px-3 bg-[#0d4722] hover:bg-[#136335] text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-file-csv"></i> Télécharger CSV
             </button>
           </div>
 
-          <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+          <div class="p-5 rounded-2xl border-2 border-slate-200 bg-white flex flex-col justify-between shadow-sm">
             <div>
-              <div class="w-10 h-10 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold text-lg mb-3">
+              <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-800 flex items-center justify-center font-bold text-lg mb-3">
                 <i class="fa-solid fa-users-viewfinder"></i>
               </div>
-              <h3 class="font-bold text-slate-800 text-sm">Données Enquêtes Terroir (CSV)</h3>
+              <h3 class="font-bold text-slate-900 text-sm">Enquêtes Terroir (CSV)</h3>
               <p class="text-xs text-slate-600 mt-1">
-                28 villages, coordonnées GPS, scores de déclin, décalages phénologiques et indices de feu MODIS.
+                28 villages, coordonnées GPS, scores de déclin et décalages phénologiques.
               </p>
             </div>
-            <button onclick="downloadVillagesCSV()" class="mt-4 w-full py-2.5 px-3 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5">
-              <i class="fa-solid fa-file-csv"></i> Télécharger (enquetes.csv)
+            <button onclick="downloadVillagesCSV()" class="mt-4 w-full py-2.5 px-3 bg-sky-700 hover:bg-sky-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-file-csv"></i> Télécharger CSV
             </button>
           </div>
 
-          <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
+          <div class="p-5 rounded-2xl border-2 border-slate-200 bg-white flex flex-col justify-between shadow-sm">
             <div>
-              <div class="w-10 h-10 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-lg mb-3">
+              <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center font-bold text-lg mb-3">
                 <i class="fa-solid fa-code"></i>
               </div>
-              <h3 class="font-bold text-slate-800 text-sm">Archive Complète (JSON)</h3>
+              <h3 class="font-bold text-slate-900 text-sm">Archive Complète (JSON)</h3>
               <p class="text-xs text-slate-600 mt-1">
-                Ensemble complet du référentiel taxonomique, simulations CMIP6 et métadonnées Dublin Core.
+                Intégralité du référentiel taxonomique et des simulations éco-climatiques.
               </p>
             </div>
-            <button onclick="downloadJSONBundle()" class="mt-4 w-full py-2.5 px-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-xs font-bold transition flex items-center justify-center gap-1.5">
-              <i class="fa-solid fa-file-code"></i> Télécharger (bundle.json)
+            <button onclick="downloadJSONBundle()" class="mt-4 w-full py-2.5 px-3 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-file-code"></i> Télécharger JSON
             </button>
           </div>
-        </div>
-
-        <div class="p-4 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-600">
-          <strong class="text-slate-800 block mb-1">Citation académique recommandée :</strong>
-          <code>YAGO, A. R. (2026). SahelTraits-DB & EcoPredict 2050-2080: Functional traits and eco-climatic vulnerability of Sahelian woody species. Doctoral Dissertation, University Joseph KI-ZERBO, Ouagadougou, Burkina Faso.</code>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- SPECIES DETAIL MODAL -->
-  <div id="speciesModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+  <!-- ======================================================== -->
+  <!-- MODAL: CRÉER UN RACCOURCI BUREAU / SMARTPHONE            -->
+  <!-- ======================================================== -->
+  <div id="shortcutModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-xl w-full border border-slate-200 p-6 relative">
+      <button onclick="closeShortcutModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-lg">
+          <i class="fa-solid fa-arrow-down-to-square"></i>
+        </div>
+        <div>
+          <h2 class="text-lg font-black text-slate-900">Créer un Raccourci Direct</h2>
+          <p class="text-xs text-slate-500">Accès direct en 1 clic sur votre Bureau Windows ou votre Smartphone</p>
+        </div>
+      </div>
+
+      <!-- Device Tabs -->
+      <div class="flex space-x-2 border-b border-slate-200 mb-4 pb-2">
+        <button onclick="setShortcutDevice('windows')" id="btn-dev-win" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0d4722] text-white">
+          <i class="fa-brands fa-windows mr-1"></i> Ordinateur (PC Windows)
+        </button>
+        <button onclick="setShortcutDevice('android')" id="btn-dev-and" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700">
+          <i class="fa-brands fa-android mr-1"></i> Smartphone Android
+        </button>
+        <button onclick="setShortcutDevice('iphone')" id="btn-dev-iph" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700">
+          <i class="fa-brands fa-apple mr-1"></i> iPhone / iPad
+        </button>
+      </div>
+
+      <!-- Windows Instructions -->
+      <div id="inst-windows" class="space-y-4 text-xs text-slate-700">
+        <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-xl">
+          <strong class="text-emerald-950 block mb-1">Méthode Automatique (Recommandée) :</strong>
+          <p class="text-emerald-900 mb-2">Cliquez ci-dessous pour télécharger le raccourci direct sur votre bureau :</p>
+          <div class="flex gap-2">
+            <button onclick="downloadDesktopShortcut('web')" class="px-3 py-2 bg-[#0d4722] hover:bg-[#136335] text-white font-bold rounded-lg text-xs transition flex items-center gap-1.5">
+              <i class="fa-solid fa-download"></i> Raccourci Portail Web (.url)
+            </button>
+            <button onclick="downloadDesktopShortcut('mobile')" class="px-3 py-2 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-lg text-xs transition flex items-center gap-1.5">
+              <i class="fa-solid fa-download"></i> Raccourci SahelField (.url)
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-xl space-y-1.5">
+          <strong class="text-slate-900 block">Méthode Manuelle dans Google Chrome ou Edge :</strong>
+          <ol class="list-decimal pl-4 space-y-1">
+            <li>En haut à droite de Google Chrome, cliquez sur les <strong>3 petits points verticaux ⋮</strong></li>
+            <li>Passez la souris sur <strong>"Enregistrer et partager"</strong> (ou "Plus d'outils")</li>
+            <li>Cliquez sur <strong>"Créer un raccourci..."</strong></li>
+            <li>Cochez <em>"Ouvrir dans une nouvelle fenêtre"</em> puis cliquez sur <strong>Créer</strong>.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Android Instructions -->
+      <div id="inst-android" class="hidden space-y-3 text-xs text-slate-700">
+        <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl space-y-2">
+          <strong class="text-amber-950 block text-sm">Sur Smartphone Android (Google Chrome) :</strong>
+          <ol class="list-decimal pl-4 space-y-2 text-slate-800">
+            <li>Ouvrez le lien dans Google Chrome sur votre téléphone :<br><code class="text-[11px] bg-white px-2 py-0.5 rounded border">https://yarinformatique.github.io/saheltraits-ecopredict/mobile.html</code></li>
+            <li>Appuyez sur les <strong>3 petits points verticaux ⋮</strong> tout en haut à droite (à côté de la barre d'adresse).</li>
+            <li>Dans le menu déroulant, appuyez sur <strong>« Ajouter à l'écran d'accueil »</strong> (ou <strong>« Installer l'application »</strong>).</li>
+            <li>Appuyez sur <strong>Ajouter</strong> : l'icône de l'application s'installe sur votre écran de téléphone !</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- iPhone Instructions -->
+      <div id="inst-iphone" class="hidden space-y-3 text-xs text-slate-700">
+        <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-2">
+          <strong class="text-slate-900 block text-sm">Sur iPhone / iPad (Navigateur Safari) :</strong>
+          <ol class="list-decimal pl-4 space-y-2 text-slate-800">
+            <li>Ouvrez le lien dans Safari sur votre iPhone.</li>
+            <li>Appuyez sur l'icône de <strong>Partage</strong> en bas de l'écran (le carré avec une flèche vers le haut <i class="fa-solid fa-arrow-up-from-bracket"></i>).</li>
+            <li>Faites défiler vers le bas et appuyez sur <strong>« Sur l'écran d'accueil »</strong>.</li>
+            <li>Appuyez sur <strong>Ajouter</strong> en haut à droite.</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SPECIES DETAIL MODAL                                     -->
+  <!-- ======================================================== -->
+  <div id="speciesModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 p-6 relative">
-      <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition">
+      <button onclick="closeModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold">
         <i class="fa-solid fa-xmark"></i>
       </button>
 
@@ -562,15 +694,15 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-12">
+  <footer class="bg-[#082412] text-slate-300 text-xs py-8 border-t-4 border-amber-500 mt-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
       <div>
-        <p class="font-semibold text-slate-200">SahelTraits-DB & EcoPredict 2050-2080 • Laboratoire de Biologie et Écologie Végétales</p>
-        <p class="mt-1 text-slate-400">Université Joseph KI-ZERBO (UJKZ) • 03 BP 7021 Ouagadougou 03, Burkina Faso</p>
+        <p class="font-extrabold text-white text-sm">SahelTraits-DB & EcoPredict 2050-2080</p>
+        <p class="mt-0.5 text-slate-300">Laboratoire de Biologie et Écologie Végétales (LaBEV) • Université Joseph KI-ZERBO (UJKZ)</p>
       </div>
       <div class="text-center md:text-right">
-        <p>© 2026 M. YAGO Abdoul Rachide • Tous droits réservés.</p>
-        <p class="mt-1 text-slate-400">Hébergement Cloud Haute Disponibilité GitHub Pages (24/7)</p>
+        <p class="font-bold text-white">Thèse de Doctorat Unique — M. YAGO Abdoul Rachide</p>
+        <p class="mt-0.5 text-emerald-300 font-mono">Déploiement Cloud GitHub Pages Haute Disponibilité 24/7</p>
       </div>
     </div>
   </footer>
@@ -590,18 +722,52 @@
     function switchTab(tabId) {
       document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('bg-white/10', 'text-white', 'font-semibold');
-        b.classList.add('text-white/80');
+        b.className = "tab-btn tab-inactive px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap";
       });
 
       const panel = document.getElementById('panel-' + tabId);
       const btn = document.getElementById('tab-' + tabId);
       if (panel) panel.classList.remove('hidden');
       if (btn) {
-        btn.classList.add('bg-white/10', 'text-white', 'font-semibold');
-        btn.classList.remove('text-white/80');
+        btn.className = "tab-btn tab-active px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap";
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // SHORTCUT MODAL LOGIC
+    function openShortcutModal() {
+      document.getElementById('shortcutModal').classList.remove('hidden');
+    }
+    function closeShortcutModal() {
+      document.getElementById('shortcutModal').classList.add('hidden');
+    }
+    function setShortcutDevice(dev) {
+      ['win', 'and', 'iph'].forEach(d => {
+        document.getElementById('btn-dev-' + d).className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 text-slate-700";
+      });
+      ['windows', 'android', 'iphone'].forEach(d => {
+        document.getElementById('inst-' + d).classList.add('hidden');
+      });
+
+      if (dev === 'windows') {
+        document.getElementById('btn-dev-win').className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0d4722] text-white";
+        document.getElementById('inst-windows').classList.remove('hidden');
+      } else if (dev === 'android') {
+        document.getElementById('btn-dev-and').className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0d4722] text-white";
+        document.getElementById('inst-android').classList.remove('hidden');
+      } else if (dev === 'iphone') {
+        document.getElementById('btn-dev-iph').className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0d4722] text-white";
+        document.getElementById('inst-iphone').classList.remove('hidden');
+      }
+    }
+
+    function downloadDesktopShortcut(type) {
+      const url = type === 'mobile' 
+        ? 'https://yarinformatique.github.io/saheltraits-ecopredict/mobile.html'
+        : 'https://yarinformatique.github.io/saheltraits-ecopredict/';
+      const name = type === 'mobile' ? 'SahelField_Mobile.url' : 'SahelTraits_Portail.url';
+      const content = `[InternetShortcut]\nURL=${url}\nIconIndex=0\n`;
+      downloadBlob(content, name, 'application/internet-shortcut');
     }
 
     // POPULATE DROPDOWNS
@@ -638,64 +804,64 @@
       document.getElementById('speciesCount').textContent = list.length;
 
       if (list.length === 0) {
-        container.innerHTML = '<div class="col-span-3 text-center py-12 text-slate-400"><i class="fa-solid fa-tree text-4xl mb-2"></i><p>Aucune espèce trouvée avec ces critères.</p></div>';
+        container.innerHTML = '<div class="col-span-3 text-center py-12 text-slate-500 font-medium"><i class="fa-solid fa-tree text-4xl mb-2 text-slate-400"></i><p>Aucune espèce trouvée avec ces critères.</p></div>';
         return;
       }
 
       list.forEach(sp => {
         const card = document.createElement('div');
-        card.className = "bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition overflow-hidden flex flex-col justify-between cursor-pointer";
+        card.className = "card-solid rounded-2xl overflow-hidden flex flex-col justify-between cursor-pointer transition";
         card.onclick = () => openSpeciesModal(sp.id);
 
-        const iucnColor = sp.iucn_status === 'CR' ? 'bg-red-500' : (sp.iucn_status === 'VU' ? 'bg-amber-500' : 'bg-emerald-600');
+        const iucnColor = sp.iucn_status === 'CR' ? 'bg-red-600' : (sp.iucn_status === 'VU' ? 'bg-amber-600' : 'bg-emerald-700');
 
         card.innerHTML = `
           <div>
-            <div class="h-44 bg-slate-100 relative overflow-hidden group">
+            <div class="h-44 bg-slate-200 relative overflow-hidden group">
               <img src="${sp.photo_url}" alt="${sp.scientific_name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80'">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent"></div>
               <div class="absolute top-3 right-3">
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold text-white ${iucnColor} shadow">
+                <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold text-white ${iucnColor} shadow-md border border-white/30">
                   IUCN : ${sp.iucn_status}
                 </span>
               </div>
               <div class="absolute bottom-3 left-3 right-3 text-white">
-                <span class="text-[10px] font-semibold tracking-wider uppercase text-emerald-300">${sp.family}</span>
-                <h3 class="text-base font-bold italic drop-shadow-sm leading-tight">${sp.scientific_name}</h3>
+                <span class="text-[10px] font-black tracking-wider uppercase text-amber-300">${sp.family}</span>
+                <h3 class="text-base font-bold italic drop-shadow leading-snug">${sp.scientific_name}</h3>
               </div>
             </div>
 
             <div class="p-4 space-y-3">
-              <div class="flex items-center gap-2 text-xs text-slate-600">
-                <span class="bg-sahel-100 text-sahel-900 px-2 py-0.5 rounded-md font-medium">Mooré : ${sp.vernacular_moore || 'N/A'}</span>
-                <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md font-medium">Dioula : ${sp.vernacular_dioula || 'N/A'}</span>
+              <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                <span class="bg-amber-100 text-amber-950 font-bold px-2 py-0.5 rounded border border-amber-300">Mooré : ${sp.vernacular_moore || '-'}</span>
+                <span class="bg-slate-100 text-slate-800 font-semibold px-2 py-0.5 rounded border border-slate-200">Dioula : ${sp.vernacular_dioula || '-'}</span>
               </div>
 
-              <div class="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-slate-100">
-                <div class="bg-slate-50 p-2 rounded-lg">
-                  <span class="text-[10px] text-slate-500 block">SLA (Surface Foliaire)</span>
-                  <span class="font-bold text-slate-800">${sp.traits.sla_mm2mg} mm²/mg</span>
+              <div class="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-slate-100">
+                <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  <span class="text-[10px] text-slate-500 font-bold block">SLA (Surface Foliaire)</span>
+                  <span class="font-bold text-slate-900">${sp.traits.sla_mm2mg} mm²/mg</span>
                 </div>
-                <div class="bg-slate-50 p-2 rounded-lg">
-                  <span class="text-[10px] text-slate-500 block">Densité du Bois</span>
-                  <span class="font-bold text-slate-800">${sp.traits.wood_density_gcm3} g/cm³</span>
+                <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  <span class="text-[10px] text-slate-500 font-bold block">Densité du Bois</span>
+                  <span class="font-bold text-slate-900">${sp.traits.wood_density_gcm3} g/cm³</span>
                 </div>
-                <div class="bg-slate-50 p-2 rounded-lg">
-                  <span class="text-[10px] text-slate-500 block">Tolérance Sécheresse</span>
-                  <span class="font-bold text-emerald-700">${sp.traits.drought_index} / 100</span>
+                <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  <span class="text-[10px] text-slate-500 font-bold block">Tolérance Sécheresse</span>
+                  <span class="font-extrabold text-emerald-800">${sp.traits.drought_index} / 100</span>
                 </div>
-                <div class="bg-slate-50 p-2 rounded-lg">
-                  <span class="text-[10px] text-slate-500 block">Stress Osmo. (PEG)</span>
-                  <span class="font-bold text-sky-700">${sp.germination.gp_peg_pct} %</span>
+                <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  <span class="text-[10px] text-slate-500 font-bold block">Germination PEG (-0.8)</span>
+                  <span class="font-extrabold text-sky-800">${sp.germination.gp_peg_pct} %</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="px-4 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs">
-            <span class="text-slate-500 font-medium">${sp.functional_group}</span>
-            <span class="text-forest-600 font-bold flex items-center gap-1">
-              Détails & Radar <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          <div class="px-4 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-xs font-bold">
+            <span class="text-slate-600 font-medium">${sp.functional_group}</span>
+            <span class="text-[#0d4722] flex items-center gap-1">
+              Fiche Détaillée <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </span>
           </div>
         `;
@@ -733,117 +899,117 @@
       content.innerHTML = `
         <div class="space-y-6">
           <div class="flex items-start gap-4">
-            <img src="${sp.photo_url}" class="w-20 h-20 rounded-xl object-cover border border-slate-200" onerror="this.src='https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=300&q=80'">
+            <img src="${sp.photo_url}" class="w-20 h-20 rounded-xl object-cover border-2 border-slate-300 flex-shrink-0" onerror="this.src='https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=300&q=80'">
             <div>
-              <span class="text-xs uppercase font-bold text-forest-600 tracking-wide">${sp.family} • GBIF Key : ${sp.gbif_usage_key || 'N/A'}</span>
-              <h2 class="text-xl font-bold italic text-slate-900">${sp.scientific_name}</h2>
-              <p class="text-xs text-slate-600 mt-1">
-                <strong>Noms locaux :</strong> Mooré : <span class="text-forest-700 font-semibold">${sp.vernacular_moore || '-'}</span> | 
-                Dioula : <span class="text-forest-700 font-semibold">${sp.vernacular_dioula || '-'}</span> | 
-                Fulfuldé : <span class="text-forest-700 font-semibold">${sp.vernacular_fulfulde || '-'}</span>
+              <span class="text-xs uppercase font-extrabold text-[#0d4722] tracking-wide">${sp.family} • GBIF Usage Key : ${sp.gbif_usage_key || 'N/A'}</span>
+              <h2 class="text-xl font-black italic text-slate-900">${sp.scientific_name}</h2>
+              <p class="text-xs text-slate-700 mt-1">
+                <strong>Noms locaux :</strong> Mooré : <span class="text-[#0d4722] font-bold">${sp.vernacular_moore || '-'}</span> | 
+                Dioula : <span class="text-[#0d4722] font-bold">${sp.vernacular_dioula || '-'}</span> | 
+                Fulfuldé : <span class="text-[#0d4722] font-bold">${sp.vernacular_fulfulde || '-'}</span>
               </p>
             </div>
           </div>
 
-          <p class="text-xs text-slate-700 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <p class="text-xs text-slate-700 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-200">
             ${sp.description}
           </p>
 
-          <!-- Traits Radar / Grid -->
+          <!-- Traits continuous -->
           <div>
-            <h4 class="text-xs font-bold uppercase text-slate-500 mb-2">Traits Morpho-Fonctionnels Mesurés</h4>
+            <h4 class="text-xs font-bold uppercase text-slate-700 mb-2">Traits Morpho-Fonctionnels Continus</h4>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                <span class="text-[10px] text-slate-500 block">SLA</span>
-                <span class="font-bold text-slate-800">${sp.traits.sla_mm2mg} mm²/mg</span>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">SLA</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.sla_mm2mg} mm²/mg</span>
               </div>
-              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                <span class="text-[10px] text-slate-500 block">LDMC</span>
-                <span class="font-bold text-slate-800">${sp.traits.ldmc_mgg} mg/g</span>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">LDMC</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.ldmc_mgg} mg/g</span>
               </div>
-              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                <span class="text-[10px] text-slate-500 block">Densité Bois</span>
-                <span class="font-bold text-slate-800">${sp.traits.wood_density_gcm3} g/cm³</span>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Densité Bois</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.wood_density_gcm3} g/cm³</span>
               </div>
-              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                <span class="text-[10px] text-slate-500 block">P50 Hydraulique</span>
-                <span class="font-bold text-slate-800">${sp.traits.p50_hydraulic_mpa} MPa</span>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">P50 Hydraulique</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.p50_hydraulic_mpa} MPa</span>
               </div>
-              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                <span class="text-[10px] text-slate-500 block">Masse 100 Graines</span>
-                <span class="font-bold text-slate-800">${sp.traits.seed_mass_mg} mg</span>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Masse 100 Graines</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.seed_mass_mg} mg</span>
               </div>
-              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                <span class="text-[10px] text-slate-500 block">Épaisseur Feuille</span>
-                <span class="font-bold text-slate-800">${sp.traits.leaf_thickness_um} µm</span>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Épaisseur Feuille</span>
+                <span class="font-extrabold text-slate-900">${sp.traits.leaf_thickness_um} µm</span>
               </div>
-              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                <span class="text-[10px] text-slate-500 block">Tolérance Sécheresse</span>
-                <span class="font-bold text-emerald-700">${sp.traits.drought_index} / 100</span>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Tolérance Sécheresse</span>
+                <span class="font-extrabold text-emerald-800">${sp.traits.drought_index} / 100</span>
               </div>
-              <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200">
-                <span class="text-[10px] text-slate-500 block">Résistance Feu</span>
-                <span class="font-bold text-amber-700">${sp.traits.fire_resistance} / 100</span>
+              <div class="bg-white p-2.5 rounded-xl border-2 border-slate-200">
+                <span class="text-[10px] text-slate-500 font-bold block">Résistance Feux</span>
+                <span class="font-extrabold text-amber-800">${sp.traits.fire_resistance} / 100</span>
               </div>
             </div>
           </div>
 
           <!-- Germination Ecology -->
           <div>
-            <h4 class="text-xs font-bold uppercase text-slate-500 mb-2">Écologie de la Germination & Contrainte Hydrique</h4>
-            <div class="grid grid-cols-3 gap-3 text-xs bg-sky-50/50 p-3 rounded-xl border border-sky-100">
+            <h4 class="text-xs font-bold uppercase text-slate-700 mb-2">Écologie de la Germination & Contrainte Hydrique</h4>
+            <div class="grid grid-cols-3 gap-3 text-xs bg-sky-50 p-3 rounded-xl border border-sky-200">
               <div>
-                <span class="text-[10px] text-slate-500 block">Temps T50 (Jours)</span>
-                <span class="font-bold text-slate-800">${sp.germination.t50_days} jours</span>
+                <span class="text-[10px] text-slate-500 font-bold block">Temps T50</span>
+                <span class="font-black text-slate-900">${sp.germination.t50_days} jours</span>
               </div>
               <div>
-                <span class="text-[10px] text-slate-500 block">Germination Contrôle</span>
-                <span class="font-bold text-emerald-700">${sp.germination.gp_ctrl_pct} %</span>
+                <span class="text-[10px] text-slate-500 font-bold block">Germination Témoin</span>
+                <span class="font-black text-emerald-800">${sp.germination.gp_ctrl_pct} %</span>
               </div>
               <div>
-                <span class="text-[10px] text-slate-500 block">Sous PEG 6000 (-0.8 MPa)</span>
-                <span class="font-bold text-sky-700">${sp.germination.gp_peg_pct} %</span>
+                <span class="text-[10px] text-slate-500 font-bold block">Sous PEG 6000 (-0.8 MPa)</span>
+                <span class="font-black text-sky-800">${sp.germination.gp_peg_pct} %</span>
               </div>
             </div>
           </div>
 
           <!-- Projections CMIP6 -->
           <div>
-            <h4 class="text-xs font-bold uppercase text-slate-500 mb-2">Projections Bioclimatiques CMIP6 (Modèles MaxEnt / Biomod2)</h4>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs border border-slate-200 rounded-lg">
-                <thead class="bg-slate-100 text-slate-700 font-bold">
+            <h4 class="text-xs font-bold uppercase text-slate-700 mb-2">Projections Bioclimatiques CMIP6</h4>
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-slate-200 text-slate-800 font-black">
                   <tr>
-                    <th class="p-2">Scénario & Horizon</th>
-                    <th class="p-2">Variation Aire (%)</th>
-                    <th class="p-2">Indice Vulnérabilité</th>
-                    <th class="p-2">Diagnostic</th>
+                    <th class="p-2.5">Scénario & Horizon</th>
+                    <th class="p-2.5">Variation Aire (%)</th>
+                    <th class="p-2.5">Indice Vulnérabilité</th>
+                    <th class="p-2.5">Diagnostic</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-slate-100 bg-white">
                   <tr>
-                    <td class="p-2 font-medium">SSP2-4.5 (2050)</td>
-                    <td class="p-2 font-bold ${sp.projections.ssp245_2050.change_pct >= 0 ? 'text-emerald-600' : 'text-amber-600'}">${sp.projections.ssp245_2050.change_pct}%</td>
-                    <td class="p-2">${sp.projections.ssp245_2050.vuln_idx} / 100</td>
-                    <td class="p-2"><span class="px-2 py-0.5 rounded text-[10px] bg-emerald-100 text-emerald-800">${sp.projections.ssp245_2050.status}</span></td>
+                    <td class="p-2.5 font-bold">SSP2-4.5 (2050)</td>
+                    <td class="p-2.5 font-black ${sp.projections.ssp245_2050.change_pct >= 0 ? 'text-emerald-700' : 'text-amber-700'}">${sp.projections.ssp245_2050.change_pct}%</td>
+                    <td class="p-2.5 font-bold">${sp.projections.ssp245_2050.vuln_idx} / 100</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-900 border border-emerald-300">${sp.projections.ssp245_2050.status}</span></td>
                   </tr>
                   <tr>
-                    <td class="p-2 font-medium">SSP2-4.5 (2080)</td>
-                    <td class="p-2 font-bold ${sp.projections.ssp245_2080.change_pct >= 0 ? 'text-emerald-600' : 'text-amber-600'}">${sp.projections.ssp245_2080.change_pct}%</td>
-                    <td class="p-2">${sp.projections.ssp245_2080.vuln_idx} / 100</td>
-                    <td class="p-2"><span class="px-2 py-0.5 rounded text-[10px] bg-amber-100 text-amber-800">${sp.projections.ssp245_2080.status}</span></td>
+                    <td class="p-2.5 font-bold">SSP2-4.5 (2080)</td>
+                    <td class="p-2.5 font-black ${sp.projections.ssp245_2080.change_pct >= 0 ? 'text-emerald-700' : 'text-amber-700'}">${sp.projections.ssp245_2080.change_pct}%</td>
+                    <td class="p-2.5 font-bold">${sp.projections.ssp245_2080.vuln_idx} / 100</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 border border-amber-300">${sp.projections.ssp245_2080.status}</span></td>
                   </tr>
                   <tr>
-                    <td class="p-2 font-medium">SSP5-8.5 (2050)</td>
-                    <td class="p-2 font-bold ${sp.projections.ssp585_2050.change_pct >= 0 ? 'text-emerald-600' : 'text-red-600'}">${sp.projections.ssp585_2050.change_pct}%</td>
-                    <td class="p-2">${sp.projections.ssp585_2050.vuln_idx} / 100</td>
-                    <td class="p-2"><span class="px-2 py-0.5 rounded text-[10px] bg-red-100 text-red-800">${sp.projections.ssp585_2050.status}</span></td>
+                    <td class="p-2.5 font-bold">SSP5-8.5 (2050)</td>
+                    <td class="p-2.5 font-black ${sp.projections.ssp585_2050.change_pct >= 0 ? 'text-emerald-700' : 'text-red-700'}">${sp.projections.ssp585_2050.change_pct}%</td>
+                    <td class="p-2.5 font-bold">${sp.projections.ssp585_2050.vuln_idx} / 100</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-900 border border-red-300">${sp.projections.ssp585_2050.status}</span></td>
                   </tr>
                   <tr>
-                    <td class="p-2 font-medium">SSP5-8.5 (2080)</td>
-                    <td class="p-2 font-bold ${sp.projections.ssp585_2080.change_pct >= 0 ? 'text-emerald-600' : 'text-red-600'}">${sp.projections.ssp585_2080.change_pct}%</td>
-                    <td class="p-2">${sp.projections.ssp585_2080.vuln_idx} / 100</td>
-                    <td class="p-2"><span class="px-2 py-0.5 rounded text-[10px] bg-red-100 text-red-800">${sp.projections.ssp585_2080.status}</span></td>
+                    <td class="p-2.5 font-bold">SSP5-8.5 (2080)</td>
+                    <td class="p-2.5 font-black ${sp.projections.ssp585_2080.change_pct >= 0 ? 'text-emerald-700' : 'text-red-700'}">${sp.projections.ssp585_2080.change_pct}%</td>
+                    <td class="p-2.5 font-bold">${sp.projections.ssp585_2080.vuln_idx} / 100</td>
+                    <td class="p-2.5"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-900 border border-red-300">${sp.projections.ssp585_2080.status}</span></td>
                   </tr>
                 </tbody>
               </table>
@@ -851,8 +1017,8 @@
           </div>
 
           <!-- Ethnobotany -->
-          <div class="bg-sahel-50 p-4 rounded-xl border border-sahel-200 text-xs space-y-2">
-            <h4 class="font-bold text-sahel-900 uppercase">Usages Ethnobotaniques & Valeur Pastorale</h4>
+          <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-xs space-y-2">
+            <h4 class="font-black text-amber-950 uppercase">Usages Ethnobotaniques & Valeur Pastorale</h4>
             <p><strong>Usages majeurs :</strong> ${sp.ethnobotany.traditional_uses.join(', ')}</p>
             <p><strong>Importance culturelle :</strong> ${sp.ethnobotany.cultural_importance}</p>
             <p><strong>Propriétés médicinales :</strong> ${sp.ethnobotany.medicinal_properties}</p>
@@ -871,11 +1037,11 @@
     function setScenario(sc) {
       currentScenario = sc;
       document.querySelectorAll('.ssp-btn').forEach(b => {
-        b.className = "ssp-btn py-2 px-2 text-xs rounded-lg font-bold border border-slate-300 bg-white hover:bg-slate-100 transition text-center";
+        b.className = "ssp-btn py-2.5 px-2 text-xs rounded-xl font-bold border-2 border-slate-300 bg-white hover:bg-slate-100 transition text-center";
       });
       const active = document.getElementById('btn-' + sc);
       if (active) {
-        active.className = "ssp-btn py-2 px-2 text-xs rounded-lg font-bold border-2 border-forest-600 bg-forest-50 text-forest-800 transition text-center";
+        active.className = "ssp-btn py-2.5 px-2 text-xs rounded-xl font-bold border-2 border-emerald-600 bg-emerald-100 text-emerald-900 transition text-center shadow-sm";
       }
 
       const tempMap = { 'ssp126': 1.5, 'ssp245': 2.4, 'ssp585': 4.4 };
@@ -889,11 +1055,11 @@
     function setHorizon(h) {
       currentHorizon = h;
       document.querySelectorAll('.hor-btn').forEach(b => {
-        b.className = "hor-btn py-2.5 text-xs rounded-lg font-bold border border-slate-300 bg-white hover:bg-slate-100 transition";
+        b.className = "hor-btn py-2.5 text-xs rounded-xl font-bold border-2 border-slate-300 bg-white hover:bg-slate-100 transition";
       });
       const active = document.getElementById('btn-' + h);
       if (active) {
-        active.className = "hor-btn py-2.5 text-xs rounded-lg font-bold border-2 border-forest-600 bg-forest-50 text-forest-800 transition";
+        active.className = "hor-btn py-2.5 text-xs rounded-xl font-bold border-2 border-emerald-600 bg-emerald-100 text-emerald-900 transition shadow-sm";
       }
       runSimulation();
     }
@@ -911,28 +1077,24 @@
       const deltaT = parseFloat(document.getElementById('tempSlider').value);
       const deltaP = parseInt(document.getElementById('precipSlider').value);
 
-      // Ecophysiological vulnerability model
-      const droughtTol = sp.traits.drought_index; // 0-100
-      const woodDens = sp.traits.wood_density_gcm3; // ~0.4 to 0.9
-      const sla = sp.traits.sla_mm2mg; // ~5 to 25
+      const droughtTol = sp.traits.drought_index;
+      const woodDens = sp.traits.wood_density_gcm3;
 
-      // Base change rate calculation
       let changeRate = ((droughtTol - 60) * 0.3) - (deltaT * 4.2) + (deltaP * 0.5) + (woodDens * 10);
       let retreatKm = Math.max(10, Math.round((deltaT * 18) - (droughtTol * 0.15)));
       let refugiaScore = Math.min(95, Math.max(25, Math.round(droughtTol - (deltaT * 6) + (woodDens * 15))));
 
       const changeEl = document.getElementById('simChange');
       changeEl.textContent = (changeRate >= 0 ? '+' : '') + changeRate.toFixed(1) + ' %';
-      changeEl.className = "mt-2 text-2xl font-black flex items-center gap-2 " + (changeRate >= 0 ? 'text-emerald-700' : (changeRate > -15 ? 'text-amber-700' : 'text-red-700'));
-      document.getElementById('simChangeSub').textContent = changeRate >= 0 ? "Expansion bioclimatique favorable" : "Régression / contraction de niche";
+      changeEl.className = "mt-2 text-3xl font-black " + (changeRate >= 0 ? 'text-emerald-800' : (changeRate > -15 ? 'text-amber-800' : 'text-red-700'));
+      document.getElementById('simChangeSub').textContent = changeRate >= 0 ? "Expansion bioclimatique" : "Régression / contraction";
 
       document.getElementById('simRetreat').textContent = retreatKm + ' km';
       document.getElementById('simRefugia').textContent = refugiaScore + ' / 100';
 
-      // Textual diagnostic
       let hydrRisk = "Tolérance remarquable. La conductance stomatique est optimisée et le risque d'embolie reste très faible.";
       if (droughtTol < 70) {
-        hydrRisk = "Vulnérabilité modérée à sévère à la cavitation du xylème. Perte de turgescence sous stress hydrique continu.";
+        hydrRisk = "Vulnérabilité modérée à sévère à la cavitation du xylème sous stress hydrique continu.";
       }
       document.getElementById('simHydraulicRisk').textContent = hydrRisk;
 
@@ -950,15 +1112,15 @@
       list.forEach(v => {
         const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-50 transition";
-        const scoreColor = v.mean_decline_score < -1 ? 'text-red-600' : (v.mean_decline_score < 0 ? 'text-amber-600' : 'text-emerald-600');
+        const scoreColor = v.mean_decline_score < -1 ? 'text-red-700' : (v.mean_decline_score < 0 ? 'text-amber-700' : 'text-emerald-700');
         tr.innerHTML = `
-          <td class="py-2.5 px-4 font-semibold text-slate-800">${v.village_name}</td>
-          <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-700">${v.climatic_zone}</span></td>
-          <td class="py-2.5 px-4 font-mono text-slate-500">${v.latitude.toFixed(2)}°N, ${v.longitude.toFixed(2)}°W</td>
-          <td class="py-2.5 px-4 text-center font-bold text-slate-700">${v.surveys_count}</td>
-          <td class="py-2.5 px-4 text-center font-bold ${scoreColor}">${v.mean_decline_score > 0 ? '+' : ''}${v.mean_decline_score.toFixed(1)} / 2</td>
-          <td class="py-2.5 px-4 text-center font-semibold text-amber-700">${v.phenology_shift_pct} %</td>
-          <td class="py-2.5 px-4 text-slate-600">${v.primary_threat || 'Surpâturage & Sécheresse'}</td>
+          <td class="py-2.5 px-4 font-bold text-slate-900">${v.village_name}</td>
+          <td class="py-2.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-800">${v.climatic_zone}</span></td>
+          <td class="py-2.5 px-4 font-mono text-slate-600">${v.latitude.toFixed(2)}°N, ${v.longitude.toFixed(2)}°W</td>
+          <td class="py-2.5 px-4 text-center font-black text-slate-800">${v.surveys_count}</td>
+          <td class="py-2.5 px-4 text-center font-black ${scoreColor}">${v.mean_decline_score > 0 ? '+' : ''}${v.mean_decline_score.toFixed(1)} / 2</td>
+          <td class="py-2.5 px-4 text-center font-bold text-amber-800">${v.phenology_shift_pct} %</td>
+          <td class="py-2.5 px-4 text-slate-700 font-medium">${v.primary_threat || 'Surpâturage & Sécheresse'}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -970,7 +1132,7 @@
       renderVillages(filtered);
     }
 
-    // EXPORT FUNCTIONS
+    // EXPORTS
     function downloadSpeciesCSV() {
       let csv = "id;scientific_name;family;vernacular_moore;vernacular_dioula;sla_mm2mg;ldmc_mgg;wood_density_gcm3;p50_hydraulic_mpa;drought_index;fire_resistance\n";
       SPECIES_DATA.forEach(s => {
@@ -1004,7 +1166,7 @@
       URL.revokeObjectURL(url);
     }
 
-    // INITIALIZATION ON PAGE LOAD
+    // INIT
     window.addEventListener('DOMContentLoaded', () => {
       initFilters();
       renderSpecies(SPECIES_DATA);

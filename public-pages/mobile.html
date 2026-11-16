@@ -20,21 +20,21 @@
 <body class="h-full flex flex-col text-slate-800 bg-slate-100">
 
   <!-- MOBILE TOP BAR -->
-  <header class="bg-forest-800 text-white px-4 py-3 shadow-md flex items-center justify-between sticky top-0 z-40">
+  <header class="bg-[#0d4722] text-white px-4 py-3 shadow-lg flex items-center justify-between sticky top-0 z-40 border-b-2 border-amber-400">
     <div class="flex items-center gap-2.5">
-      <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold border border-emerald-400/30">
-        <i class="fa-solid fa-seedling text-sm"></i>
+      <div class="w-9 h-9 rounded-xl bg-white text-[#0d4722] flex items-center justify-center font-black border-2 border-amber-400 shadow">
+        <i class="fa-solid fa-tree text-sm"></i>
       </div>
       <div>
-        <h1 class="text-sm font-bold leading-tight">SahelField Mobile</h1>
-        <p class="text-[10px] text-emerald-200">Collecteur Terrain PWA • Mode Hors-Ligne</p>
+        <h1 class="text-sm font-black leading-tight text-white">SahelField Mobile</h1>
+        <p class="text-[10px] text-emerald-200 font-medium">Collecteur Terrain PWA • Mode Hors-Ligne</p>
       </div>
     </div>
-    <div class="flex items-center gap-2">
-      <span id="networkBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/30 text-emerald-200 border border-emerald-400/40 flex items-center gap-1">
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Connecté
-      </span>
-      <a href="index.html" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xs transition">
+    <div class="flex items-center gap-1.5">
+      <button onclick="openInstallHelp()" class="px-2.5 py-1 rounded-lg text-[11px] font-extrabold bg-amber-400 hover:bg-amber-300 text-slate-950 flex items-center gap-1 shadow transition">
+        <i class="fa-solid fa-arrow-down-to-square"></i> Installer
+      </button>
+      <a href="index.html" title="Retour au portail" class="w-8 h-8 rounded-lg bg-white/15 hover:bg-white/25 flex items-center justify-center text-white text-xs transition">
         <i class="fa-solid fa-house"></i>
       </a>
     </div>
@@ -242,6 +242,53 @@
         </div>
       </div>
     </section>
+
+    <!-- MODAL: AIDE INSTALLATION SUR SMARTPHONE -->
+  <div id="installModal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full border border-slate-200 p-5 relative text-xs">
+      <button onclick="closeInstallHelp()" class="absolute top-3 right-3 w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-2.5 mb-3">
+        <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-base">
+          <i class="fa-solid fa-mobile-screen"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-slate-900 text-sm">Installer sur votre Téléphone</h3>
+          <p class="text-[10px] text-slate-500">Pour y accéder directement sans ouvrir le navigateur</p>
+        </div>
+      </div>
+
+      <div class="space-y-3 pt-1">
+        <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl space-y-1.5 text-slate-800">
+          <strong class="text-amber-950 block text-[11px] font-bold">
+            <i class="fa-brands fa-android text-emerald-700 mr-1"></i> Sur Android (Google Chrome) :
+          </strong>
+          <ol class="list-decimal pl-4 space-y-1 text-[11px]">
+            <li>Appuyez sur les <strong>3 petits points verticaux ⋮</strong> tout en haut à droite.</li>
+            <li>Appuyez sur <strong>« Ajouter à l'écran d'accueil »</strong> (ou « Installer l'application »).</li>
+            <li>Appuyez sur <strong>Ajouter</strong>.</li>
+          </ol>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 p-3 rounded-xl space-y-1.5 text-slate-800">
+          <strong class="text-slate-900 block text-[11px] font-bold">
+            <i class="fa-brands fa-apple text-slate-700 mr-1"></i> Sur iPhone (Safari) :
+          </strong>
+          <ol class="list-decimal pl-4 space-y-1 text-[11px]">
+            <li>Appuyez sur le bouton <strong>Partager</strong> <i class="fa-solid fa-arrow-up-from-bracket"></i> en bas.</li>
+            <li>Faites défiler vers le bas et appuyez sur <strong>« Sur l'écran d'accueil »</strong>.</li>
+            <li>Appuyez sur <strong>Ajouter</strong> en haut à droite.</li>
+          </ol>
+        </div>
+
+        <button onclick="closeInstallHelp()" class="w-full py-2.5 bg-[#0d4722] text-white font-bold rounded-xl text-center">
+          J'ai compris
+        </button>
+      </div>
+    </div>
+  </div>
 
   </main>
 
