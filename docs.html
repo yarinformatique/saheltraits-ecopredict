@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation API & Données | SahelTraits-DB & EcoPredict</title>
+  <meta name="description" content="Spécifications OpenAPI et dictionnaire des variables - Plateforme doctorale M. YAGO Abdoul Rachide (UJKZ).">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="min-h-full flex flex-col text-slate-800 antialiased">
+
+  <header class="bg-slate-900 text-white py-5 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white text-lg font-bold">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <div>
+          <h1 class="text-xl font-bold">Documentation de l'API & Référentiel de Données</h1>
+          <p class="text-xs text-slate-400">SahelTraits-DB & EcoPredict 2050-2080 • Spécification REST / OpenAPI v3.1</p>
+        </div>
+      </div>
+      <a href="index.html" class="px-3.5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition">
+        Portail Décisionnel
+      </a>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-8 space-y-8">
+
+    <!-- Overview -->
+    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-3">
+      <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+        Architecture Micro-services FastAPI & PostgreSQL / PostGIS
+      </span>
+      <h2 class="text-2xl font-bold text-slate-900">Points de Terminaison (REST API Endpoints)</h2>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        L'API permet d'interroger par programmation l'ensemble du référentiel taxonomique, les matrices de traits continus harmonisés, les simulations éco-climatiques CMIP6 et les données d'enquêtes terrain sous format JSON normalisé.
+      </p>
+    </div>
+
+    <!-- Endpoints List -->
+    <div class="space-y-4">
+      <!-- EP 1 -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white">GET</span>
+            <code class="text-sm font-bold text-slate-800">/api/v1/taxa</code>
+          </div>
+          <span class="text-xs text-slate-500">Liste complète des taxons répertoriés</span>
+        </div>
+        <div class="p-4 text-xs text-slate-700 space-y-2">
+          <p><strong>Paramètres de requête :</strong> <code>family</code> (string), <code>iucn_status</code> (string), <code>limit</code> (int, default: 50)</p>
+          <div class="bg-slate-900 text-slate-200 p-3 rounded-lg overflow-x-auto">
+            <pre><code>{
+  "total": 15,
+  "items": [
+    {
+      "id": "balanites_aegyptiaca",
+      "scientific_name": "Balanites aegyptiaca (L.) Delile",
+      "family": "Zygophyllaceae",
+      "gbif_key": 3189912,
+      "vernacular_moore": "Kieglga"
+    }
+  ]
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- EP 2 -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-600 text-white">GET</span>
+            <code class="text-sm font-bold text-slate-800">/api/v1/traits/{species_id}</code>
+          </div>
+          <span class="text-xs text-slate-500">Matrice des 8 traits fonctionnels continus</span>
+        </div>
+        <div class="p-4 text-xs text-slate-700 space-y-2">
+          <div class="bg-slate-900 text-slate-200 p-3 rounded-lg overflow-x-auto">
+            <pre><code>{
+  "species_id": "balanites_aegyptiaca",
+  "traits": {
+    "sla_mm2mg": 11.2,
+    "ldmc_mgg": 378.0,
+    "wood_density_gcm3": 0.69,
+    "p50_hydraulic_mpa": -4.2,
+    "seed_mass_mg": 2840.0,
+    "drought_index": 92.0
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- EP 3 -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-1 rounded-md text-xs font-bold bg-amber-600 text-white">POST</span>
+            <code class="text-sm font-bold text-slate-800">/api/v1/climate/simulate</code>
+          </div>
+          <span class="text-xs text-slate-500">Moteur de simulation éco-climatique CMIP6</span>
+        </div>
+        <div class="p-4 text-xs text-slate-700 space-y-2">
+          <p><strong>Corps de la requête (JSON Payload) :</strong></p>
+          <div class="bg-slate-900 text-slate-200 p-3 rounded-lg overflow-x-auto">
+            <pre><code>{
+  "species_id": "balanites_aegyptiaca",
+  "scenario": "ssp245",
+  "horizon": 2050,
+  "delta_temp_c": 2.4,
+  "delta_precip_pct": -12.0
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Dictionary Table -->
+    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+      <h3 class="text-lg font-bold text-slate-900">Dictionnaire des Variables & Unités Scientifiques</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left">
+          <thead class="bg-slate-100 text-slate-700 font-bold uppercase">
+            <tr>
+              <th class="p-3">Variable</th>
+              <th class="p-3">Nom Complet & Définition</th>
+              <th class="p-3">Unité Standard</th>
+              <th class="p-3">Protocole de Mesure</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr>
+              <td class="p-3 font-mono font-bold text-forest-700">SLA</td>
+              <td class="p-3">Surface Foliaire Spécifique (Specific Leaf Area)</td>
+              <td class="p-3">mm² / mg</td>
+              <td class="p-3">Scanner foliaire + étuve 70°C / 48h (Pérez-Harguindeguy et al., 2013)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-forest-700">LDMC</td>
+              <td class="p-3">Teneur en Matière Sèche Foliaire (Leaf Dry Matter Content)</td>
+              <td class="p-3">mg / g</td>
+              <td class="p-3">Masse sèche divisée par la masse saturée d'eau</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-forest-700">WD</td>
+              <td class="p-3">Densité Basale du Bois (Wood Density)</td>
+              <td class="p-3">g / cm³</td>
+              <td class="p-3">Sondage à la tarière de Pressler (masse sèche / volume vert)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono font-bold text-forest-700">P50</td>
+              <td class="p-3">Vulnérabilité à la cavitation hydraulique</td>
+              <td class="p-3">MPa</td>
+              <td class="p-3">Courbe de vulnérabilité par cytométrie / chambre à pression de Scholander</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 text-xs py-6 border-t border-slate-800 text-center">
+    <p>SahelTraits-DB & EcoPredict 2050-2080 • M. YAGO Abdoul Rachide • UJKZ / EDST</p>
+  </footer>
+</body>
+</html>

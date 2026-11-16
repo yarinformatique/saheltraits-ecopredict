@@ -41,3 +41,11 @@ htmlcov/
 Thumbs.db
 desktop.ini
 *.lnk
+*.db
+cloudflared.exe
+live_urls.json
+species_data.json
+*tunnel*.py
+run_all_*.py
+
+

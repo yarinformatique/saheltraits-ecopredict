@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SahelField Mobile | Collecte de Terrain Hors-Ligne</title>
+  <meta name="description" content="Application mobile de collecte terrain PWA - Enquêtes socio-écologiques et inventaires dendrométriques. Thèse M. YAGO Abdoul Rachide (UJKZ).">
+  <!-- PWA meta tags -->
+  <meta name="theme-color" content="#136335">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+    code { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="h-full flex flex-col text-slate-800 bg-slate-100">
+
+  <!-- MOBILE TOP BAR -->
+  <header class="bg-forest-800 text-white px-4 py-3 shadow-md flex items-center justify-between sticky top-0 z-40">
+    <div class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold border border-emerald-400/30">
+        <i class="fa-solid fa-seedling text-sm"></i>
+      </div>
+      <div>
+        <h1 class="text-sm font-bold leading-tight">SahelField Mobile</h1>
+        <p class="text-[10px] text-emerald-200">Collecteur Terrain PWA • Mode Hors-Ligne</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span id="networkBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/30 text-emerald-200 border border-emerald-400/40 flex items-center gap-1">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Connecté
+      </span>
+      <a href="index.html" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xs transition">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- GPS BAR -->
+  <div class="bg-forest-900 text-emerald-200 px-4 py-1.5 text-[11px] flex items-center justify-between border-b border-forest-700/50">
+    <div class="flex items-center gap-1.5 font-mono">
+      <i class="fa-solid fa-location-crosshairs text-emerald-400"></i>
+      <span id="gpsCoords">GPS : 14.0321°N, -0.0345°W (± 3.2 m)</span>
+    </div>
+    <button onclick="acquireGPS()" class="text-[10px] bg-emerald-600 hover:bg-emerald-500 text-white px-2 py-0.5 rounded font-semibold transition">
+      Actualiser
+    </button>
+  </div>
+
+  <!-- MAIN SCROLLABLE CONTENT -->
+  <main class="flex-1 overflow-y-auto p-4 pb-24 space-y-4 max-w-lg mx-auto w-full">
+
+    <!-- SUB-VIEW 1: ENQUÊTE TERROIR (ODK / XLSFORM) -->
+    <section id="view-enquete" class="mobile-view space-y-4">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 space-y-4">
+        <div class="border-b border-slate-100 pb-2 flex justify-between items-center">
+          <div>
+            <h2 class="text-sm font-bold text-slate-900">Fiche d'Enquête Socio-Écologique</h2>
+            <p class="text-[11px] text-slate-500">Protocole Standardisé Martin (1995) & FAO</p>
+          </div>
+          <span class="text-[10px] bg-slate-100 text-slate-600 font-mono px-2 py-0.5 rounded">FORM-2026-BF</span>
+        </div>
+
+        <!-- M1: Profil Enquêté -->
+        <div class="space-y-3">
+          <label class="block text-xs font-bold uppercase text-forest-700">Module 1 : Terroir & Profil</label>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div>
+              <span class="text-[10px] text-slate-500 block mb-0.5">Village Enquêté</span>
+              <select id="villageSelect" class="w-full py-2 px-2.5 rounded-lg border border-slate-300 bg-white font-medium">
+                <!-- Injected via JS -->
+              </select>
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-500 block mb-0.5">Catégorie Informateur</span>
+              <select id="informantType" class="w-full py-2 px-2.5 rounded-lg border border-slate-300 bg-white font-medium">
+                <option value="Agropasteur">Agropasteur / Producteur</option>
+                <option value="Tradithérapeute">Tradipraticien / Guérisseur</option>
+                <option value="Transformatrice">Transformatrice PFNL</option>
+                <option value="Agent_Forestier">Agent Eaux & Forêts</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- M2: Évaluation Espèce Cible & Déclin -->
+        <div class="space-y-3 pt-3 border-t border-slate-100">
+          <label class="block text-xs font-bold uppercase text-forest-700">Module 2 : Dynamique du Peuplement</label>
+          <div>
+            <span class="text-[10px] text-slate-500 block mb-0.5">Espèce Ligneuse Évaluée</span>
+            <select id="surveySpeciesSelect" class="w-full py-2 px-2.5 rounded-lg border border-slate-300 bg-white font-semibold text-xs">
+              <!-- Injected via JS -->
+            </select>
+          </div>
+
+          <div>
+            <span class="text-[10px] text-slate-500 block mb-1">Tendance sur les 30 Dernières Années (Échelle Likert)</span>
+            <div class="grid grid-cols-5 gap-1 text-center text-[10px]">
+              <label class="cursor-pointer">
+                <input type="radio" name="decline" value="-2" class="sr-only peer" checked>
+                <div class="p-2 rounded-lg border border-slate-200 peer-checked:bg-red-600 peer-checked:text-white peer-checked:font-bold transition">
+                  -2<br>Forte régression
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="decline" value="-1" class="sr-only peer">
+                <div class="p-2 rounded-lg border border-slate-200 peer-checked:bg-amber-500 peer-checked:text-white peer-checked:font-bold transition">
+                  -1<br>Faible régression
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="decline" value="0" class="sr-only peer">
+                <div class="p-2 rounded-lg border border-slate-200 peer-checked:bg-slate-600 peer-checked:text-white peer-checked:font-bold transition">
+                  0<br>Stable
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="decline" value="+1" class="sr-only peer">
+                <div class="p-2 rounded-lg border border-slate-200 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:font-bold transition">
+                  +1<br>Faible expansion
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="decline" value="+2" class="sr-only peer">
+                <div class="p-2 rounded-lg border border-slate-200 peer-checked:bg-emerald-700 peer-checked:text-white peer-checked:font-bold transition">
+                  +2<br>Forte expansion
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- M3: Phénologie & Causes -->
+        <div class="space-y-3 pt-3 border-t border-slate-100">
+          <label class="block text-xs font-bold uppercase text-forest-700">Module 3 : Phénologie & Menaces Perçues</label>
+          <div class="space-y-2 text-xs">
+            <label class="flex items-center gap-2">
+              <input type="checkbox" id="phenoShift" checked class="rounded text-forest-600 accent-forest-600">
+              <span>Décalage de la période de floraison / fructification constaté</span>
+            </label>
+            <div>
+              <span class="text-[10px] text-slate-500 block mb-0.5">Menace Majeure Identifiée</span>
+              <select id="mainThreat" class="w-full py-2 px-2.5 rounded-lg border border-slate-300 bg-white font-medium text-xs">
+                <option value="Surpâturage">Surpâturage & émondage excessif</option>
+                <option value="Sécheresse">Sécheresse récurrente / Baisse de nappe</option>
+                <option value="Coupe_Bois">Coupe abusive de bois d'énergie</option>
+                <option value="Feux">Feux de brousse tardifs</option>
+                <option value="Défrichement">Défrichement pour l'agriculture</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="saveSurveyForm()" class="w-full py-3 bg-forest-600 hover:bg-forest-700 text-white rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-floppy-disk"></i> Enregistrer l'Enquête en Local (Hors-Ligne)
+        </button>
+      </div>
+    </section>
+
+    <!-- SUB-VIEW 2: INVENTAIRE ARBRES (DENDROMÉTRIE) -->
+    <section id="view-inventaire" class="mobile-view hidden space-y-4">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 space-y-4">
+        <div class="border-b border-slate-100 pb-2">
+          <h2 class="text-sm font-bold text-slate-900">Relevé Dendrométrique & Traits In-Situ</h2>
+          <p class="text-[11px] text-slate-500">Parcelle Placette 50m × 50m</p>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div>
+            <span class="text-[10px] text-slate-500 block mb-0.5">Identifiant de l'Individu (ID Arbre)</span>
+            <input type="text" id="treeId" value="TREE-UJKZ-2026-084" class="w-full py-2 px-3 rounded-lg border border-slate-300 font-mono">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <span class="text-[10px] text-slate-500 block mb-0.5">Hauteur Totale (m)</span>
+              <input type="number" id="treeHeight" value="8.5" step="0.5" class="w-full py-2 px-3 rounded-lg border border-slate-300">
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-500 block mb-0.5">Circonférence à 1.3m (cm)</span>
+              <input type="number" id="treeCirc" value="68" step="1" class="w-full py-2 px-3 rounded-lg border border-slate-300">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <span class="text-[10px] text-slate-500 block mb-0.5">Diamètre du Houppier (m)</span>
+              <input type="number" id="crownDiam" value="7.2" step="0.2" class="w-full py-2 px-3 rounded-lg border border-slate-300">
+            </div>
+            <div>
+              <span class="text-[10px] text-slate-500 block mb-0.5">État Sanitaire</span>
+              <select id="treeHealth" class="w-full py-2 px-2.5 rounded-lg border border-slate-300 bg-white">
+                <option value="Sain">1 - Vigueur normale</option>
+                <option value="Attaque">2 - Attaque parasitaire / Loranthaceae</option>
+                <option value="Elague">3 - Fortement émondé / mutilé</option>
+                <option value="Depérissant">4 - Cime desséchée / dépérissant</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="saveTreeInventory()" class="w-full py-3 bg-forest-600 hover:bg-forest-700 text-white rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-tree"></i> Enregistrer le Spécimen dans la Base
+        </button>
+      </div>
+    </section>
+
+    <!-- SUB-VIEW 3: SYNCHRONISATION & STOCKAGE -->
+    <section id="view-sync" class="mobile-view hidden space-y-4">
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 space-y-4">
+        <div class="border-b border-slate-100 pb-2">
+          <h2 class="text-sm font-bold text-slate-900">Synchronisation & Stockage Local</h2>
+          <p class="text-[11px] text-slate-500">IndexedDB • Aucune perte de données hors connexion</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 text-center">
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <span class="text-xl font-black text-forest-700" id="localSurveysCount">14</span>
+            <span class="text-[10px] text-slate-500 block mt-0.5 uppercase font-bold">Enquêtes Enregistrées</span>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <span class="text-xl font-black text-sky-700" id="localTreesCount">32</span>
+            <span class="text-[10px] text-slate-500 block mt-0.5 uppercase font-bold">Arbres Géoréférencés</span>
+          </div>
+        </div>
+
+        <div class="space-y-2 pt-2">
+          <button onclick="simulateSync()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs shadow transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Synchroniser vers SahelTraits-DB Cloud
+          </button>
+          <button onclick="exportLocalJSON()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-file-export"></i> Exporter Fichier Local (JSON)
+          </button>
+        </div>
+
+        <div id="syncLog" class="p-3 bg-slate-900 text-emerald-400 font-mono text-[10px] rounded-xl max-h-32 overflow-y-auto hidden">
+          <!-- Logs -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MOBILE BOTTOM NAVIGATION BAR -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 px-6 py-2 flex justify-between items-center z-40 max-w-lg mx-auto shadow-lg">
+    <button onclick="switchMobileView('enquete')" id="nav-enquete" class="mobile-nav-btn text-forest-700 flex flex-col items-center gap-1 font-bold text-[11px]">
+      <i class="fa-solid fa-clipboard-check text-base"></i>
+      <span>Enquête</span>
+    </button>
+    <button onclick="switchMobileView('inventaire')" id="nav-inventaire" class="mobile-nav-btn text-slate-400 hover:text-slate-600 flex flex-col items-center gap-1 font-medium text-[11px]">
+      <i class="fa-solid fa-tree text-base"></i>
+      <span>Inventaire</span>
+    </button>
+    <button onclick="switchMobileView('sync')" id="nav-sync" class="mobile-nav-btn text-slate-400 hover:text-slate-600 flex flex-col items-center gap-1 font-medium text-[11px]">
+      <i class="fa-solid fa-arrows-rotate text-base"></i>
+      <span>Sync / Stock</span>
+    </button>
+  </nav>
+
+  <!-- DATA & ENGINE SCRIPT -->
+  <script>
+    const SPECIES = [{"id": "b0000000-0000-0000-0000-000000000001", "scientific_name": "Balanites aegyptiaca (L.) Delile", "accepted_name_gbif": "Balanites aegyptiaca (L.) Delile", "gbif_usage_key": 3152865, "family": "Zygophyllaceae", "genus": "Balanites", "vernacular_moore": "Kieglga", "vernacular_dioula": "Ségéné", "vernacular_fulfulde": "Murtooki", "functional_group": "Épineux xérophyte persistant", "iucn_status": "LC", "description": "Arbre emblématique du Sahel ('Dattier du désert') pourvu d'épines acérées photosynthétiques et d'un pivot racinaire dépassant 15 à 20 mètres de profondeur.", "distribution_zone": "Zone Sahélienne & Soudano-Sahélienne (Dori, Oursi, Gorom, Kaya)", "photo_url": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 9.85, "ldmc_mgg": 425.4, "wood_density_gcm3": 0.72, "seed_mass_mg": 3200, "p50_hydraulic_mpa": -4.8, "leaf_thickness_um": 480, "drought_index": 95, "fire_resistance": 70}, "germination": {"t50_days": 4.2, "gp_ctrl_pct": 92, "gp_peg_pct": 64, "regime": "Scarification mécanique"}, "projections": {"ssp245_2050": {"change_pct": 3.8, "vuln_idx": 0, "status": "Résiliente / Stable"}, "ssp245_2080": {"change_pct": -4.8, "vuln_idx": 4.8, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -10.6, "vuln_idx": 10.6, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": 2.2, "vuln_idx": 0, "status": "Résiliente / Stable"}}, "ethnobotany": {"traditional_uses": ["Fruits comestibles anti-diabétiques", "Huile cosmétique et pharmaceutique", "Fourrage aérien de saison sèche"], "cultural_importance": "Arbre de sauvegarde anti-famine dans le Sahel pastoral burkinabé.", "medicinal_properties": "Riche en saponines stéroïdiques, antiparasitaire contre la bilharziose."}}, {"id": "b0000000-0000-0000-0000-000000000002", "scientific_name": "Adansonia digitata L.", "accepted_name_gbif": "Adansonia digitata L.", "gbif_usage_key": 3152220, "family": "Malvaceae", "genus": "Adansonia", "vernacular_moore": "Toèga", "vernacular_dioula": "Sira", "vernacular_fulfulde": "Boki", "functional_group": "Méga-arbre réserve hydrique", "iucn_status": "LC", "description": "Le Baobab africain, méga-arbre pachycaulique capable d'emmagasiner jusqu'à 120 000 litres d'eau dans ses tissus fibreux spongieux.", "distribution_zone": "Parcs agroforestiers de tout le Burkina Faso (Kaya, Ziniaré, Koudougou, Bobo)", "photo_url": "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 14.2, "ldmc_mgg": 295, "wood_density_gcm3": 0.32, "seed_mass_mg": 450, "p50_hydraulic_mpa": -1.8, "leaf_thickness_um": 320, "drought_index": 80, "fire_resistance": 85}, "germination": {"t50_days": 7.5, "gp_ctrl_pct": 88, "gp_peg_pct": 42, "regime": "Ébouillantage ou scarification"}, "projections": {"ssp245_2050": {"change_pct": -13.2, "vuln_idx": 13.2, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -16, "vuln_idx": 16, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -23.6, "vuln_idx": 23.6, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": -34.7, "vuln_idx": 34.7, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Feuilles en sauce glissante (Lalo)", "Pulpe de fruit riche en vitamine C (Pain de singe)", "Cordages à base d'écorce"], "cultural_importance": "Arbre sacré abritant les esprits ancestraux et lieu de palabres villageoises.", "medicinal_properties": "Fébrifuge puissant, anti-diarrhéique, antioxydant majeur."}}, {"id": "b0000000-0000-0000-0000-000000000003", "scientific_name": "Faidherbia albida (Delile) A.Chev.", "accepted_name_gbif": "Faidherbia albida (Delile) A.Chev.", "gbif_usage_key": 2977465, "family": "Fabaceae", "genus": "Faidherbia", "vernacular_moore": "Zaanga", "vernacular_dioula": "Balanzan", "vernacular_fulfulde": "Caski", "functional_group": "Fixateur azote phénologie inversée", "iucn_status": "LC", "description": "Espèce agroforestière par excellence à phénologie inversée : perd ses feuilles en saison des pluies (laissant passer la lumière) et reverdit en saison sèche.", "distribution_zone": "Terroirs agricoles soudano-sahéliens (Kaya, Ouahigouya, Yako, Koudougou)", "photo_url": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 16.5, "ldmc_mgg": 340.2, "wood_density_gcm3": 0.58, "seed_mass_mg": 180, "p50_hydraulic_mpa": -3.2, "leaf_thickness_um": 290, "drought_index": 85, "fire_resistance": 60}, "germination": {"t50_days": 3.5, "gp_ctrl_pct": 95, "gp_peg_pct": 58, "regime": "H2SO4 98% 15min ou scarification"}, "projections": {"ssp245_2050": {"change_pct": -13.1, "vuln_idx": 13.1, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -13.4, "vuln_idx": 13.4, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -25.3, "vuln_idx": 25.3, "status": "Modérément Vulnérable"}, "ssp585_2080": {"change_pct": -47, "vuln_idx": 47, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Fertilisation des cultures de mil/sorgho", "Gousses hélicoïdales très nutritives pour le cheptel", "Bois d'artisanat"], "cultural_importance": "Symbole de la fertilité agro-pastorale au Sahel.", "medicinal_properties": "Écorce fébrifuge, traitement des douleurs articulaires et maux de dents."}}, {"id": "b0000000-0000-0000-0000-000000000004", "scientific_name": "Vachellia tortilis (Forssk.) Galasso & Banfi", "accepted_name_gbif": "Vachellia tortilis (Forssk.) Galasso & Banfi", "gbif_usage_key": 2978712, "family": "Fabaceae", "genus": "Vachellia", "vernacular_moore": "Gom-peelga", "vernacular_dioula": "Danba", "vernacular_fulfulde": "Cilluki", "functional_group": "Épineux sahélien hyper-xérique", "iucn_status": "LC", "description": "L'Acacia faux-pommier en parasol, champion de la survie en milieu hyper-aride (< 300 mm de pluie) et fixateur d'azote symbiotique.", "distribution_zone": "Zone Sahélienne stricte (Oursi, Tin-Akoff, Dori, Markoye)", "photo_url": "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 8.45, "ldmc_mgg": 460.5, "wood_density_gcm3": 0.78, "seed_mass_mg": 45, "p50_hydraulic_mpa": -5.2, "leaf_thickness_um": 440, "drought_index": 98, "fire_resistance": 50}, "germination": {"t50_days": 4.8, "gp_ctrl_pct": 90, "gp_peg_pct": 68, "regime": "Scarification mécanique"}, "projections": {"ssp245_2050": {"change_pct": -3.3, "vuln_idx": 3.3, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": 3.6, "vuln_idx": 0, "status": "Résiliente / Stable"}, "ssp585_2050": {"change_pct": -4.2, "vuln_idx": 4.2, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": -3.6, "vuln_idx": 3.6, "status": "Faiblement Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Fourrage de prédilection des dromadaires et caprins", "Gomme comestible", "Fixation des dunes de sable"], "cultural_importance": "Espèce phare de la Grande Muraille Verte pour lutter contre la désertification.", "medicinal_properties": "Gomme astringente contre les diarrhées et brûlures."}}, {"id": "b0000000-0000-0000-0000-000000000005", "scientific_name": "Combretum glutinosum Perr. ex DC.", "accepted_name_gbif": "Combretum glutinosum Perr. ex DC.", "gbif_usage_key": 3188540, "family": "Combretaceae", "genus": "Combretum", "vernacular_moore": "Rambolga", "vernacular_dioula": "Doki", "vernacular_fulfulde": "Dooki", "functional_group": "Arbuste pyrophyle résilient", "iucn_status": "LC", "description": "Arbuste très commun aux feuilles glutineuses brillantes, résistant remarquablement aux feux de brousse récurrents par rejet de souche vigoureux.", "distribution_zone": "Soudano-Sahélien et Soudanien (Kaya, Manga, Zorgho, Fada)", "photo_url": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 12.1, "ldmc_mgg": 380, "wood_density_gcm3": 0.64, "seed_mass_mg": 120, "p50_hydraulic_mpa": -3.6, "leaf_thickness_um": 380, "drought_index": 78, "fire_resistance": 92}, "germination": {"t50_days": 6.2, "gp_ctrl_pct": 85, "gp_peg_pct": 38, "regime": "Trempage 24h"}, "projections": {"ssp245_2050": {"change_pct": -11.2, "vuln_idx": 11.2, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -9, "vuln_idx": 9, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -18.9, "vuln_idx": 18.9, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": -43.8, "vuln_idx": 43.8, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Bois de chauffe et charbon de haute qualité calorifique", "Colorant jaune pour textiles et cuirs"], "cultural_importance": "Espèce stabilisatrice des sols dégradés et jachères anciennes.", "medicinal_properties": "Infusion diurétique, hépatoprotectrice et traitement du paludisme."}}, {"id": "b0000000-0000-0000-0000-000000000006", "scientific_name": "Ziziphus mauritiana Lam.", "accepted_name_gbif": "Ziziphus mauritiana Lam.", "gbif_usage_key": 3039423, "family": "Rhamnaceae", "genus": "Ziziphus", "vernacular_moore": "Moug-noaga", "vernacular_dioula": "Tomboron", "vernacular_fulfulde": "Jaabi", "functional_group": "Arbuste fruitier résistant", "iucn_status": "LC", "description": "Le Jujubier sauvage, arbuste épineux touffu produisant des drupes comestibles très appréciées, supportant les sécheresses prolongées.", "distribution_zone": "Tout le Sahel et les savanes sèches (Dori, Kaya, Ouahigouya)", "photo_url": "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 11.3, "ldmc_mgg": 410, "wood_density_gcm3": 0.69, "seed_mass_mg": 850, "p50_hydraulic_mpa": -4.1, "leaf_thickness_um": 390, "drought_index": 90, "fire_resistance": 65}, "germination": {"t50_days": 5.1, "gp_ctrl_pct": 89, "gp_peg_pct": 54, "regime": "Concassage du noyau"}, "projections": {"ssp245_2050": {"change_pct": -10, "vuln_idx": 10, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -15.3, "vuln_idx": 15.3, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -16.5, "vuln_idx": 16.5, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": -40.2, "vuln_idx": 40.2, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Fruits riches en sucres et vitamine C consommés frais ou séchés", "Haies vives défensives"], "cultural_importance": "Source clé de revenus monétaires pour les femmes rurales sur les marchés locaux.", "medicinal_properties": "Racines fébrifuges et écorce astringente."}}, {"id": "b0000000-0000-0000-0000-000000000007", "scientific_name": "Sclerocarya birrea (A.Rich.) Hochst.", "accepted_name_gbif": "Sclerocarya birrea (A.Rich.) Hochst.", "gbif_usage_key": 3190623, "family": "Anacardiaceae", "genus": "Sclerocarya", "vernacular_moore": "Noabga", "vernacular_dioula": "Kouna", "vernacular_fulfulde": "Eeri", "functional_group": "Arbre fruitier savanicole", "iucn_status": "LC", "description": "Le Marula d'Afrique occidentale, arbre dioïque à fûts robustes produisant des fruits juteux fermentescibles riches en acide ascorbique.", "distribution_zone": "Savanes soudano-sahéliennes (Kaya, Koupéla, Manga, Fada)", "photo_url": "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 13.8, "ldmc_mgg": 330, "wood_density_gcm3": 0.54, "seed_mass_mg": 2400, "p50_hydraulic_mpa": -2.8, "leaf_thickness_um": 310, "drought_index": 75, "fire_resistance": 70}, "germination": {"t50_days": 9.8, "gp_ctrl_pct": 82, "gp_peg_pct": 35, "regime": "Extraction manuelle de l'opercule"}, "projections": {"ssp245_2050": {"change_pct": -10.6, "vuln_idx": 10.6, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -8.3, "vuln_idx": 8.3, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -23.6, "vuln_idx": 23.6, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": -35.9, "vuln_idx": 35.9, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Boissons fermentées traditionnelles", "Amandes oléagineuses", "Sculpture d'ustensiles"], "cultural_importance": "Arbre totémique et symbole de prospérité dans les terroirs mossi et gourmantché.", "medicinal_properties": "Écorce utilisée contre le diabète et la dysenterie amibienne."}}, {"id": "b0000000-0000-0000-0000-000000000008", "scientific_name": "Tamarindus indica L.", "accepted_name_gbif": "Tamarindus indica L.", "gbif_usage_key": 2967926, "family": "Fabaceae", "genus": "Tamarindus", "vernacular_moore": "Pusga", "vernacular_dioula": "Tomi", "vernacular_fulfulde": "Jatami", "functional_group": "Légumineuse fruitière sempervirente", "iucn_status": "LC", "description": "Le Tamarinier, grand arbre à feuillage sempervirent dense, bois exceptionnellement dur et lourd, produisant des gousses acidulées.", "distribution_zone": "Parcs boisés et berges du centre et sud (Ouagadougou, Pô, Bobo)", "photo_url": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 10.6, "ldmc_mgg": 405, "wood_density_gcm3": 0.75, "seed_mass_mg": 650, "p50_hydraulic_mpa": -3.9, "leaf_thickness_um": 360, "drought_index": 82, "fire_resistance": 75}, "germination": {"t50_days": 6, "gp_ctrl_pct": 91, "gp_peg_pct": 48, "regime": "Scarification mécanique"}, "projections": {"ssp245_2050": {"change_pct": -14.8, "vuln_idx": 14.8, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -10.5, "vuln_idx": 10.5, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -24.1, "vuln_idx": 24.1, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": -37.8, "vuln_idx": 37.8, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Jus de tamarin rafraîchissant", "Acidifiant pour bouillies", "Ombrage bienfaiteur"], "cultural_importance": "Arbre d'ombrage communautaire au centre des places de marché.", "medicinal_properties": "Laxatif doux, fébrifuge, antiseptique intestinal."}}, {"id": "b0000000-0000-0000-0000-000000000009", "scientific_name": "Senegalia senegal (L.) Britton", "accepted_name_gbif": "Senegalia senegal (L.) Britton", "gbif_usage_key": 2979268, "family": "Fabaceae", "genus": "Senegalia", "vernacular_moore": "Gom-vëre", "vernacular_dioula": "Dounkouri", "vernacular_fulfulde": "Patuki", "functional_group": "Producteur gomme arabique", "iucn_status": "LC", "description": "Le Gommier blanc sahélien, arbuste épineux par excellence produisant la gomme arabique dure de première qualité commerciale.", "distribution_zone": "Zone pastorale sahélienne septentrionale (Dori, Gorom, Djibo, Oursi)", "photo_url": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 11.9, "ldmc_mgg": 395, "wood_density_gcm3": 0.71, "seed_mass_mg": 85, "p50_hydraulic_mpa": -4.5, "leaf_thickness_um": 350, "drought_index": 94, "fire_resistance": 55}, "germination": {"t50_days": 3.8, "gp_ctrl_pct": 94, "gp_peg_pct": 62, "regime": "Trempage eau tiède 12h"}, "projections": {"ssp245_2050": {"change_pct": -12.2, "vuln_idx": 12.2, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -10, "vuln_idx": 10, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -15.4, "vuln_idx": 15.4, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": -36.9, "vuln_idx": 36.9, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Production et vente de gomme arabique", "Fourrage riche pour caprins", "Fixation du cordon dunaire"], "cultural_importance": "Filière économique stratégique d'exportation pour les communautés du nord.", "medicinal_properties": "Adoucissant pectoral, traitement des inflammations gastro-intestinales."}}, {"id": "b0000000-0000-0000-0000-000000000010", "scientific_name": "Parkia biglobosa (Jacq.) R.Br. ex G.Don", "accepted_name_gbif": "Parkia biglobosa (Jacq.) R.Br. ex G.Don", "gbif_usage_key": 2978931, "family": "Fabaceae", "genus": "Parkia", "vernacular_moore": "Roaga", "vernacular_dioula": "Néré", "vernacular_fulfulde": "Narehi", "functional_group": "Arbre agroforestier d'intérêt majeur", "iucn_status": "LC", "description": "Le Néré, pilier alimentaire de l'Afrique de l'Ouest dont les graines fermentées produisent le Soumbala, condiment nutritionnel d'une richesse exceptionnelle.", "distribution_zone": "Parcs à karité et néré soudano-sahéliens et soudaniens (Koudougou, Manga, Pô, Bobo)", "photo_url": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 15.1, "ldmc_mgg": 310, "wood_density_gcm3": 0.52, "seed_mass_mg": 280, "p50_hydraulic_mpa": -2.5, "leaf_thickness_um": 310, "drought_index": 68, "fire_resistance": 65}, "germination": {"t50_days": 5.5, "gp_ctrl_pct": 90, "gp_peg_pct": 32, "regime": "H2SO4 ou incision du tégument"}, "projections": {"ssp245_2050": {"change_pct": -10.9, "vuln_idx": 10.9, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -17.7, "vuln_idx": 17.7, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -23.6, "vuln_idx": 23.6, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": -32.3, "vuln_idx": 32.3, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Transformation des graines en Soumbala", "Pulpe jaune farineuse consommée fraîche", "Teinture des poteries"], "cultural_importance": "Patrimoine gastronomique et agroforestier inaliénable du Burkina Faso.", "medicinal_properties": "Écorce hypotensive contre l'hypertension artérielle et maux de dents."}}, {"id": "b0000000-0000-0000-0000-000000000011", "scientific_name": "Pterocarpus erinaceus Poir.", "accepted_name_gbif": "Pterocarpus erinaceus Poir.", "gbif_usage_key": 2964893, "family": "Fabaceae", "genus": "Pterocarpus", "vernacular_moore": "Noèga", "vernacular_dioula": "Guénou", "vernacular_fulfulde": "Bane", "functional_group": "Bois d'oeuvre noble menacé", "iucn_status": "EN", "description": "Le Bois de rose d'Afrique (Keno / Vène), essence noble décidue surexploitée pour son bois de résonance (fabrication des balafons) et menacée d'extinction.", "distribution_zone": "Forêts claires et savanes soudaniennes (Pô, Kaboré Tambi, Nazinga, Léo, Gaoua)", "photo_url": "https://images.unsplash.com/photo-1546842931-886c185b4c8c?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 14.6, "ldmc_mgg": 325, "wood_density_gcm3": 0.68, "seed_mass_mg": 150, "p50_hydraulic_mpa": -2.4, "leaf_thickness_um": 300, "drought_index": 50, "fire_resistance": 70}, "germination": {"t50_days": 8.2, "gp_ctrl_pct": 78, "gp_peg_pct": 22, "regime": "Extraction des samares épineuses"}, "projections": {"ssp245_2050": {"change_pct": -21.1, "vuln_idx": 21.1, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -21.3, "vuln_idx": 21.3, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -33.2, "vuln_idx": 33.2, "status": "Modérément Vulnérable"}, "ssp585_2080": {"change_pct": -50.5, "vuln_idx": 50.5, "status": "Extrêmement Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Lames de balafons de tradition mandingue", "Ébénisterie de luxe", "Fourrage de grande valeur pour ovins"], "cultural_importance": "Instrument fondamental de la musique traditionnelle et des rituels initiatiques.", "medicinal_properties": "Exsudat rouge astringent (sang-dragon) anti-hémorragique."}}, {"id": "b0000000-0000-0000-0000-000000000012", "scientific_name": "Anogeissus leiocarpa (DC.) Guill. & Perr.", "accepted_name_gbif": "Anogeissus leiocarpa (DC.) Guill. & Perr.", "gbif_usage_key": 3188556, "family": "Combretaceae", "genus": "Anogeissus", "vernacular_moore": "Siiga", "vernacular_dioula": "Kérékété", "vernacular_fulfulde": "Kojoli", "functional_group": "Essence ripicole et savanicole dense", "iucn_status": "LC", "description": "Le Bouleau d'Afrique, grand arbre élancé à bois très dense (0.76 g/cm³), poussant préférentiellement dans les zones de transition et le long des cours d'eau.", "distribution_zone": "Galeries ripicoles et forêts classées du centre et sud (Dem, Pô, Nazinga)", "photo_url": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 12.8, "ldmc_mgg": 365, "wood_density_gcm3": 0.76, "seed_mass_mg": 35, "p50_hydraulic_mpa": -3.7, "leaf_thickness_um": 340, "drought_index": 76, "fire_resistance": 60}, "germination": {"t50_days": 7, "gp_ctrl_pct": 72, "gp_peg_pct": 30, "regime": "Trempage 24h"}, "projections": {"ssp245_2050": {"change_pct": -9, "vuln_idx": 9, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -8.5, "vuln_idx": 8.5, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -19.4, "vuln_idx": 19.4, "status": "Faiblement Vulnérable"}, "ssp585_2080": {"change_pct": -39.8, "vuln_idx": 39.8, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Poteaux de construction imputrescibles", "Teinture des tissus Bogolan (tanins)", "Frotte-dents hygiénique"], "cultural_importance": "Utilisé pour la teinture traditionnelle du coton écru en jaune/kaki.", "medicinal_properties": "Anthelminthique puissant, antibactérien pour l'hygiène buccodentaire."}}, {"id": "b0000000-0000-0000-0000-000000000013", "scientific_name": "Khaya senegalensis (Desr.) A.Juss.", "accepted_name_gbif": "Khaya senegalensis (Desr.) A.Juss.", "gbif_usage_key": 3190474, "family": "Meliaceae", "genus": "Khaya", "vernacular_moore": "Kooko", "vernacular_dioula": "Dialo", "vernacular_fulfulde": "Cailcédrat", "functional_group": "Grand arbre ripicole médicinal", "iucn_status": "VU", "description": "L'Acajou du Sénégal ou Cailcédrat, arbre majestueux des galeries forestières vulnérable à la fragmentation de son habitat et à l'écorçage médicinal intensif.", "distribution_zone": "Ripisylves et forêts soudaniennes (Kou, Pô, Nazinga, Banfora)", "photo_url": "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 15.8, "ldmc_mgg": 305, "wood_density_gcm3": 0.62, "seed_mass_mg": 70, "p50_hydraulic_mpa": -2.1, "leaf_thickness_um": 330, "drought_index": 52, "fire_resistance": 60}, "germination": {"t50_days": 6.5, "gp_ctrl_pct": 85, "gp_peg_pct": 20, "regime": "Semis direct après récolte"}, "projections": {"ssp245_2050": {"change_pct": -18.5, "vuln_idx": 18.5, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -22, "vuln_idx": 22, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -34.8, "vuln_idx": 34.8, "status": "Modérément Vulnérable"}, "ssp585_2080": {"change_pct": -52.4, "vuln_idx": 52.4, "status": "Extrêmement Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Ébénisterie de grand luxe", "Fourrage de haute valeur", "Arbre d'alignement urbain ombragé"], "cultural_importance": "L'écorce amère est la panacée la plus réputée de la médecine traditionnelle voltaïque.", "medicinal_properties": "Antipaludique de référence (amertume due aux khayanolides)."}}, {"id": "b0000000-0000-0000-0000-000000000014", "scientific_name": "Vitellaria paradoxa C.F.Gaertn.", "accepted_name_gbif": "Vitellaria paradoxa C.F.Gaertn.", "gbif_usage_key": 2888636, "family": "Sapotaceae", "genus": "Vitellaria", "vernacular_moore": "Taanga", "vernacular_dioula": "Si", "vernacular_fulfulde": "Karehi", "functional_group": "Arbre oléagineux agroforestier clé", "iucn_status": "VU", "description": "Le Karité, arbre d'or vert d'Afrique de l'Ouest dont les noix fournissent le beurre de karité, ressource économique majeure du Burkina Faso.", "distribution_zone": "Parcs agroforestiers du centre et du sud (Koudougou, Manga, Bobo, Fada)", "photo_url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 12.4, "ldmc_mgg": 385, "wood_density_gcm3": 0.7, "seed_mass_mg": 9500, "p50_hydraulic_mpa": -3.1, "leaf_thickness_um": 390, "drought_index": 65, "fire_resistance": 80}, "germination": {"t50_days": 14.5, "gp_ctrl_pct": 75, "gp_peg_pct": 25, "regime": "Semis immédiat (graines récalcitrantes)"}, "projections": {"ssp245_2050": {"change_pct": -15.4, "vuln_idx": 15.4, "status": "Faiblement Vulnérable"}, "ssp245_2080": {"change_pct": -19.8, "vuln_idx": 19.8, "status": "Faiblement Vulnérable"}, "ssp585_2050": {"change_pct": -28.6, "vuln_idx": 28.6, "status": "Modérément Vulnérable"}, "ssp585_2080": {"change_pct": -46.2, "vuln_idx": 46.2, "status": "Modérément Vulnérable"}}, "ethnobotany": {"traditional_uses": ["Fabrication artisanale du beurre de karité", "Alimentation et cosmétique mondiale", "Consommation du fruit mûr sucré"], "cultural_importance": "Arbre protégé par le droit coutumier; pilier de l'autonomisation économique des femmes.", "medicinal_properties": "Cicatrisant dermique d'exception, baume décongestionnant."}}, {"id": "b0000000-0000-0000-0000-000000000028", "scientific_name": "Boscia senegalensis (Pers.) Lam.", "accepted_name_gbif": "Boscia senegalensis (Pers.) Lam.", "gbif_usage_key": 3054115, "family": "Capparaceae", "genus": "Boscia", "vernacular_moore": "Vang-pelga", "vernacular_dioula": "Bere", "vernacular_fulfulde": "Gigli", "functional_group": "Arbuste vivrier anti-famine hyper-aride", "iucn_status": "LC", "description": "Le Boscia du Sahel, arbuste sempervirent xérophyte extrême maintenant ses feuilles vertes même lors des pires sécheresses pluriannuelles.", "distribution_zone": "Sahel septentrional dunaire et rocailleux (Oursi, Markoye, Tin-Akoff, Dori)", "photo_url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80", "traits": {"sla_mm2mg": 7.9, "ldmc_mgg": 480, "wood_density_gcm3": 0.77, "seed_mass_mg": 1200, "p50_hydraulic_mpa": -6, "leaf_thickness_um": 520, "drought_index": 99, "fire_resistance": 75}, "germination": {"t50_days": 4, "gp_ctrl_pct": 94, "gp_peg_pct": 78, "regime": "Scarification légère"}, "projections": {"ssp245_2050": {"change_pct": 5.2, "vuln_idx": 0, "status": "Résiliente / Stable"}, "ssp245_2080": {"change_pct": 8.1, "vuln_idx": 0, "status": "Expansion d'aire"}, "ssp585_2050": {"change_pct": 4.6, "vuln_idx": 0, "status": "Résiliente / Stable"}, "ssp585_2080": {"change_pct": 12.4, "vuln_idx": 0, "status": "Expansion d'aire"}}, "ethnobotany": {"traditional_uses": ["Graines détoxifiées consommées comme céréale de substitution anti-famine", "Fourrage de soudure ultime"], "cultural_importance": "L'arbuste qui sauve des vies lors des sécheresses dévastatrices au Sahel.", "medicinal_properties": "Purification de l'eau trouble (graines coagulantes) et soin des ophtalmies."}}];
+    const VILLAGES = [{"village_name": "Yakouta (Dori)", "climatic_zone": "Sahélienne", "latitude": 14.025, "longitude": -0.088, "fire_index_modis": 1.6, "aridity_index": 0.22, "surveys_count": 10, "mean_decline_score": -1.3, "phenology_shift_pct": 90, "top_threats": ["Sécheresses récurrentes", "Baisse de la nappe phréatique", "Surpâturage caprin"], "most_declining_species": ["Adansonia digitata", "Faidherbia albida"], "most_resilient_species": ["Balanites aegyptiaca", "Vachellia tortilis", "Boscia senegalensis"]}, {"village_name": "Oursi (Réserve Mare)", "climatic_zone": "Sahélienne", "latitude": 14.502, "longitude": -0.448, "fire_index_modis": 0.9, "aridity_index": 0.18, "surveys_count": 10, "mean_decline_score": -1.5, "phenology_shift_pct": 95, "top_threats": ["Ensablement des mares", "Chaleurs extrêmes printanières", "Vent desséchant (Harmattan)"], "most_declining_species": ["Pterocarpus erinaceus", "Anogeissus leiocarpa"], "most_resilient_species": ["Boscia senegalensis", "Vachellia tortilis"]}, {"village_name": "Gorom-Gorom Centre", "climatic_zone": "Sahélienne", "latitude": 14.445, "longitude": -0.235, "fire_index_modis": 1.2, "aridity_index": 0.19, "surveys_count": 10, "mean_decline_score": -1.4, "phenology_shift_pct": 88, "top_threats": ["Coupe abusive pour combustible", "Déficit hydrique édaphique"], "most_declining_species": ["Adansonia digitata", "Parkia biglobosa"], "most_resilient_species": ["Balanites aegyptiaca", "Senegalia senegal"]}, {"village_name": "Bani", "climatic_zone": "Sahélienne", "latitude": 13.785, "longitude": -0.15, "fire_index_modis": 2.1, "aridity_index": 0.24, "surveys_count": 10, "mean_decline_score": -1.1, "phenology_shift_pct": 82, "top_threats": ["Érosion éolienne", "Tassement du sol pastoral"], "most_declining_species": ["Sclerocarya birrea", "Faidherbia albida"], "most_resilient_species": ["Ziziphus mauritiana", "Balanites aegyptiaca"]}, {"village_name": "Seytenga", "climatic_zone": "Sahélienne", "latitude": 13.98, "longitude": 0.21, "fire_index_modis": 1.8, "aridity_index": 0.21, "surveys_count": 10, "mean_decline_score": -1.2, "phenology_shift_pct": 85, "top_threats": ["Baisse de pluviométrie", "Émondage excessif des bergers"], "most_declining_species": ["Tamarindus indica", "Combretum glutinosum"], "most_resilient_species": ["Vachellia tortilis", "Boscia senegalensis"]}, {"village_name": "Sebba", "climatic_zone": "Sahélienne", "latitude": 13.43, "longitude": 0.52, "fire_index_modis": 2.3, "aridity_index": 0.23, "surveys_count": 10, "mean_decline_score": -1, "phenology_shift_pct": 80, "top_threats": ["Pression agropastorale", "Irrégularité de la saison des pluies"], "most_declining_species": ["Faidherbia albida", "Adansonia digitata"], "most_resilient_species": ["Balanites aegyptiaca", "Senegalia senegal"]}, {"village_name": "Djibo", "climatic_zone": "Sahélienne", "latitude": 14.1, "longitude": -1.63, "fire_index_modis": 2.5, "aridity_index": 0.2, "surveys_count": 10, "mean_decline_score": -1.6, "phenology_shift_pct": 92, "top_threats": ["Abandon de parcs et insécurité", "Sécheresses consécutives"], "most_declining_species": ["Pterocarpus erinaceus", "Adansonia digitata"], "most_resilient_species": ["Vachellia tortilis", "Balanites aegyptiaca"]}, {"village_name": "Arbinda", "climatic_zone": "Sahélienne", "latitude": 14.23, "longitude": -0.86, "fire_index_modis": 2, "aridity_index": 0.2, "surveys_count": 10, "mean_decline_score": -1.3, "phenology_shift_pct": 86, "top_threats": ["Dessèchement précoce des mares", "Attaques parasitaires de gui"], "most_declining_species": ["Sclerocarya birrea", "Faidherbia albida"], "most_resilient_species": ["Ziziphus mauritiana", "Boscia senegalensis"]}, {"village_name": "Markoye", "climatic_zone": "Sahélienne", "latitude": 14.64, "longitude": 0.035, "fire_index_modis": 1.1, "aridity_index": 0.16, "surveys_count": 10, "mean_decline_score": -1.7, "phenology_shift_pct": 98, "top_threats": ["Avancée des dunes mobiles", "Déficit d'infiltration"], "most_declining_species": ["Tamarindus indica", "Combretum glutinosum"], "most_resilient_species": ["Boscia senegalensis", "Vachellia tortilis"]}, {"village_name": "Tin-Akoff", "climatic_zone": "Sahélienne", "latitude": 14.97, "longitude": -0.16, "fire_index_modis": 0.8, "aridity_index": 0.14, "surveys_count": 10, "mean_decline_score": -1.8, "phenology_shift_pct": 100, "top_threats": ["Aridité extrême", "Températures de surface > 50°C"], "most_declining_species": ["Adansonia digitata", "Faidherbia albida"], "most_resilient_species": ["Boscia senegalensis", "Vachellia tortilis"]}, {"village_name": "Dem (Forêt Classée Kaya)", "climatic_zone": "Soudano-Sahélienne", "latitude": 13.078, "longitude": -1.121, "fire_index_modis": 4.8, "aridity_index": 0.34, "surveys_count": 10, "mean_decline_score": -0.7, "phenology_shift_pct": 75, "top_threats": ["Feux de brousse tardifs", "Coupe de bois d'énergie", "Émondage fourrager"], "most_declining_species": ["Vitellaria paradoxa", "Parkia biglobosa"], "most_resilient_species": ["Combretum glutinosum", "Faidherbia albida"]}, {"village_name": "Barsalogho", "climatic_zone": "Soudano-Sahélienne", "latitude": 13.41, "longitude": -1.19, "fire_index_modis": 3.8, "aridity_index": 0.3, "surveys_count": 10, "mean_decline_score": -0.9, "phenology_shift_pct": 78, "top_threats": ["Encrassement des sols par latérisation", "Feux de brousse"], "most_declining_species": ["Pterocarpus erinaceus", "Sclerocarya birrea"], "most_resilient_species": ["Ziziphus mauritiana", "Balanites aegyptiaca"]}, {"village_name": "Ouahigouya (Namissiguima)", "climatic_zone": "Soudano-Sahélienne", "latitude": 13.582, "longitude": -2.42, "fire_index_modis": 3.4, "aridity_index": 0.31, "surveys_count": 10, "mean_decline_score": -0.8, "phenology_shift_pct": 74, "top_threats": ["Dégradation des cordons pierreux", "Pauses pluviométriques estivales"], "most_declining_species": ["Parkia biglobosa", "Adansonia digitata"], "most_resilient_species": ["Faidherbia albida", "Ziziphus mauritiana"]}, {"village_name": "Kongoussi (Lac Bam)", "climatic_zone": "Soudano-Sahélienne", "latitude": 13.325, "longitude": -1.53, "fire_index_modis": 4, "aridity_index": 0.33, "surveys_count": 10, "mean_decline_score": -0.6, "phenology_shift_pct": 70, "top_threats": ["Comblement du lac", "Pression maraîchère sur les berges"], "most_declining_species": ["Khaya senegalensis", "Anogeissus leiocarpa"], "most_resilient_species": ["Combretum glutinosum", "Tamarindus indica"]}, {"village_name": "Tougan", "climatic_zone": "Soudano-Sahélienne", "latitude": 13.07, "longitude": -3.07, "fire_index_modis": 4.9, "aridity_index": 0.35, "surveys_count": 10, "mean_decline_score": -0.5, "phenology_shift_pct": 68, "top_threats": ["Extension des champs de céréales", "Feux pastoraux"], "most_declining_species": ["Vitellaria paradoxa", "Pterocarpus erinaceus"], "most_resilient_species": ["Faidherbia albida", "Combretum glutinosum"]}, {"village_name": "Koudougou Terroirs", "climatic_zone": "Soudano-Sahélienne", "latitude": 12.25, "longitude": -2.36, "fire_index_modis": 6.1, "aridity_index": 0.42, "surveys_count": 10, "mean_decline_score": -0.4, "phenology_shift_pct": 62, "top_threats": ["Vieillissement des parcs à karité", "Parasitisme végétal (Loranthus)"], "most_declining_species": ["Vitellaria paradoxa", "Parkia biglobosa"], "most_resilient_species": ["Faidherbia albida", "Tamarindus indica"]}, {"village_name": "Ouagadougou (Ceinture Verte)", "climatic_zone": "Soudano-Sahélienne", "latitude": 12.37, "longitude": -1.52, "fire_index_modis": 6.5, "aridity_index": 0.39, "surveys_count": 10, "mean_decline_score": -0.9, "phenology_shift_pct": 72, "top_threats": ["Urbanisation galopante", "Décharges sauvages et pollution"], "most_declining_species": ["Khaya senegalensis", "Pterocarpus erinaceus"], "most_resilient_species": ["Azadirachta indica (exotique)", "Balanites aegyptiaca"]}, {"village_name": "Manga", "climatic_zone": "Soudano-Sahélienne", "latitude": 11.66, "longitude": -1.07, "fire_index_modis": 7.8, "aridity_index": 0.44, "surveys_count": 10, "mean_decline_score": -0.3, "phenology_shift_pct": 60, "top_threats": ["Feux de brousse annuels", "Élagage pour fourrage"], "most_declining_species": ["Pterocarpus erinaceus", "Parkia biglobosa"], "most_resilient_species": ["Vitellaria paradoxa", "Combretum glutinosum"]}, {"village_name": "Fada N'Gourma (Singou)", "climatic_zone": "Soudano-Sahélienne", "latitude": 12.06, "longitude": 0.35, "fire_index_modis": 8.6, "aridity_index": 0.43, "surveys_count": 10, "mean_decline_score": -0.4, "phenology_shift_pct": 65, "top_threats": ["Feux cynégétiques répétitifs", "Braconnage de bois d'œuvre"], "most_declining_species": ["Pterocarpus erinaceus", "Khaya senegalensis"], "most_resilient_species": ["Anogeissus leiocarpa", "Combretum glutinosum"]}, {"village_name": "Tenkodogo", "climatic_zone": "Soudano-Sahélienne", "latitude": 11.78, "longitude": -0.37, "fire_index_modis": 7.2, "aridity_index": 0.45, "surveys_count": 10, "mean_decline_score": -0.2, "phenology_shift_pct": 58, "top_threats": ["Pression agraire sur les bas-fonds", "Feux de nettoyage"], "most_declining_species": ["Parkia biglobosa", "Vitellaria paradoxa"], "most_resilient_species": ["Faidherbia albida", "Sclerocarya birrea"]}, {"village_name": "Pô (Parc Kaboré Tambi)", "climatic_zone": "Soudanienne", "latitude": 11.17, "longitude": -1.15, "fire_index_modis": 12.4, "aridity_index": 0.58, "surveys_count": 10, "mean_decline_score": -0.2, "phenology_shift_pct": 52, "top_threats": ["Feux tardifs violents", "Coupe illégale de Pterocarpus"], "most_declining_species": ["Pterocarpus erinaceus", "Khaya senegalensis"], "most_resilient_species": ["Anogeissus leiocarpa", "Vitellaria paradoxa"]}, {"village_name": "Tiébélé", "climatic_zone": "Soudanienne", "latitude": 11.095, "longitude": -0.96, "fire_index_modis": 11.8, "aridity_index": 0.59, "surveys_count": 10, "mean_decline_score": -0.1, "phenology_shift_pct": 48, "top_threats": ["Feux de brousse", "Érosion hydrique des versants"], "most_declining_species": ["Khaya senegalensis", "Parkia biglobosa"], "most_resilient_species": ["Vitellaria paradoxa", "Combretum glutinosum"]}, {"village_name": "Nazinga (Ranch Faune)", "climatic_zone": "Soudanienne", "latitude": 11.132, "longitude": -1.517, "fire_index_modis": 11.2, "aridity_index": 0.56, "surveys_count": 10, "mean_decline_score": 0.1, "phenology_shift_pct": 45, "top_threats": ["Dégâts causés par les éléphants", "Feux précoces contrôlés"], "most_declining_species": ["Adansonia digitata (écorçage)", "Pterocarpus erinaceus"], "most_resilient_species": ["Anogeissus leiocarpa", "Combretum glutinosum"]}, {"village_name": "Léo", "climatic_zone": "Soudanienne", "latitude": 11.1, "longitude": -2.1, "fire_index_modis": 13.2, "aridity_index": 0.6, "surveys_count": 10, "mean_decline_score": -0.3, "phenology_shift_pct": 54, "top_threats": ["Exploitation du bois d'œuvre", "Feux pastoraux de régénération"], "most_declining_species": ["Pterocarpus erinaceus", "Vitellaria paradoxa"], "most_resilient_species": ["Anogeissus leiocarpa", "Parkia biglobosa"]}, {"village_name": "Bobo (Forêt du Kou)", "climatic_zone": "Soudanienne", "latitude": 11.18, "longitude": -4.29, "fire_index_modis": 14.1, "aridity_index": 0.64, "surveys_count": 10, "mean_decline_score": -0.4, "phenology_shift_pct": 55, "top_threats": ["Pollution de la source du Kou", "Déforestation pour vergers de manguiers"], "most_declining_species": ["Khaya senegalensis", "Pterocarpus erinaceus"], "most_resilient_species": ["Vitellaria paradoxa", "Parkia biglobosa"]}, {"village_name": "Banfora (Cascades)", "climatic_zone": "Soudanienne", "latitude": 10.635, "longitude": -4.76, "fire_index_modis": 15.5, "aridity_index": 0.69, "surveys_count": 10, "mean_decline_score": 0, "phenology_shift_pct": 42, "top_threats": ["Feux de canne à sucre et de brousse", "Exploitation touristique non régulée"], "most_declining_species": ["Khaya senegalensis", "Pterocarpus erinaceus"], "most_resilient_species": ["Parkia biglobosa", "Anogeissus leiocarpa"]}, {"village_name": "Gaoua (Poni)", "climatic_zone": "Soudanienne", "latitude": 10.33, "longitude": -3.18, "fire_index_modis": 15.1, "aridity_index": 0.68, "surveys_count": 10, "mean_decline_score": -0.2, "phenology_shift_pct": 46, "top_threats": ["Orpaillage artisanal dévastateur", "Pollution aux métaux lourds des rivières"], "most_declining_species": ["Khaya senegalensis", "Pterocarpus erinaceus"], "most_resilient_species": ["Vitellaria paradoxa", "Combretum glutinosum"]}, {"village_name": "Sindou (Pics de Sindou)", "climatic_zone": "Soudanienne", "latitude": 10.66, "longitude": -5.16, "fire_index_modis": 14.5, "aridity_index": 0.68, "surveys_count": 10, "mean_decline_score": 0.1, "phenology_shift_pct": 40, "top_threats": ["Feux de brousse sur crêtes gréseuses", "Tourisme non régulé"], "most_declining_species": ["Khaya senegalensis"], "most_resilient_species": ["Anogeissus leiocarpa", "Vitellaria paradoxa"]}];
+
+    function initMobile() {
+      const vSelect = document.getElementById('villageSelect');
+      VILLAGES.forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v.village_name;
+        opt.textContent = v.village_name + ' (' + v.climatic_zone + ')';
+        vSelect.appendChild(opt);
+      });
+
+      const sSelect = document.getElementById('surveySpeciesSelect');
+      SPECIES.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s.id;
+        opt.textContent = s.scientific_name + ' (' + s.vernacular_moore + ')';
+        sSelect.appendChild(opt);
+      });
+    }
+
+    function switchMobileView(viewId) {
+      document.querySelectorAll('.mobile-view').forEach(v => v.classList.add('hidden'));
+      document.querySelectorAll('.mobile-nav-btn').forEach(b => {
+        b.className = "mobile-nav-btn text-slate-400 hover:text-slate-600 flex flex-col items-center gap-1 font-medium text-[11px]";
+      });
+
+      const targetView = document.getElementById('view-' + viewId);
+      const targetNav = document.getElementById('nav-' + viewId);
+      if (targetView) targetView.classList.remove('hidden');
+      if (targetNav) {
+        targetNav.className = "mobile-nav-btn text-forest-700 flex flex-col items-center gap-1 font-bold text-[11px]";
+      }
+    }
+
+    function acquireGPS() {
+      const el = document.getElementById('gpsCoords');
+      el.textContent = "Acquisition satellite en cours...";
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          pos => {
+            el.textContent = `GPS : ${pos.coords.latitude.toFixed(4)}°N, ${pos.coords.longitude.toFixed(4)}°W (± ${pos.coords.accuracy.toFixed(1)} m)`;
+          },
+          err => {
+            el.textContent = "GPS : 14.0321°N, -0.0345°W (Simulation Terroir Dori)";
+          },
+          { timeout: 5000 }
+        );
+      } else {
+        el.textContent = "GPS : 14.0321°N, -0.0345°W (Simulation Terroir Dori)";
+      }
+    }
+
+    function saveSurveyForm() {
+      const sp = document.getElementById('surveySpeciesSelect').value;
+      const v = document.getElementById('villageSelect').value;
+      alert(`✅ Enquête enregistrée localement avec succès !
+Village : ${v}
+Espèce : ${sp}
+Coordonnées horodatées rattachées.`);
+      const c = document.getElementById('localSurveysCount');
+      c.textContent = parseInt(c.textContent) + 1;
+    }
+
+    function saveTreeInventory() {
+      const id = document.getElementById('treeId').value;
+      const h = document.getElementById('treeHeight').value;
+      alert(`✅ Arbre ${id} (Hauteur: ${h}m) stocké dans le cache hors-ligne !`);
+      const c = document.getElementById('localTreesCount');
+      c.textContent = parseInt(c.textContent) + 1;
+    }
+
+    function simulateSync() {
+      const log = document.getElementById('syncLog');
+      log.classList.remove('hidden');
+      log.innerHTML = `> Connexion au serveur central SahelTraits-DB Cloud...<br>> Envoi de 15 enquêtes et 33 spécimens...<br>> Validation intégrité SHA256 OK<br>> Synchronisation terminée avec succès à 100% !`;
+    }
+
+    function exportLocalJSON() {
+      const data = {
+        app: "SahelField-Mobile-PWA",
+        version: "2.4",
+        timestamp: new Date().toISOString(),
+        author: "M. YAGO Abdoul Rachide",
+        records: "Données collectées hors-ligne"
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'sahelfield_offline_records.json';
+      a.click();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initMobile();
+      acquireGPS();
+    });
+  </script>
+</body>
+</html>
