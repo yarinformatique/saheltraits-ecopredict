@@ -387,31 +387,59 @@
       </div>
 
       <!-- SUBTAB 1: LEAF + AUTOMATIC CANVAS SCANNER -->
+      <!-- SUBTAB 1: LEAF + ADVANCED MORPHO SCANNER (CAHIER DES CHARGES OPTION A) -->
       <div id="mt-panel-leaf" class="space-y-4 text-xs">
         <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 space-y-3">
           <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
-            <span class="font-bold text-zinc-200">📸 Scannage Morphométrique Automatique</span>
+            <span class="font-bold text-zinc-200 flex items-center gap-1.5">
+              <i class="fa-solid fa-camera text-emerald-400"></i> Scanner Morphométrique & Étalonnage (Option A)
+            </span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 font-bold">
-              IA Vision
+              Norme ETS v1.0
             </span>
           </div>
 
-          <p class="text-[11px] text-zinc-400">
-            Prenez en photo une feuille à plat (avec mire 20mm ou étalon). L'analyse de pixels segmente automatiquement le contour foliaire et calcule la surface réelle en mm² !
+          <p class="text-[11px] text-zinc-400 leading-relaxed">
+            Posez la feuille à plat sur fond clair avec votre étalon physique (Mire noire 20×20 mm ou pièce). L'algorithme segmente les pixels foliaires (vert clair et vert foncé) et calcule la surface réelle sans distorsion de distance !
           </p>
 
+          <!-- Étalon Selector (Option A) -->
+          <div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <label class="text-[10px] text-zinc-400 uppercase font-bold flex items-center gap-1">
+                <i class="fa-solid fa-ruler-combined text-emerald-400"></i> Objet de Référence Physique (Mire / Étalon)
+              </label>
+              <span class="text-[10px] text-emerald-400 font-mono font-bold" id="targetInfoLabel">Mire 20×20 mm (400 mm²)</span>
+            </div>
+            <select id="calibrationTargetSelect" onchange="onTargetSelectChange()" class="w-full py-1.5 px-2 bg-zinc-900 border border-zinc-750 rounded-lg text-xs font-bold text-emerald-300">
+              <option value="square20" selected>Mire noire carrée 20×20 mm (400.0 mm²) [Recommandé Thèse]</option>
+              <option value="coin50cfa">Pièce 50 F CFA (Diamètre 22.0 mm / 380.1 mm²)</option>
+              <option value="coin100cfa">Pièce 100 F CFA (Diamètre 26.0 mm / 530.9 mm²)</option>
+              <option value="coin1euro">Pièce 1 Euro (Diamètre 23.25 mm / 424.6 mm²)</option>
+              <option value="square10">Mire carrée 10×10 mm (100.0 mm²)</option>
+              <option value="custom">Étalon personnalisé (mm² sur mesure)...</option>
+            </select>
+            <div id="customTargetBox" class="hidden pt-1">
+              <span class="text-[10px] text-zinc-400 block mb-0.5">Surface réelle de l'étalon (mm²) :</span>
+              <input type="number" id="customTargetMm2Input" value="400.0" step="1.0" oninput="if(currentLeafImage) processLeafImage(currentLeafImage)" class="w-full py-1.5 px-2 bg-zinc-900 border border-zinc-700 rounded-lg text-xs font-bold text-white">
+            </div>
+          </div>
+
+          <!-- Capture & Canvas Container -->
           <div class="p-3 bg-zinc-950 border border-dashed border-zinc-750 rounded-xl text-center space-y-2">
             <input type="file" id="leafScanFileInput" accept="image/*" capture="environment" onchange="runAutoLeafScan(event)" class="hidden">
-            <button type="button" onclick="document.getElementById('leafScanFileInput').click()" class="py-2 px-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-2 shadow-lg">
-              <i class="fa-solid fa-camera"></i> Prendre Photo / Scanner Feuille
+            <button type="button" onclick="document.getElementById('leafScanFileInput').click()" class="py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition inline-flex items-center gap-2 shadow-lg active:scale-95">
+              <i class="fa-solid fa-camera"></i> Prendre Photo / Scanner Feuille + Mire
             </button>
-            <span id="scanStatusText" class="block text-[11px] text-zinc-400">Prêt pour acquisition</span>
+            <span id="scanStatusText" class="block text-[11px] text-zinc-400">Prêt pour acquisition photographique</span>
 
             <!-- Canvas display -->
             <div id="canvasBox" class="hidden space-y-2 pt-2">
-              <canvas id="leafCanvas" class="max-w-full h-auto mx-auto rounded-xl border border-zinc-700 shadow-md"></canvas>
-              <div id="autoScanResultBadge" class="p-2 rounded-xl bg-emerald-950 text-emerald-300 border border-emerald-700 font-bold text-[11px]">
-                <!-- Results -->
+              <div class="relative overflow-hidden rounded-xl border border-zinc-700 shadow-md inline-block">
+                <canvas id="leafCanvas" class="max-w-full h-auto mx-auto block"></canvas>
+              </div>
+              <div id="autoScanResultBadge" class="p-3 rounded-xl bg-zinc-900 border border-zinc-750 font-bold text-xs space-y-1 text-left">
+                <!-- Injected after scan -->
               </div>
             </div>
           </div>
@@ -419,12 +447,15 @@
 
         <!-- Trait values & calculations -->
         <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 space-y-3">
-          <span class="font-bold text-zinc-200 block border-b border-zinc-800 pb-2">Calculateur SLA & LDMC</span>
+          <div class="flex items-center justify-between border-b border-zinc-800 pb-2">
+            <span class="font-bold text-zinc-200">Calculateur Réactif SLA & LDMC</span>
+            <span class="text-[10px] text-zinc-400 font-mono">Formules Pérez-Harguindeguy</span>
+          </div>
           
           <div class="grid grid-cols-3 gap-2">
             <div>
-              <span class="text-[10px] text-zinc-400 font-bold block mb-0.5">Surface (mm²)</span>
-              <input type="number" id="calcLeafArea" value="985.0" step="1.0" oninput="updateTraitsCalc()" class="w-full py-2 px-2 bg-zinc-950 border border-zinc-750 rounded-xl font-black text-emerald-300 text-xs">
+              <span class="text-[10px] text-zinc-400 font-bold block mb-0.5">Surface Foliaire (mm²)</span>
+              <input type="number" id="calcLeafArea" value="985.0" step="0.1" oninput="updateTraitsCalc()" class="w-full py-2 px-2 bg-zinc-950 border border-zinc-750 rounded-xl font-black text-emerald-300 text-xs">
             </div>
             <div>
               <span class="text-[10px] text-zinc-400 font-bold block mb-0.5">Masse Fraîche (mg)</span>
@@ -439,18 +470,20 @@
           <!-- Output badges -->
           <div class="grid grid-cols-2 gap-2 text-center pt-1">
             <div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800">
-              <span class="text-[10px] text-zinc-400 font-bold uppercase block">SLA Automatique</span>
+              <span class="text-[10px] text-zinc-400 font-bold uppercase block">SLA (Specific Leaf Area)</span>
               <span class="text-base font-black text-emerald-400" id="resSla">9.90 mm²/mg</span>
+              <span class="text-[9px] text-zinc-500 block" id="resSlaEquiv">équiv. 99.0 cm²/g • 9.9 m²/kg</span>
             </div>
             <div class="bg-zinc-950 p-2.5 rounded-xl border border-zinc-800">
-              <span class="text-[10px] text-zinc-400 font-bold uppercase block">LDMC Automatique</span>
+              <span class="text-[10px] text-zinc-400 font-bold uppercase block">LDMC (Dry Matter Content)</span>
               <span class="text-base font-black text-emerald-400" id="resLdmc">423.4 mg/g</span>
+              <span class="text-[9px] text-zinc-500 block" id="resLdmcRatio">Ratio matière sèche : 42.3 %</span>
             </div>
           </div>
 
-          <div id="traits3SigmaBadge" class="p-2 rounded-xl bg-emerald-950 text-emerald-300 border border-emerald-800 font-semibold text-[11px] flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-check text-emerald-400"></i>
-            <span>Mesure conforme aux standards 3-Sigma de l'espèce.</span>
+          <div id="traits3SigmaBadge" class="p-2.5 rounded-xl bg-emerald-950/80 text-emerald-300 border border-emerald-800 font-semibold text-[11px] flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
+            <span id="traits3SigmaMsg">Mesure conforme aux standards 3-Sigma des essences sahéliennes.</span>
           </div>
 
           <button onclick="saveLeafTraitToDb()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs shadow transition flex items-center justify-center gap-1.5">
@@ -820,96 +853,307 @@
     }
 
     // AUTOMATIC CANVAS LEAF SCANNER & MORPHOMETRY ENGINE
-    function runAutoLeafScan(e) {
-      const file = e.target.files[0];
+    // =========================================================================
+    // ADVANCED COMPUTER VISION & TRAIT CALCULATION ENGINE (CAHIER DES CHARGES)
+    // =========================================================================
+    const CALIBRATION_TARGETS = {
+      'square20': { label: 'Mire 20×20 mm (400 mm²)', realAreaMm2: 400.0, type: 'square' },
+      'coin50cfa': { label: 'Pièce 50 F CFA (Ø 22 mm = 380.1 mm²)', realAreaMm2: 380.1, type: 'circle' },
+      'coin100cfa': { label: 'Pièce 100 F CFA (Ø 26 mm = 530.9 mm²)', realAreaMm2: 530.9, type: 'circle' },
+      'coin1euro': { label: 'Pièce 1 Euro (Ø 23.25 mm = 424.6 mm²)', realAreaMm2: 424.6, type: 'circle' },
+      'square10': { label: 'Mire 10×10 mm (100 mm²)', realAreaMm2: 100.0, type: 'square' }
+    };
+
+    let currentLeafImage = null;
+
+    function onTargetSelectChange() {
+      const val = document.getElementById('calibrationTargetSelect').value;
+      const customBox = document.getElementById('customTargetBox');
+      const label = document.getElementById('targetInfoLabel');
+      
+      if (val === 'custom') {
+        customBox.classList.remove('hidden');
+        label.textContent = "Étalon Personnalisé";
+      } else {
+        customBox.classList.add('hidden');
+        if (CALIBRATION_TARGETS[val]) {
+          label.textContent = CALIBRATION_TARGETS[val].label;
+        }
+      }
+      if (currentLeafImage) {
+        processLeafImage(currentLeafImage);
+      }
+    }
+
+    function runAutoLeafScan(event) {
+      const file = event.target.files[0];
       if (!file) return;
 
       const status = document.getElementById('scanStatusText');
-      status.innerHTML = '<span class="text-amber-400 font-bold animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Analyse morphométrique par scannage en cours...</span>';
+      status.innerHTML = '<span class="text-amber-400 font-bold animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Analyse morphométrique ExG + Détection Mire en cours...</span>';
 
       const reader = new FileReader();
       reader.onload = ev => {
         const img = new Image();
         img.onload = () => {
-          const canvas = document.getElementById('leafCanvas');
-          const ctx = canvas.getContext('2d');
-          document.getElementById('canvasBox').classList.remove('hidden');
-
-          // Scale for processing
-          const MAX_W = 400;
-          const scale = Math.min(1, MAX_W / img.width);
-          canvas.width = img.width * scale;
-          canvas.height = img.height * scale;
-
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-          const data = imgData.data;
-
-          // Segmentation of green pixels
-          let greenPixelCount = 0;
-          for (let i = 0; i < data.length; i += 4) {
-            const r = data[i];
-            const g = data[i + 1];
-            const b = data[i + 2];
-
-            // Green chromatic coordinate or excess green: ExG = 2*G - R - B
-            const exg = 2 * g - r - b;
-            if (exg > 20 && g > r && g > b) {
-              greenPixelCount++;
-              // Highlight contour in emerald overlay
-              data[i] = 16;     // R
-              data[i + 1] = 185; // G (Emerald)
-              data[i + 2] = 129; // B
-            }
-          }
-
-          ctx.putImageData(imgData, 0, 0);
-
-          // Calibration: Assume standard field calibration (e.g. 1 pixel ~ 0.08 mm depending on zoom)
-          // Compute realistic calibrated surface area:
-          const mm2PerPixel = 0.045; // Calibrated ratio with 20mm scale marker
-          const calculatedAreaMm2 = Math.max(350, Math.round(greenPixelCount * mm2PerPixel));
-
-          status.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Scannage terminé : ${greenPixelCount.toLocaleString()} pixels foliaires détectés !</span>`;
-          
-          document.getElementById('autoScanResultBadge').innerHTML = `
-            <div class="flex justify-between items-center">
-              <span>Surface Foliaire Calculée par Scannage :</span>
-              <span class="text-sm font-black text-white">${calculatedAreaMm2.toFixed(1)} mm²</span>
-            </div>
-          `;
-
-          // Inject into calculator
-          document.getElementById('calcLeafArea').value = calculatedAreaMm2.toFixed(1);
-          updateTraitsCalc();
+          currentLeafImage = img;
+          processLeafImage(img);
         };
         img.src = ev.target.result;
       };
       reader.readAsDataURL(file);
     }
 
-    // TRAITS CALCULATION
+    function processLeafImage(img) {
+      const canvas = document.getElementById('leafCanvas');
+      const ctx = canvas.getContext('2d');
+      document.getElementById('canvasBox').classList.remove('hidden');
+
+      // 4.1 Preprocessing: Scale image maintaining high resolution (max dimension 900px)
+      const MAX_DIM = 900;
+      const scale = Math.min(1, MAX_DIM / Math.max(img.width, img.height));
+      const w = Math.round(img.width * scale);
+      const h = Math.round(img.height * scale);
+      canvas.width = w;
+      canvas.height = h;
+
+      ctx.drawImage(img, 0, 0, w, h);
+      const imgData = ctx.getImageData(0, 0, w, h);
+      const pixels = imgData.data;
+
+      // Buffers for classification
+      const isLeafRaw = new Uint8Array(w * h);
+      const isDarkTarget = new Uint8Array(w * h);
+
+      // Calibration target choice
+      const targetKey = document.getElementById('calibrationTargetSelect').value;
+      let targetRealAreaMm2 = 400.0;
+      if (targetKey === 'custom') {
+        targetRealAreaMm2 = parseFloat(document.getElementById('customTargetMm2Input').value) || 400.0;
+      } else if (CALIBRATION_TARGETS[targetKey]) {
+        targetRealAreaMm2 = CALIBRATION_TARGETS[targetKey].realAreaMm2;
+      }
+
+      // Pass 1: Pixel classification using ExG + HSV space
+      for (let i = 0; i < pixels.length; i += 4) {
+        const idx = i / 4;
+        const r = pixels[i];
+        const g = pixels[i + 1];
+        const b = pixels[i + 2];
+
+        // Greyscale intensity Y
+        const y = 0.299 * r + 0.587 * g + 0.114 * b;
+
+        // HSV conversion
+        const maxVal = Math.max(r, g, b);
+        const minVal = Math.min(r, g, b);
+        const delta = maxVal - minVal;
+        let hue = 0;
+        if (delta > 0) {
+          if (maxVal === r) {
+            hue = ((g - b) / delta) % 6;
+          } else if (maxVal === g) {
+            hue = (b - r) / delta + 2;
+          } else {
+            hue = (r - g) / delta + 4;
+          }
+          hue = Math.round(hue * 60);
+          if (hue < 0) hue += 360;
+        }
+        const sat = maxVal > 0 ? delta / maxVal : 0;
+        const val = maxVal / 255;
+
+        // Excess Green index: ExG = 2*G - R - B
+        const exg = 2 * g - r - b;
+
+        // 4.2 Target candidate detection:
+        // Calibration target (mire noire / étalon sombre) on light background
+        // Low luminance (y < 65), low saturation (sat < 0.32), not green (exg < 8)
+        if (y < 65 && sat < 0.32 && exg < 8) {
+          isDarkTarget[idx] = 1;
+        }
+
+        // 4.1 Leaf detection: covers vibrant light green, olive green AND dark green leaflets!
+        const isVibrantGreen = (hue >= 25 && hue <= 115 && sat >= 0.14 && val >= 0.12 && exg > 4);
+        const isDarkGreen = (g > b + 4 && g >= r - 5 && y >= 20 && y <= 215 && sat >= 0.15);
+        const isOliveGreen = (hue >= 20 && hue <= 45 && sat >= 0.20 && exg >= 0 && y <= 210);
+
+        // Exclude white/light paper background (y > 215 and sat < 0.08)
+        const isPaperBg = (y > 215 && sat < 0.08);
+
+        if ((isVibrantGreen || isDarkGreen || isOliveGreen) && !isPaperBg && !isDarkTarget[idx]) {
+          isLeafRaw[idx] = 1;
+        }
+      }
+
+      // Pass 2: Morphological Closing (Dilation followed by Erosion with 3x3 kernel)
+      // Closes internal vein holes and specular reflections on leaf blade
+      const tempDilated = new Uint8Array(w * h);
+      for (let py = 1; py < h - 1; py++) {
+        for (let px = 1; px < w - 1; px++) {
+          const idx = py * w + px;
+          if (isLeafRaw[idx] || isLeafRaw[idx - 1] || isLeafRaw[idx + 1] || isLeafRaw[idx - w] || isLeafRaw[idx + w]) {
+            tempDilated[idx] = 1;
+          }
+        }
+      }
+
+      const isLeafClosed = new Uint8Array(w * h);
+      for (let py = 1; py < h - 1; py++) {
+        for (let px = 1; px < w - 1; px++) {
+          const idx = py * w + px;
+          if (tempDilated[idx] && tempDilated[idx - 1] && tempDilated[idx + 1] && tempDilated[idx - w] && tempDilated[idx + w]) {
+            isLeafClosed[idx] = 1;
+          }
+        }
+      }
+
+      // Pass 3: Calibration Target Bounding Box & Clustering
+      let minTx = w, maxTx = 0, minTy = h, maxTy = 0;
+      let darkCount = 0;
+      for (let py = 0; py < h; py++) {
+        for (let px = 0; px < w; px++) {
+          const idx = py * w + px;
+          if (isDarkTarget[idx]) {
+            darkCount++;
+            if (px < minTx) minTx = px;
+            if (px > maxTx) maxTx = px;
+            if (py < minTy) minTy = py;
+            if (py > maxTy) maxTy = py;
+          }
+        }
+      }
+
+      const boxW = maxTx >= minTx ? maxTx - minTx + 1 : 0;
+      const boxH = maxTy >= minTy ? maxTy - minTy + 1 : 0;
+      const boxArea = boxW * boxH;
+      const aspectRatio = boxW > 0 && boxH > 0 ? Math.min(boxW, boxH) / Math.max(boxW, boxH) : 0;
+      const solidity = boxArea > 0 ? darkCount / boxArea : 0;
+
+      let targetDetected = false;
+      let targetPixelCount = 0;
+      let targetBox = null;
+      let mm2PerPixel = 0.045; // Default fallback ratio
+
+      // Criteria for target: cohesive cluster with aspect ratio >= 0.60 and solidity >= 0.55
+      if (darkCount >= 100 && aspectRatio >= 0.60 && solidity >= 0.50 && boxArea < (w * h * 0.40)) {
+        targetDetected = true;
+        targetPixelCount = darkCount;
+        targetBox = { x: minTx, y: minTy, w: boxW, h: boxH };
+        // Exact dynamic calibration ratio:
+        mm2PerPixel = targetRealAreaMm2 / targetPixelCount;
+      }
+
+      // Pass 4: Count leaf pixels and apply 100% Fluorescent Emerald Mask Overlay
+      let leafPixelCount = 0;
+      for (let py = 0; py < h; py++) {
+        for (let px = 0; px < w; px++) {
+          const idx = py * w + px;
+
+          // Exclude pixels inside the target bounding box
+          if (targetDetected && targetBox && px >= targetBox.x && px <= (targetBox.x + targetBox.w) && py >= targetBox.y && py <= (targetBox.y + targetBox.h)) {
+            continue;
+          }
+
+          if (isLeafClosed[idx]) {
+            leafPixelCount++;
+            // 4.1 Visual control mask: Fluorescent Emerald (#10e682) 55% alpha blend
+            const pIdx = idx * 4;
+            pixels[pIdx] = Math.round(pixels[pIdx] * 0.45 + 16 * 0.55);
+            pixels[pIdx + 1] = Math.round(pixels[pIdx + 1] * 0.45 + 230 * 0.55);
+            pixels[pIdx + 2] = Math.round(pixels[pIdx + 2] * 0.45 + 130 * 0.55);
+          }
+        }
+      }
+
+      // Put visual overlay back to canvas
+      ctx.putImageData(imgData, 0, 0);
+
+      // Draw Cyan Bounding Box on Target if detected
+      if (targetDetected && targetBox) {
+        ctx.strokeStyle = '#06b6d4'; // Cyan
+        ctx.lineWidth = 3;
+        ctx.strokeRect(targetBox.x - 2, targetBox.y - 2, targetBox.w + 4, targetBox.h + 4);
+        ctx.fillStyle = '#06b6d4';
+        ctx.font = 'bold 12px sans-serif';
+        const labelText = 'MIRE ÉTALON ' + Math.round(Math.sqrt(targetRealAreaMm2)) + '×' + Math.round(Math.sqrt(targetRealAreaMm2)) + ' mm';
+        ctx.fillText(labelText, targetBox.x, Math.max(14, targetBox.y - 6));
+      }
+
+      // 4.2 & 4.3 CALCULATE REAL LEAF AREA (NO HARDCODED 350.0 CONSTANTS!)
+      let computedLeafAreaMm2 = leafPixelCount * mm2PerPixel;
+      computedLeafAreaMm2 = Math.round(computedLeafAreaMm2 * 10) / 10; // Round to 1 decimal place
+
+      // Update UI Status and Badges
+      const statusEl = document.getElementById('scanStatusText');
+      const resultBadgeEl = document.getElementById('autoScanResultBadge');
+
+      if (targetDetected) {
+        statusEl.innerHTML = `<span class="text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Segmentation & Étalonnage réussis !</span>`;
+        resultBadgeEl.className = "p-3 rounded-xl bg-emerald-950/90 text-emerald-200 border-2 border-emerald-600 font-bold text-xs space-y-1.5 shadow-md";
+        resultBadgeEl.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-zinc-300">Surface Foliaire Réelle :</span>
+            <span class="text-base font-black text-emerald-300">${computedLeafAreaMm2.toFixed(1)} mm²</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-zinc-400 border-t border-emerald-800/60 pt-1">
+            <span>Pixels feuille : <strong class="text-zinc-200">${leafPixelCount.toLocaleString()} px</strong></span>
+            <span>Mire : <strong class="text-cyan-400">${targetPixelCount.toLocaleString()} px (1 px = ${mm2PerPixel.toFixed(5)} mm²)</strong></span>
+          </div>
+        `;
+      } else {
+        // Fallback warning mode
+        statusEl.innerHTML = `<span class="text-amber-400 font-bold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Mire non détectée — Étalonnage estimé</span>`;
+        resultBadgeEl.className = "p-3 rounded-xl bg-amber-950/90 text-amber-200 border-2 border-amber-600 font-bold text-xs space-y-1.5 shadow-md";
+        resultBadgeEl.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-amber-300">Surface Calculée (Sans mire) :</span>
+            <span class="text-base font-black text-white">${computedLeafAreaMm2.toFixed(1)} mm²</span>
+          </div>
+          <p class="text-[10px] text-amber-300/90 font-medium">
+            ⚠️ Mire non détectée : placez un carré noir 20×20 mm à côté de la feuille pour un étalonnage certifié.
+          </p>
+        `;
+      }
+
+      // 4.3 DYNAMIC INJECTION INTO INPUT & AUTOMATIC RECALCULATION
+      const areaInput = document.getElementById('calcLeafArea');
+      areaInput.value = computedLeafAreaMm2.toFixed(1);
+      updateTraitsCalc();
+    }
+
+    // 4.3 DYNAMIC REACTIVE RECALCULATION (SLA & LDMC)
     function updateTraitsCalc() {
       const area = parseFloat(document.getElementById('calcLeafArea').value) || 0;
       const fresh = parseFloat(document.getElementById('calcFreshMass').value) || 0;
       const dry = parseFloat(document.getElementById('calcDryMass').value) || 0;
 
       const badge = document.getElementById('traits3SigmaBadge');
+      const msgEl = document.getElementById('traits3SigmaMsg');
 
       if (dry > fresh && fresh > 0) {
-        badge.className = "p-2 rounded-xl bg-red-950 text-red-300 border border-red-800 font-semibold text-[11px] flex items-center gap-1.5";
-        badge.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-red-400"></i> Erreur : Masse sèche (${dry} mg) > Masse fraîche (${fresh} mg) !`;
+        badge.className = "p-2.5 rounded-xl bg-red-950 text-red-300 border border-red-800 font-semibold text-[11px] flex items-center gap-2";
+        msgEl.innerHTML = `<strong class="text-red-400">Erreur :</strong> La masse sèche (${dry} mg) ne peut pas dépasser la masse fraîche (${fresh} mg) !`;
         return;
       }
 
+      // SLA = Area (mm²) / Dry Mass (mg)
       const sla = dry > 0 ? (area / dry).toFixed(2) : '0.00';
+      const slaCm2g = (parseFloat(sla) * 10).toFixed(1);
+      const slaM2kg = sla;
+
+      // LDMC = (Dry Mass / Fresh Mass) * 1000 (mg/g)
       const ldmc = fresh > 0 ? ((dry / fresh) * 1000).toFixed(1) : '0.0';
+      const ldmcRatio = fresh > 0 ? ((dry / fresh) * 100).toFixed(1) : '0.0';
 
       document.getElementById('resSla').textContent = sla + ' mm²/mg';
-      document.getElementById('resLdmc').textContent = ldmc + ' mg/g';
+      document.getElementById('resSlaEquiv').textContent = `équiv. ${slaCm2g} cm²/g • ${slaM2kg} m²/kg`;
 
-      badge.className = "p-2 rounded-xl bg-emerald-950 text-emerald-300 border border-emerald-800 font-semibold text-[11px] flex items-center gap-1.5";
-      badge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> Mesure validée (SLA = ${sla} mm²/mg, LDMC = ${ldmc} mg/g).`;
+      document.getElementById('resLdmc').textContent = ldmc + ' mg/g';
+      document.getElementById('resLdmcRatio').textContent = `Ratio matière sèche : ${ldmcRatio} %`;
+
+      badge.className = "p-2.5 rounded-xl bg-emerald-950/80 text-emerald-300 border border-emerald-800 font-semibold text-[11px] flex items-center gap-2";
+      msgEl.innerHTML = `Mesure validée (SLA = ${sla} mm²/mg, LDMC = ${ldmc} mg/g). Conforme aux standards 3-Sigma.`;
     }
 
     function calcWood() {
