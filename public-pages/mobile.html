@@ -1461,7 +1461,7 @@
           ctx.strokeRect(targetInfo.rect.x, targetInfo.rect.y, targetInfo.rect.w, targetInfo.rect.h);
           ctx.fillStyle = '#00ffff';
           ctx.font = 'bold 11px sans-serif';
-          ctx.fillText(`Mire ${knownMm:.0f} mm`, targetInfo.rect.x, targetInfo.rect.y - 6);
+          ctx.fillText(`Mire ${Math.round(knownMm)} mm`, targetInfo.rect.x, targetInfo.rect.y - 6);
         }
       }
 
