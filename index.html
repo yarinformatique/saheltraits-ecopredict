@@ -72,6 +72,7 @@
       box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body class="min-h-full flex flex-col antialiased">
 
@@ -170,6 +171,10 @@
           <button onclick="switchTab('justification')" id="tab-justification" class="tab-btn tab-inactive px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap">
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Justification Scientifique</span>
+          </button>
+          <button onclick="switchTab('lab')" id="tab-lab" class="tab-btn tab-inactive px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap">
+            <i class="fa-solid fa-flask-vial text-emerald-300"></i>
+            <span>Laboratoire & QR-Codes</span>
           </button>
           <button onclick="switchTab('export')" id="tab-export" class="tab-btn tab-inactive px-3.5 py-2 rounded-lg transition flex items-center gap-2 whitespace-nowrap">
             <i class="fa-solid fa-download"></i>
@@ -584,6 +589,146 @@
             <button onclick="downloadJSONBundle()" class="mt-4 w-full py-2.5 px-3 bg-purple-700 hover:bg-purple-800 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5">
               <i class="fa-solid fa-file-code"></i> Télécharger JSON
             </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <!-- ========================================== -->
+    <!-- TAB 6: LABORATOIRE NUMÉRIQUE & TRAÇABILITÉ  -->
+    <!-- ========================================== -->
+    <section id="panel-lab" class="tab-panel hidden space-y-6">
+      <div class="card-solid rounded-2xl p-6 md:p-8 border border-slate-200 space-y-6">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-900 mb-2 border border-emerald-300">
+            <i class="fa-solid fa-microscope"></i> Morphométrie Foliaire & Traçabilité Numérique
+          </span>
+          <h2 class="text-2xl font-black text-slate-900">Laboratoire Numérique & Traçabilité QR-Codes</h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Générez vos planches d'étiquettes QR inviolables pour les spécimens de terrain et calculez les traits morpho-fonctionnels continus (SLA, LDMC, Densité du bois) avec contrôle de cohérence statistique 3-Sigma.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-2">
+          <!-- Left: QR Code Tag Generator -->
+          <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-qrcode text-[#0d4722]"></i> Générateur d'Étiquettes QR pour le Terrain
+              </h3>
+              <span class="text-[10px] bg-amber-100 text-amber-950 font-bold px-2 py-0.5 rounded">Norme Bio-informatique</span>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="font-bold text-slate-700 block mb-1">Type d'Échantillon / Organe</label>
+                <select id="deskQrType" onchange="generateDesktopQR()" class="w-full py-2 px-3 rounded-xl border-2 border-slate-300 font-bold bg-white text-slate-900">
+                  <option value="TREE">Arbre Marqué (Placette 50m × 50m)</option>
+                  <option value="LEAF">Échantillon Foliaire (Herbier & SLA)</option>
+                  <option value="WOOD">Carotte de Bois (Densité Pressler)</option>
+                  <option value="SEED">Lot de Semences (Essais Germination)</option>
+                  <option value="SOIL">Échantillon de Sol (Pédologie)</option>
+                </select>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Identifiant Placette</span>
+                  <input type="text" id="deskQrPlot" value="BF-DOR-01" oninput="generateDesktopQR()" class="w-full py-2 px-2.5 rounded-lg border-2 border-slate-300 font-mono font-bold text-xs">
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Code Espèce (3 let.)</span>
+                  <input type="text" id="deskQrSp" value="BAL" oninput="generateDesktopQR()" class="w-full py-2 px-2.5 rounded-lg border-2 border-slate-300 font-mono font-bold text-xs">
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Numéro Spécimen</span>
+                  <input type="text" id="deskQrNum" value="001" oninput="generateDesktopQR()" class="w-full py-2 px-2.5 rounded-lg border-2 border-slate-300 font-mono font-bold text-xs">
+                </div>
+              </div>
+
+              <!-- QR Box Display -->
+              <div class="p-4 bg-white border-2 border-slate-200 rounded-2xl flex flex-col items-center justify-center space-y-2">
+                <div id="deskQrContainer" class="p-2 bg-white rounded-xl shadow-inner border border-slate-200"></div>
+                <div class="text-center">
+                  <span class="font-mono font-black text-sm text-[#0d4722]" id="deskQrTagLabel">TAG-BF-DOR-BAL-001</span>
+                  <p class="text-[10px] text-slate-500">Liaison biométrique : Placette ↔ Arbre ↔ Laboratoire</p>
+                </div>
+              </div>
+
+              <div class="flex gap-2">
+                <button onclick="window.print()" class="flex-1 py-2.5 bg-[#0d4722] hover:bg-[#136335] text-white rounded-xl font-bold text-xs shadow transition flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-print"></i> Imprimer Planche d'Étiquettes
+                </button>
+                <button onclick="copyDeskQrTag()" class="px-3 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-xl font-bold text-xs transition">
+                  <i class="fa-solid fa-copy"></i> Copier
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Trait & Morphometry Calculator -->
+          <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+              <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-calculator text-emerald-700"></i> Calculateur & Validateur de Traits Continus
+              </h3>
+              <span class="text-[10px] bg-emerald-100 text-emerald-950 font-bold px-2 py-0.5 rounded">Règles Pérez-Harguindeguy</span>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Surface Foliaire (mm²)</span>
+                  <input type="number" id="deskArea" value="985.0" step="1.0" oninput="calculateDesktopTraits()" class="w-full py-2 px-2.5 rounded-lg border-2 border-slate-300 font-black text-slate-900 text-xs">
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Masse Fraîche (mg)</span>
+                  <input type="number" id="deskFresh" value="235.0" step="0.5" oninput="calculateDesktopTraits()" class="w-full py-2 px-2.5 rounded-lg border-2 border-slate-300 font-black text-slate-900 text-xs">
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-slate-600 block mb-0.5">Masse Sèche (mg)</span>
+                  <input type="number" id="deskDry" value="99.5" step="0.1" oninput="calculateDesktopTraits()" class="w-full py-2 px-2.5 rounded-lg border-2 border-slate-300 font-black text-slate-900 text-xs">
+                </div>
+              </div>
+
+              <!-- Computed SLA / LDMC -->
+              <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white p-3 rounded-xl border-2 border-emerald-200 text-center">
+                  <span class="text-[10px] font-bold text-slate-500 uppercase block">SLA (Surface Foliaire Spécifique)</span>
+                  <span class="text-xl font-black text-emerald-800" id="deskSla">9.90 mm²/mg</span>
+                  <span class="text-[9px] text-slate-500 block">Area / Dry Mass</span>
+                </div>
+                <div class="bg-white p-3 rounded-xl border-2 border-emerald-200 text-center">
+                  <span class="text-[10px] font-bold text-slate-500 uppercase block">LDMC (Matière Sèche Foliaire)</span>
+                  <span class="text-xl font-black text-emerald-800" id="deskLdmc">423.4 mg/g</span>
+                  <span class="text-[9px] text-slate-500 block">(Dry / Fresh) × 1000</span>
+                </div>
+              </div>
+
+              <!-- Wood density section -->
+              <div class="p-3 bg-white rounded-xl border-2 border-amber-200 space-y-2">
+                <span class="text-[11px] font-bold text-amber-950 uppercase block">Carotte de Bois (Densité Basale)</span>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <span class="text-[10px] text-slate-500 block">Volume Carotte (cm³)</span>
+                    <input type="number" id="deskWoodVol" value="15.4" step="0.1" oninput="calculateDesktopTraits()" class="w-full py-1.5 px-2 rounded-lg border border-slate-300 font-bold text-xs">
+                  </div>
+                  <div>
+                    <span class="text-[10px] text-slate-500 block">Masse Sèche (g)</span>
+                    <input type="number" id="deskWoodMass" value="11.1" step="0.1" oninput="calculateDesktopTraits()" class="w-full py-1.5 px-2 rounded-lg border border-slate-300 font-bold text-xs">
+                  </div>
+                </div>
+                <div class="text-center font-bold text-amber-900 text-xs pt-1">
+                  Densité du bois = <span id="deskWoodDensity" class="text-sm font-black">0.72 g/cm³</span>
+                </div>
+              </div>
+
+              <!-- 3-Sigma validation message -->
+              <div id="deskValidationMsg" class="p-3 rounded-xl bg-emerald-100 text-emerald-950 text-xs font-bold flex items-center gap-2 border border-emerald-300">
+                <i class="fa-solid fa-circle-check text-emerald-700 text-base"></i>
+                <span>Valeurs cohérentes avec le spectre fonctionnel des essences sahéliennes.</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
